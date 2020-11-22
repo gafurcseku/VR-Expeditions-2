@@ -8,6 +8,11 @@
     <dimen name="border_margin_right">40dp</dimen>
     <dimen name="margin_8">8dp</dimen>
     <dimen name="margin_40">40dp</dimen>
+    <dimen name="margin_15">15dp</dimen>
+
+
+    <dimen name="padding_15">15dp</dimen>
+    <dimen name="padding_5">5dp</dimen>
 
 
     <dimen name="font_size_12">12sp</dimen>
