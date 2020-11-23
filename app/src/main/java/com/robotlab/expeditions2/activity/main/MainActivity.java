@@ -2,11 +2,11 @@ package com.robotlab.expeditions2.activity.main;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProvider;
 
 import com.robotlab.expeditions2.R;
+import com.robotlab.expeditions2.activity.expedition.ExpeditionFragment;
 import com.robotlab.expeditions2.base.BaseActivity;
 import com.robotlab.expeditions2.databinding.ActivityMainBinding;
 
@@ -22,6 +22,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         binding.expeditionLinearLayout.setOnClickListener(this);
         binding.studentLinearLayout.setOnClickListener(this);
         setContentView(binding.getRoot());
+
+        getSupportFragmentManager().beginTransaction().add(binding.rightFragmentViw.getId(), ExpeditionFragment.newInstance()).commit();
     }
 
     @Override

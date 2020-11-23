@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".activity.expedition.ExpeditionFragment"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools">
+
+<androidx.appcompat.widget.AppCompatImageView
+    android:id="@+id/categories_icon_ImageView"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:adjustViewBounds="true"
+    android:src="@drawable/ic_icon_categorie_details" />
+
+<androidx.appcompat.widget.AppCompatTextView
+    android:id="@+id/categoriesNameTextView"
+    app:layout_constraintBottom_toBottomOf="@+id/categories_icon_ImageView"
+    app:layout_constraintStart_toEndOf="@id/categories_icon_ImageView"
+    app:layout_constraintTop_toTopOf="@+id/categories_icon_ImageView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/margin_8"
+    android:text="ALL EXPEDITIONs"
+    android:textAllCaps="true" />
+
+<androidx.appcompat.widget.AppCompatImageView
+    android:id="@+id/filter_icon_ImageView"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:adjustViewBounds="true"
+    android:src="@drawable/ic_icon_filter" />
+
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/expeditionRecyclerView"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/categories_icon_ImageView"
+    tools:listitem="@layout/expedition_list_layout"
+    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+    android:layout_width="match_parent"
+    app:spanCount="3"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margin_40" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

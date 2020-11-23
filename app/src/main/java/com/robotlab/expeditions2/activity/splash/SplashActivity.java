@@ -1,11 +1,10 @@
 package com.robotlab.expeditions2.activity.splash;
 
 import android.os.Bundle;
-import android.os.Handler;
 
 import com.robotlab.expeditions2.R;
 import com.robotlab.expeditions2.activity.main.MainActivity;
-import com.robotlab.expeditions2.model.BaseActivity;
+import com.robotlab.expeditions2.base.BaseActivity;
 
 /*
   * This is Application starting point.

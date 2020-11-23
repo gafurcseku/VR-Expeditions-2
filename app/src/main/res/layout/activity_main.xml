@@ -34,16 +34,14 @@
                     android:id="@+id/topRelativeLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="70dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_marginRight="70dp">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/top_logoImageView"
                         android:layout_width="@dimen/top_main_logo_size"
                         android:layout_height="@dimen/top_main_logo_size"
-                        android:layout_centerInParent="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="60dp"
                         app:srcCompat="@drawable/ic_application_icon" />
 
                     <androidx.appcompat.widget.LinearLayoutCompat
@@ -78,6 +76,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginRight="@dimen/margin_8"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/topLogoLinearLayout">
 
@@ -85,7 +85,7 @@
                     android:id="@+id/browseLinearLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/menu_background_click_state"
+                    android:background="@drawable/main_menu_selected"
                     android:gravity="center_vertical|start"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -99,13 +99,15 @@
                         android:src="@drawable/ic_icon_forward" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/browseTextViewt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/margin_8"
+                        android:textAllCaps="true"
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/poppins_regular"
                         android:text="Browse Expedition"
-                        android:textColor="@android:color/black"
+                        android:textColor="@android:color/white"
                         android:textSize="@dimen/font_size_12" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -114,8 +116,10 @@
                     android:id="@+id/expeditionLinearLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_15"
                     android:gravity="center_vertical|start"
                     android:orientation="horizontal"
+                    android:background="@drawable/main_menu_normal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/browseLinearLayout">
@@ -127,11 +131,14 @@
                         android:src="@drawable/ic_icon_forward" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/expeditionTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/poppins_regular"
                         android:text="My Expeditions"
+                        android:textAllCaps="true"
+                        android:layout_marginLeft="@dimen/margin_8"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/font_size_12" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -142,6 +149,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|start"
                     android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/margin_15"
+                    android:background="@drawable/main_menu_normal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/expeditionLinearLayout">
@@ -153,11 +162,14 @@
                         android:src="@drawable/ic_icon_forward" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/studentTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/poppins_regular"
                         android:text="My Students"
+                        android:textAllCaps="true"
+                        android:layout_marginLeft="@dimen/margin_8"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/font_size_12" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -212,6 +224,7 @@
                     android:fontFamily="@font/poppins_light"
                     android:hint="Find an expedition ..."
                     android:textSize="@dimen/font_size_12"
+                    android:focusable="false"
                     app:layout_constraintBottom_toBottomOf="@+id/searchButton"
                     app:layout_constraintEnd_toStartOf="@id/searchButton"
                     app:layout_constraintTop_toTopOf="@+id/searchButton" />
@@ -244,35 +257,25 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                    <FrameLayout
+                    <androidx.fragment.app.FragmentContainerView
                         android:id="@+id/leftFragmentViw"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1.7"
+                        android:layout_weight="3"
+                        android:paddingLeft="@dimen/padding_10"
+                        android:paddingRight="@dimen/padding_10"
+                        android:name="com.robotlab.expeditions2.activity.categorie.CategoriesFragment"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:layout_constraintTop_toTopOf="parent"/>
 
-                        <include
-                            layout="@layout/categorie_layout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                    </FrameLayout>
-
-                    <FrameLayout
+                    <androidx.fragment.app.FragmentContainerView
                         android:id="@+id/rightFragmentViw"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="8"
+                        android:layout_weight="7"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_weight="8">
-
-                        <include
-                            layout="@layout/expedition_layout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                    </FrameLayout>
-
+                        app:layout_constraintVertical_weight="8"/>
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
