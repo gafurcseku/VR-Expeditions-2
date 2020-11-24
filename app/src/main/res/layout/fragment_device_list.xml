@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.deviceList.DeviceListFragment">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/deviceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_icon_device"
+        android:drawablePadding="@dimen/padding_5"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
+        android:text="Connected Devices (8)"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/font_size_18"
+        app:layout_constraintBottom_toBottomOf="@+id/deviceScanTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/deviceScanTextView" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/deviceScanTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/device_scan_bg"
+        android:drawableLeft="@drawable/ic_icon_device_scan"
+        android:drawablePadding="@dimen/padding_10"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center"
+        android:text="Scan for Devices"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/font_size_12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/deviceTextView"
+        app:spanCount="3"
+        tools:listitem="@layout/device_list_layout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

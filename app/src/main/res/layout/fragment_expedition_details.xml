@@ -68,6 +68,7 @@
             android:layout_weight="7">
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/topLogoImageView"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:adjustViewBounds="true"
@@ -77,12 +78,101 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/subtitleTextView"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:text="Amazonia, is a moist broadleaf tropical rainforest in the Amazon biome that covers most of the Amazon basin of South America.  This basin encompasses 7,000,000 km2 (2,700,000 sq mi), of which 5,500,000 km2 (2,100,000 sq mi) are covered by the rainforest. This region includes territory belonging to nine nations."
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/topLogoImageView" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/contentLayoutCompat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/subtitleTextView">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/lessonNumberTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:drawableLeft="@drawable/ic_icon_lessons"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:text="5 lessons"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/font_size_12" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/gradeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:drawableLeft="@drawable/ic_icon_grade"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:text="8-12 grade"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/font_size_12" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/typeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_icon_type"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:text="Art of War, Civilization"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/font_size_12" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/cornerRadius_5"
+                app:cardElevation="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/fileNameTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_icon_file"
+                        android:drawablePadding="@dimen/padding_5"
+                        android:text="Student Handout Files"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/fileInformationTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_15"
+                        android:text="The_forest_of_the_world.pdf (452 KB)"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/fileNameTextView" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/fileInformationTextView"
+                        android:src="@drawable/ic_icon_download"
+                        app:layout_constraintBottom_toBottomOf="@+id/fileInformationTextView"
+                        app:layout_constraintEnd_toEndOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -91,15 +181,20 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="3">
+            android:layout_weight="2">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/lessonTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lesson"
+                android:drawableLeft="@drawable/ic_icon_book"
                 android:textAllCaps="true"
-                app:layout_constraintLeft_toLeftOf="parent"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="@dimen/font_size_18"
+                android:drawablePadding="@dimen/padding_5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -108,6 +203,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/lesson_list_layout"
                 app:layout_constraintTop_toBottomOf="@id/lessonTextView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
