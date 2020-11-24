@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.robotlab.expeditions2.activity.MyExpedition.MyExpeditionViewModel;
 import com.robotlab.expeditions2.activity.categorie.CategoriesViewModel;
 import com.robotlab.expeditions2.activity.expedition.ExpeditionViewModel;
 import com.robotlab.expeditions2.activity.main.MainViewModel;
@@ -26,7 +27,9 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
            return (T) new CategoriesViewModel(context);
         }else if(modelClass.isAssignableFrom(ExpeditionViewModel.class)){
            return (T) new ExpeditionViewModel(context);
-       }else {
+       }else if(modelClass.isAssignableFrom(MyExpeditionViewModel.class)){
+           return (T) new MyExpeditionViewModel(context);
+       } else {
            return super.create(modelClass);
         }
     }
