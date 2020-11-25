@@ -6,6 +6,7 @@
     <dimen name="search_button_size">24dp</dimen>
 
     <dimen name="border_margin_right">40dp</dimen>
+    <dimen name="margin_5">5dp</dimen>
     <dimen name="margin_8">8dp</dimen>
     <dimen name="margin_40">40dp</dimen>
     <dimen name="margin_15">15dp</dimen>
@@ -16,6 +17,7 @@
     <dimen name="padding_5">5dp</dimen>
     
     <dimen name="cornerRadius_5">5dp</dimen>
+    <dimen name="cardview_radius_10">10dp</dimen>
 
 
     <dimen name="font_size_12">12sp</dimen>

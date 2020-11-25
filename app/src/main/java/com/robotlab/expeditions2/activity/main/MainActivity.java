@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.robotlab.expeditions2.R;
+import com.robotlab.expeditions2.activity.MainFragment.MainFragment;
 import com.robotlab.expeditions2.activity.MyExpedition.MyExpeditionFragment;
 import com.robotlab.expeditions2.activity.expedition.ExpeditionFragment;
 import com.robotlab.expeditions2.base.BaseActivity;
@@ -24,7 +25,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         binding.studentLinearLayout.setOnClickListener(this);
         setContentView(binding.getRoot());
 
-        getSupportFragmentManager().beginTransaction().add(binding.rightFragmentViw.getId(), ExpeditionFragment.newInstance()).commit();
+        getSupportFragmentManager().beginTransaction().add(binding.detailsFragment.getId(), MainFragment.newInstance(false)).commit();
     }
 
     @Override
@@ -32,11 +33,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         switch (view.getId()){
             case R.id.browseLinearLayout:
                 viewModel.setBrowserClick(binding);
-                getSupportFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), ExpeditionFragment.newInstance()).commit();
+                getSupportFragmentManager().beginTransaction().replace(binding.detailsFragment.getId(), MainFragment.newInstance(false)).commit();
                 break;
             case R.id.expeditionLinearLayout:
                 viewModel.setExpeditionClick(binding);
-                getSupportFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), MyExpeditionFragment.newInstance()).commit();
+                getSupportFragmentManager().beginTransaction().replace(binding.detailsFragment.getId(), MainFragment.newInstance(true)).commit();
                 break;
             case R.id.studentLinearLayout:
                 viewModel.setStudentClick(binding);

@@ -3,6 +3,7 @@ package com.robotlab.expeditions2.base;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,5 +37,13 @@ public class BaseActivity extends AppCompatActivity {
         startActivity(intent);
         if(isFinish)
             finish();
+    }
+
+    protected void showShortToast(String message){
+        Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
+    }
+
+    protected void showLongToast(String message){
+        Toast.makeText(context,message,Toast.LENGTH_LONG).show();
     }
 }

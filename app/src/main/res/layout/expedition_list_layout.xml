@@ -1,108 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:padding="@dimen/padding_5"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardCornerRadius="@dimen/cardview_radius_10"
+    android:layout_margin="@dimen/margin_5">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/coverImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/sample_image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/coverImageView"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/sample_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/titleLinearLayoutCompat"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:background="#BF2D3236"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="@id/coverImageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/titleLinearLayoutCompat"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="#BF2D3236"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="@id/coverImageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/titleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_bold"
-            android:text="Ancient Egypt"
-            android:textAllCaps="true"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/font_size_14" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/subtitleTextView"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:fontFamily="@font/poppins_light"
-        android:gravity="start"
-        android:padding="@dimen/padding_15"
-        android:text="Relive the mystical world of the ancient Egyptian gods."
-        android:textColor="@color/text_color"
-        android:textSize="@dimen/font_size_12"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleLinearLayoutCompat" />
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/contentLayoutCompat"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/padding_15"
-        android:paddingRight="@dimen/padding_15"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/subtitleTextView">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/titleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Ancient Egypt"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/font_size_14" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/lessonTextView"
-            android:layout_width="wrap_content"
+            android:id="@+id/subtitleTextView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/poppins_light"
+            android:gravity="start"
+            android:padding="@dimen/padding_15"
+            android:text="Relive the mystical world of the ancient Egyptian gods."
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/font_size_12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titleLinearLayoutCompat" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/contentLayoutCompat"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:drawableLeft="@drawable/ic_icon_lessons"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/padding_15"
+            android:paddingRight="@dimen/padding_15"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/subtitleTextView">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lessonTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:drawableLeft="@drawable/ic_icon_lessons"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="5 lessons"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/font_size_12" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/gradeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:drawableLeft="@drawable/ic_icon_grade"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="8-12 grade"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/font_size_12" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/typeTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_8"
+            android:drawableLeft="@drawable/ic_icon_type"
             android:drawablePadding="8dp"
             android:fontFamily="@font/poppins_light"
-            android:text="5 lessons"
+            android:paddingLeft="@dimen/padding_15"
+            android:paddingRight="@dimen/padding_15"
+            android:text="Art of War, Civilization"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/font_size_12" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/gradeTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:drawableLeft="@drawable/ic_icon_grade"
-            android:drawablePadding="8dp"
-            android:fontFamily="@font/poppins_light"
-            android:text="8-12 grade"
-            android:textColor="@color/text_color"
-            android:textSize="@dimen/font_size_12" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/typeTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_8"
-        android:drawableLeft="@drawable/ic_icon_type"
-        android:drawablePadding="8dp"
-        android:fontFamily="@font/poppins_light"
-        android:paddingLeft="@dimen/padding_15"
-        android:paddingRight="@dimen/padding_15"
-        android:text="Art of War, Civilization"
-        android:textColor="@color/text_color"
-        android:textSize="@dimen/font_size_12"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/contentLayoutCompat" />
+            android:textSize="@dimen/font_size_12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/contentLayoutCompat" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
