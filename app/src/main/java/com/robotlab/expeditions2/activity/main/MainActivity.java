@@ -8,11 +8,15 @@ import androidx.lifecycle.ViewModelProvider;
 import com.robotlab.expeditions2.R;
 import com.robotlab.expeditions2.activity.MainFragment.MainFragment;
 import com.robotlab.expeditions2.activity.MyExpedition.MyExpeditionFragment;
+import com.robotlab.expeditions2.activity.deviceList.StudentListFragment;
 import com.robotlab.expeditions2.activity.expedition.ExpeditionFragment;
+import com.robotlab.expeditions2.activity.expedition.ItemClick;
+import com.robotlab.expeditions2.activity.expeditionDetails.ExpeditionDetailsFragment;
 import com.robotlab.expeditions2.base.BaseActivity;
 import com.robotlab.expeditions2.databinding.ActivityMainBinding;
+import com.robotlab.expeditions2.model.Expedition;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener , ItemClick {
     private ActivityMainBinding binding;
     private  MainViewModel viewModel;
     @Override
@@ -41,9 +45,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.studentLinearLayout:
                 viewModel.setStudentClick(binding);
+                getSupportFragmentManager().beginTransaction().replace(binding.detailsFragment.getId(), StudentListFragment.newInstance()).commit();
                 break;
             case R.id.settingLinearLayout:
                 break;
         }
+    }
+
+    @Override
+    public void OnClick(Expedition expedition) {
+        showShortToast("YE");
+        getSupportFragmentManager().beginTransaction().replace(binding.detailsFragment.getId(), ExpeditionDetailsFragment.newInstance()).commit();
     }
 }

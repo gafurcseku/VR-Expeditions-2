@@ -1,34 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardBackgroundColor="@android:color/white"
-    app:cardCornerRadius="@dimen/cornerRadius_5"
-    app:cardElevation="0dp">
+    android:layout_margin="@dimen/margin_5"
+    app:cardCornerRadius="@dimen/cornerRadius_5">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:layout_margin="@dimen/margin_8"
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/appCompatTextView"
-            android:layout_width="wrap_content"
+            android:id="@+id/nameTextView"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
             android:text="RobotLAB-A4R9"
             android:textSize="@dimen/font_size_14"
+            android:textColor="@color/text_color"
+            app:layout_constraintEnd_toStartOf="@id/statusImageView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/statusImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_icon_online"
-            app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView"
+            app:layout_constraintBottom_toBottomOf="@+id/nameTextView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/appCompatTextView" />
+            app:layout_constraintTop_toTopOf="@+id/nameTextView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</com.google.android.material.card.MaterialCardView>
+</androidx.cardview.widget.CardView>

@@ -3,12 +3,12 @@ package com.robotlab.expeditions2.model;
 public class Devices {
     private int id;
     private String name;
-    private  Boolean status;
+    private  Boolean online;
 
-    public Devices(int id, String name, Boolean status) {
+    public Devices(int id, String name, Boolean online) {
         this.id = id;
         this.name = name;
-        this.status = status;
+        this.online = online;
     }
 
     public int getId() {
@@ -27,11 +27,11 @@ public class Devices {
         this.name = name;
     }
 
-    public Boolean getStatus() {
-        return status;
+    public Boolean getOnline() {
+        return online;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public void setOnline(Boolean online) {
+        this.online = online;
     }
 }

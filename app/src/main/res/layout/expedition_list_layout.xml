@@ -7,6 +7,7 @@
     app:cardCornerRadius="@dimen/cardview_radius_10"
     android:layout_margin="@dimen/margin_5">
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rootView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -23,7 +24,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/titleLinearLayoutCompat"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:background="#BF2D3236"
             android:gravity="center"
             app:layout_constraintBottom_toBottomOf="@id/coverImageView"
@@ -102,6 +103,7 @@
             android:fontFamily="@font/poppins_light"
             android:paddingLeft="@dimen/padding_15"
             android:paddingRight="@dimen/padding_15"
+            android:paddingBottom="@dimen/padding_5"
             android:text="Art of War, Civilization"
             android:textColor="@color/text_color"
             android:textSize="@dimen/font_size_12"

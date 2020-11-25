@@ -1,64 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_10"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardCornerRadius="@dimen/cardview_radius_10">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/logoImageView"
-        android:layout_width="100dp"
-        android:layout_height="80dp"
-        android:src="@drawable/sample_image"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/titleTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_15"
-        android:fontFamily="@font/poppins_bold"
-        android:text="Etymology"
-        android:textAllCaps="true"
-        android:textColor="@color/text_color"
-        android:textSize="@dimen/font_size_14"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/logoImageView"
-        app:layout_constraintTop_toTopOf="@id/logoImageView" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/subtitleTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_15"
-        android:fontFamily="@font/poppins_light"
-        android:text="Ready to broadcast"
-        android:textColor="@color/text_color"
-        android:textSize="@dimen/font_size_12"
-        app:layout_constraintBottom_toBottomOf="@id/logoImageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/logoImageView" />
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/logoImageView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_10">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/logoImageView"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:src="@drawable/sample_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/broadcastTextView"
-            android:layout_width="wrap_content"
+            android:id="@+id/titleTextView"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/broadcast_bg"
-            android:drawableLeft="@drawable/ic_icons_broadcast"
-            android:drawablePadding="@dimen/padding_5"
+            android:layout_marginLeft="@dimen/margin_15"
             android:fontFamily="@font/poppins_bold"
-            android:text="Broadcast to my students"
-            android:textColor="@android:color/white"
+            android:text="Etymology"
+            android:textAllCaps="true"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/font_size_14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/logoImageView"
+            app:layout_constraintTop_toTopOf="@id/logoImageView" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/subtitleTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_15"
+            android:fontFamily="@font/poppins_light"
+            android:text="Ready to broadcast"
+            android:textColor="@color/text_color"
             android:textSize="@dimen/font_size_12"
-            />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            app:layout_constraintBottom_toBottomOf="@id/logoImageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/logoImageView" />
 
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/broadcast_bg"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/margin_10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/logoImageView">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/margin_5"
+                android:src="@drawable/ic_icons_broadcast" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/broadcastTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:fontFamily="@font/poppins_bold"
+                android:text="Broadcast to my students"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/font_size_12" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

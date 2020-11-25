@@ -1,5 +1,6 @@
 package com.robotlab.expeditions2.activity.MainFragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -11,21 +12,26 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.robotlab.expeditions2.R;
 import com.robotlab.expeditions2.activity.MyExpedition.MyExpeditionFragment;
+import com.robotlab.expeditions2.activity.deviceList.StudentListFragment;
 import com.robotlab.expeditions2.activity.expedition.ExpeditionFragment;
+import com.robotlab.expeditions2.activity.expedition.ItemClick;
 import com.robotlab.expeditions2.activity.main.MainViewModel;
 import com.robotlab.expeditions2.base.BaseFragment;
 import com.robotlab.expeditions2.databinding.FragmentMainBinding;
+import com.robotlab.expeditions2.model.Expedition;
 
 
-public class MainFragment extends BaseFragment implements View.OnClickListener , TextView.OnEditorActionListener {
+public class MainFragment extends BaseFragment implements View.OnClickListener , TextView.OnEditorActionListener , ItemClick {
     private static String IS_FAVORITE;
     private Boolean isFavorite = false ;
     private FragmentMainBinding binding;
     private MainViewModel viewModel;
+    private ItemClick itemClick;
 
     public static MainFragment newInstance(Boolean isFavorite) {
         MainFragment fragment = new MainFragment();
@@ -54,9 +60,10 @@ public class MainFragment extends BaseFragment implements View.OnClickListener ,
         binding.searchButton.setOnClickListener(this);
 
         setUpLiveData();
-
+        onAttachToParentActivity(requireActivity());
         if(isFavorite)
-            getChildFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), MyExpeditionFragment.newInstance()).commit();
+            //getChildFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), MyExpeditionFragment.newInstance()).commit();
+            getChildFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), StudentListFragment.newInstance()).commit();
         else
             getChildFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), ExpeditionFragment.newInstance()).commit();
         return binding.getRoot();
@@ -105,5 +112,18 @@ public class MainFragment extends BaseFragment implements View.OnClickListener ,
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void OnClick(Expedition expedition) {
+        itemClick.OnClick(expedition);
+    }
+
+    public void onAttachToParentActivity(Activity activity) {
+        try {
+            itemClick = (ItemClick) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement OnPlayerSelectionSetListener");
+        }
     }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.deviceList.DeviceListFragment">
+    tools:context=".activity.deviceList.StudentListFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/deviceTextView"
@@ -38,14 +38,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/studentRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_40"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/deviceTextView"
         app:spanCount="3"
-        tools:listitem="@layout/device_list_layout" />
+        tools:listitem="@layout/student_list_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,10 +19,12 @@ public class ExpeditionAdapter extends RecyclerView.Adapter<ExpeditionAdapter.Vi
     private Context context;
     private List<Expedition> expeditionList;
     private ExpeditionListLayoutBinding binding;
+    private ItemClick itemClick;
 
-    public ExpeditionAdapter(Context context, List<Expedition> expeditionList) {
+    public ExpeditionAdapter(Context context, List<Expedition> expeditionList, ItemClick itemClick) {
         this.context = context;
         this.expeditionList = expeditionList;
+        this.itemClick = itemClick;
     }
 
     @NonNull
@@ -56,6 +58,14 @@ public class ExpeditionAdapter extends RecyclerView.Adapter<ExpeditionAdapter.Vi
             binding.lessonTextView.setText(expedition.getLesson());
             binding.gradeTextView.setText(expedition.getGrade());
             binding.typeTextView.setText(expedition.getType());
+            binding.rootView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    itemClick.OnClick(expedition);
+                }
+            });
         }
     }
 }
+
+

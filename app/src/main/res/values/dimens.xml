@@ -9,7 +9,9 @@
     <dimen name="margin_5">5dp</dimen>
     <dimen name="margin_8">8dp</dimen>
     <dimen name="margin_40">40dp</dimen>
+    <dimen name="margin_30">30dp</dimen>
     <dimen name="margin_15">15dp</dimen>
+    <dimen name="margin_10">10dp</dimen>
 
 
     <dimen name="padding_15">15dp</dimen>
@@ -24,4 +26,5 @@
     <dimen name="font_size_16">16sp</dimen>
     <dimen name="font_size_18">18sp</dimen>
     <dimen name="font_size_14">14sp</dimen>
+    <dimen name="font_size_36">36sp</dimen>
 </resources>
