@@ -41,10 +41,10 @@ public class StudentListFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding.studentRecyclerView.setLayoutManager(new GridLayoutManager(context,3));
         viewModel.getStudent();
         viewModel.getStudentLiveData().observe(getViewLifecycleOwner(), item -> {
             adapter = new StudentAdapter(context,item);
+            binding.studentRecyclerView.setLayoutManager(new GridLayoutManager(context,3));
             binding.studentRecyclerView.setAdapter(adapter);
         } );
         return binding.getRoot();

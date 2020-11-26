@@ -1,5 +1,6 @@
 package com.robotlab.expeditions2.activity.expeditionDetails;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.robotlab.expeditions2.R;
+import com.robotlab.expeditions2.activity.MainFragment.MainFragment;
+import com.robotlab.expeditions2.activity.expedition.ItemClick;
 import com.robotlab.expeditions2.base.BaseFragment;
 import com.robotlab.expeditions2.databinding.FragmentExpeditionDetailsBinding;
 import com.robotlab.expeditions2.model.Lesson;
@@ -18,10 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ExpeditionDetailsFragment extends BaseFragment {
+public class ExpeditionDetailsFragment extends BaseFragment implements View.OnClickListener {
 
     private FragmentExpeditionDetailsBinding binding;
     private ExpeditionDetailAdapter adapter;
+    private BackClick backClick;
 
     public static ExpeditionDetailsFragment newInstance() {
         ExpeditionDetailsFragment fragment = new ExpeditionDetailsFragment();
@@ -36,6 +40,7 @@ public class ExpeditionDetailsFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = FragmentExpeditionDetailsBinding.inflate(getLayoutInflater());
+        onAttachToParentFragment(requireActivity());
 //        if (getArguments() != null) {
 //            mParam1 = getArguments().getString(ARG_PARAM1);
 //            mParam2 = getArguments().getString(ARG_PARAM2);
@@ -47,6 +52,7 @@ public class ExpeditionDetailsFragment extends BaseFragment {
         adapter = new ExpeditionDetailAdapter(context,getDummy());
         binding.lessonRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         binding.lessonRecyclerView.setAdapter(adapter);
+        binding.backImageView.setOnClickListener(this);
         return binding.getRoot();
     }
 
@@ -56,5 +62,25 @@ public class ExpeditionDetailsFragment extends BaseFragment {
             lessonList.add(new Lesson("Etymology","Ready to broadcast",null));
         }
         return  lessonList;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.backImageView:
+                showLongToast("Click");
+                backClick.setDone(true);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void onAttachToParentFragment(Activity activity) {
+        try {
+            backClick = (BackClick) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement OnPlayerSelectionSetListener");
+        }
     }
 }

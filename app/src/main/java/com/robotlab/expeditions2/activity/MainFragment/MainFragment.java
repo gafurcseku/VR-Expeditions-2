@@ -58,15 +58,25 @@ public class MainFragment extends BaseFragment implements View.OnClickListener ,
         binding.searchEditText.setOnClickListener(this);
         binding.searchEditText.setOnEditorActionListener(this);
         binding.searchButton.setOnClickListener(this);
-
         setUpLiveData();
         onAttachToParentActivity(requireActivity());
-        if(isFavorite)
-            getChildFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), MyExpeditionFragment.newInstance()).commit();
-          //  getChildFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), StudentListFragment.newInstance()).commit();
-        else
-            getChildFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), ExpeditionFragment.newInstance()).commit();
+        getChildFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), ExpeditionFragment.newInstance()).commit();
         return binding.getRoot();
+    }
+
+    public void showMyExpedition(){
+        binding.leftFragmentViw.setVisibility(View.VISIBLE);
+        getChildFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), MyExpeditionFragment.newInstance()).commit();
+    }
+
+    public void showExpedition(){
+        binding.leftFragmentViw.setVisibility(View.VISIBLE);
+        getChildFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), ExpeditionFragment.newInstance()).commit();
+    }
+
+    public void showStudent(){
+        getChildFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), StudentListFragment.newInstance()).commit();
+        binding.leftFragmentViw.setVisibility(View.GONE);
     }
 
     private void setUpLiveData(){

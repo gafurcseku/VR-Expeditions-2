@@ -2,11 +2,13 @@ package com.robotlab.expeditions2.activity.MyExpedition;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.robotlab.expeditions2.activity.expedition.ItemClick;
 import com.robotlab.expeditions2.databinding.ExpeditionListLayoutBinding;
 import com.robotlab.expeditions2.databinding.MyExpeditionListLayoutBinding;
 import com.robotlab.expeditions2.model.Expedition;
@@ -18,10 +20,12 @@ public class MyExpeditionAdapter extends RecyclerView.Adapter<MyExpeditionAdapte
     private Context context;
     private List<Expedition> expeditionList;
     private MyExpeditionListLayoutBinding binding;
+    private ItemClick itemClick;
 
-    public MyExpeditionAdapter(Context context, List<Expedition> expeditionList) {
+    public MyExpeditionAdapter(Context context, List<Expedition> expeditionList,ItemClick itemClick) {
         this.context = context;
         this.expeditionList = expeditionList;
+        this.itemClick=itemClick;
     }
 
     @NonNull
@@ -55,6 +59,12 @@ public class MyExpeditionAdapter extends RecyclerView.Adapter<MyExpeditionAdapte
             binding.lessonTextView.setText(expedition.getLesson());
             binding.gradeTextView.setText(expedition.getGrade());
             binding.typeTextView.setText(expedition.getType());
+            binding.rootView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    itemClick.OnClick(expedition);
+                }
+            });
         }
     }
 }
