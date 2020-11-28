@@ -15,6 +15,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/leftConstraintLayout"
             android:layout_width="0dp"
+            android:background="@android:color/white"
             android:layout_height="match_parent"
             android:layout_weight="2">
 
@@ -76,7 +77,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginTop="@dimen/margin_40"
                 android:layout_marginRight="@dimen/margin_8"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/topLogoLinearLayout">
@@ -96,6 +97,7 @@
                         android:layout_width="18dp"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
+                        android:layout_marginLeft="@dimen/margin_10"
                         android:src="@drawable/ic_icon_forward" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -105,7 +107,7 @@
                         android:layout_marginLeft="@dimen/margin_8"
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="Browse Expedition"
+                        android:text="@string/browse_expedition"
                         android:textAllCaps="true"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/font_size_12" />
@@ -116,7 +118,7 @@
                     android:id="@+id/expeditionLinearLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_20"
                     android:background="@drawable/main_menu_normal"
                     android:gravity="center_vertical|start"
                     android:orientation="horizontal"
@@ -128,6 +130,7 @@
                         android:layout_width="18dp"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
+                        android:layout_marginLeft="@dimen/margin_10"
                         android:src="@drawable/ic_icon_forward" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -137,7 +140,7 @@
                         android:layout_marginLeft="@dimen/margin_8"
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="My Expeditions"
+                        android:text="@string/my_expeditions"
                         android:textAllCaps="true"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/font_size_12" />
@@ -147,7 +150,7 @@
                     android:id="@+id/studentLinearLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_20"
                     android:background="@drawable/main_menu_normal"
                     android:gravity="center_vertical|start"
                     android:orientation="horizontal"
@@ -159,6 +162,7 @@
                         android:layout_width="18dp"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
+                        android:layout_marginLeft="@dimen/margin_10"
                         android:src="@drawable/ic_icon_forward" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -168,7 +172,7 @@
                         android:layout_marginLeft="@dimen/margin_8"
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="My Students"
+                        android:text="@string/my_students"
                         android:textAllCaps="true"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/font_size_12" />
@@ -180,13 +184,16 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|start"
                     android:orientation="horizontal"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="@dimen/margin_20"
+                    app:layout_constraintBottom_toTopOf="@id/versionTextView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent">
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="wrap_content"
+                        android:layout_width="18dp"
                         android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:layout_marginLeft="@dimen/margin_10"
                         android:src="@drawable/ic_icon_forward" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -194,10 +201,25 @@
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="SETTING"
+                        android:text="@string/setting"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/font_size_12" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/versionTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/poppins_light"
+                    android:text="RobotLAB VR v1.8 (Build 31)"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/font_size_8"
+                    android:layout_marginBottom="@dimen/margin_10"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -207,6 +229,7 @@
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/detailsFragment"
             android:layout_width="0dp"
+            android:background="@color/bg_color"
             android:layout_height="match_parent"
             android:layout_weight="8" />
     </androidx.appcompat.widget.LinearLayoutCompat>

@@ -33,7 +33,9 @@ public class BaseActivity extends AppCompatActivity {
 
     protected void setActivityLunch(Class activity, Bundle bundle, Boolean isFinish){
         intent = new Intent(context, activity);
-        intent.putExtras(bundle);
+        if(bundle!=null){
+            intent.putExtras(bundle);
+        }
         startActivity(intent);
         if(isFinish)
             finish();

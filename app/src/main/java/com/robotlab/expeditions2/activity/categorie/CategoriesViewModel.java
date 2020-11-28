@@ -27,9 +27,19 @@ public class CategoriesViewModel extends ViewModel {
         List<Category> categories = new ArrayList<>();
         for (int i = 0 ; i< 20 ; i++){
             if(i==0){
-                categories.add(new Category(1,"Ancient World",true));
-            }else{
+                categories.add(new Category(1,"ALL",true));
+            }else if(i==1){
+                categories.add(new Category(1,"Algebra I",false));
+            }else if(i==2){
+                categories.add(new Category(1,"Algebra II",false));
+            }else if(i==3){
                 categories.add(new Category(1,"Ancient World",false));
+            }else if(i==4){
+                categories.add(new Category(1,"Coding",false));
+            }else if(i==4){
+                categories.add(new Category(1,"Computer Science",false));
+            }else{
+                categories.add(new Category(1,"Geography",false));
             }
         }
 

@@ -3,14 +3,11 @@ package com.robotlab.expeditions2.activity.main;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.robotlab.expeditions2.BuildConfig;
 import com.robotlab.expeditions2.R;
 import com.robotlab.expeditions2.activity.MainFragment.MainFragment;
-import com.robotlab.expeditions2.activity.MyExpedition.MyExpeditionFragment;
-import com.robotlab.expeditions2.activity.deviceList.StudentListFragment;
-import com.robotlab.expeditions2.activity.expedition.ExpeditionFragment;
 import com.robotlab.expeditions2.activity.expedition.ItemClick;
 import com.robotlab.expeditions2.activity.expeditionDetails.BackClick;
 import com.robotlab.expeditions2.activity.expeditionDetails.ExpeditionDetailsFragment;
@@ -31,7 +28,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         binding.expeditionLinearLayout.setOnClickListener(this);
         binding.studentLinearLayout.setOnClickListener(this);
         setContentView(binding.getRoot());
-
+        setVersionAndBuild();
         getSupportFragmentManager().beginTransaction().add(binding.detailsFragment.getId(), MainFragment.newInstance(false),MainFragment.class.getSimpleName()).addToBackStack(MainFragment.class.getSimpleName()).commit();
     }
 
@@ -39,21 +36,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.browseLinearLayout:
+                removeOtherBack();
                 viewModel.setBrowserClick(binding);
-                //getSupportFragmentManager().beginTransaction().replace(binding.detailsFragment.getId(), MainFragment.newInstance(false)).commit();
                 mainFragment = (MainFragment) getSupportFragmentManager().findFragmentByTag(MainFragment.class.getSimpleName());
                 mainFragment.showExpedition();
                 break;
             case R.id.expeditionLinearLayout:
+                removeOtherBack();
                 viewModel.setExpeditionClick(binding);
-//                getSupportFragmentManager().beginTransaction().replace(binding.detailsFragment.getId(), MainFragment.newInstance(true),"YES").commit();
                 mainFragment = (MainFragment) getSupportFragmentManager().findFragmentByTag(MainFragment.class.getSimpleName());
                 mainFragment.showMyExpedition();
                 break;
             case R.id.studentLinearLayout:
+                removeOtherBack();
                 viewModel.setStudentClick(binding);
-
-                //getSupportFragmentManager().beginTransaction().replace(binding.detailsFragment.getId(), StudentListFragment.newInstance()).commit();
                 mainFragment = (MainFragment) getSupportFragmentManager().findFragmentByTag(MainFragment.class.getSimpleName());
                 mainFragment.showStudent();
                 break;
@@ -68,6 +64,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         getSupportFragmentManager().beginTransaction().add(binding.detailsFragment.getId(), ExpeditionDetailsFragment.newInstance(),ExpeditionDetailsFragment.class.getSimpleName()).addToBackStack(ExpeditionDetailsFragment.class.getSimpleName()).commit();
     }
 
+    private void removeOtherBack(){
+        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+            getSupportFragmentManager().popBackStackImmediate();
+        }
+    }
+
     @Override
     public void setDone(Boolean isComplete) {
         if(isComplete){
@@ -75,6 +77,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
                 getSupportFragmentManager().popBackStackImmediate();
             }
         }
+    }
+
+    private void setVersionAndBuild(){
+        int versionCode = BuildConfig.VERSION_CODE;
+        String versionName = BuildConfig.VERSION_NAME;
+        binding.versionTextView.setText("RobotLAB VR v"+versionCode+"(Build "+versionCode+")");
 
     }
 }

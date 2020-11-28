@@ -2,17 +2,13 @@ package com.robotlab.expeditions2.activity.expeditionDetails;
 
 import android.app.Activity;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.robotlab.expeditions2.R;
-import com.robotlab.expeditions2.activity.MainFragment.MainFragment;
-import com.robotlab.expeditions2.activity.expedition.ItemClick;
 import com.robotlab.expeditions2.base.BaseFragment;
 import com.robotlab.expeditions2.databinding.FragmentExpeditionDetailsBinding;
 import com.robotlab.expeditions2.model.Lesson;

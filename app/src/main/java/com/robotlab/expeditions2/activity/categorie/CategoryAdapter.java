@@ -1,6 +1,8 @@
 package com.robotlab.expeditions2.activity.categorie;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.LinearLayoutCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.robotlab.expeditions2.R;
@@ -40,8 +43,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewMo
         holder.titleTextView.setText(category.getName());
         if(row_index == position){
             holder.selectionImageView.setVisibility(View.VISIBLE);
+            holder.titleTextView.setTextColor(Color.parseColor("#F20F00"));
+            Typeface typeface = ResourcesCompat.getFont(context, R.font.poppins_bold);
+            holder.titleTextView.setTypeface(typeface);
         }else {
             holder.selectionImageView.setVisibility(View.GONE);
+            holder.titleTextView.setTextColor(Color.parseColor("#2D3236"));
+            Typeface typeface = ResourcesCompat.getFont(context, R.font.poppins_regular);
+            holder.titleTextView.setTypeface(typeface);
         }
 
         holder.rootViewLinearLayout.setOnClickListener(new View.OnClickListener() {

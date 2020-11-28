@@ -1,10 +1,13 @@
 package com.robotlab.expeditions2.activity.splash;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 
 import com.robotlab.expeditions2.R;
 import com.robotlab.expeditions2.activity.main.MainActivity;
 import com.robotlab.expeditions2.base.BaseActivity;
+import com.robotlab.expeditions2.databinding.ActivitySplashBinding;
 
 /*
   * This is Application starting point.
@@ -12,12 +15,20 @@ import com.robotlab.expeditions2.base.BaseActivity;
  */
 
 public class SplashActivity extends BaseActivity {
-
+    private ActivitySplashBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+        binding = ActivitySplashBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        setActivityLunch(MainActivity.class,null,false);
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                setActivityLunch(MainActivity.class,null,true);
+            }
+        },3000);
+
+
     }
 }

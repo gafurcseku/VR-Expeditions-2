@@ -7,21 +7,26 @@
 
     <dimen name="border_margin_right">40dp</dimen>
     <dimen name="margin_5">5dp</dimen>
+    <dimen name="margin_6">6dp</dimen>
     <dimen name="margin_8">8dp</dimen>
     <dimen name="margin_40">40dp</dimen>
     <dimen name="margin_30">30dp</dimen>
     <dimen name="margin_15">15dp</dimen>
+    <dimen name="margin_20">20dp</dimen>
+    <dimen name="margin_25">25dp</dimen>
     <dimen name="margin_10">10dp</dimen>
 
 
     <dimen name="padding_15">15dp</dimen>
     <dimen name="padding_10">10dp</dimen>
     <dimen name="padding_5">5dp</dimen>
+    <dimen name="padding_30">30dp</dimen>
     
     <dimen name="cornerRadius_5">5dp</dimen>
     <dimen name="cardview_radius_10">10dp</dimen>
 
 
+    <dimen name="font_size_8">8sp</dimen>
     <dimen name="font_size_12">12sp</dimen>
     <dimen name="font_size_16">16sp</dimen>
     <dimen name="font_size_18">18sp</dimen>

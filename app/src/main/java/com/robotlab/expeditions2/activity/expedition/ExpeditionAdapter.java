@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.robotlab.expeditions2.R;
+
 import com.robotlab.expeditions2.databinding.ExpeditionListLayoutBinding;
 import com.robotlab.expeditions2.model.Expedition;
 

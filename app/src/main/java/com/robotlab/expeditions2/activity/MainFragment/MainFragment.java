@@ -10,9 +10,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.robotlab.expeditions2.R;
@@ -65,18 +63,22 @@ public class MainFragment extends BaseFragment implements View.OnClickListener ,
     }
 
     public void showMyExpedition(){
-        binding.leftFragmentViw.setVisibility(View.VISIBLE);
         getChildFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), MyExpeditionFragment.newInstance()).commit();
+        getChildFragmentManager().executePendingTransactions();
+        binding.leftFragmentViw.setVisibility(View.VISIBLE);
     }
 
     public void showExpedition(){
-        binding.leftFragmentViw.setVisibility(View.VISIBLE);
         getChildFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), ExpeditionFragment.newInstance()).commit();
+        getChildFragmentManager().executePendingTransactions();
+        binding.leftFragmentViw.setVisibility(View.VISIBLE);
     }
 
     public void showStudent(){
         getChildFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), StudentListFragment.newInstance()).commit();
+        getChildFragmentManager().executePendingTransactions();
         binding.leftFragmentViw.setVisibility(View.GONE);
+
     }
 
     private void setUpLiveData(){
