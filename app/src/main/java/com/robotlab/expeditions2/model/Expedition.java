@@ -1,5 +1,8 @@
 package com.robotlab.expeditions2.model;
 
+import androidx.room.Entity;
+
+@Entity
 public class Expedition {
     private int _id;
     private String title;
