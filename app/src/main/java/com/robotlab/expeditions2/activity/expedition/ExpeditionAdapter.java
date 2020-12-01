@@ -54,7 +54,7 @@ public class ExpeditionAdapter extends RecyclerView.Adapter<ExpeditionAdapter.Vi
 
         public void bind(Expedition expedition) {
             binding.titleTextView.setText(expedition.getTitle());
-            binding.subtitleTextView.setText(expedition.getShortTitle());
+            binding.subtitleTextView.setText(expedition.getDescription());
             binding.lessonTextView.setText(expedition.getLesson());
             binding.gradeTextView.setText(expedition.getGrade());
             binding.typeTextView.setText(expedition.getType());

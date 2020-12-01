@@ -2,20 +2,24 @@ package com.robotlab.expeditions2.model;
 
 public class Expedition {
     private int _id;
+    private String image_url
     private String title;
-    private String shortTitle;
+    private String description;
+    private int category;
     private String lesson;
     private String grade;
     private String type;
+    private String pdfUrl;
+    private String pdfName;
 
     public Expedition(){
 
     }
 
-    public Expedition(int _id, String title, String shortTitle, String lesson, String grade, String type) {
+    public Expedition(int _id, String title, String description, String lesson, String grade, String type) {
         this._id = _id;
         this.title = title;
-        this.shortTitle = shortTitle;
+        this.description = description;
         this.lesson = lesson;
         this.grade = grade;
         this.type = type;
@@ -37,12 +41,12 @@ public class Expedition {
         this.title = title;
     }
 
-    public String getShortTitle() {
-        return shortTitle;
+    public String getDescription() {
+        return description;
     }
 
-    public void setShortTitle(String shortTitle) {
-        this.shortTitle = shortTitle;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getLesson() {

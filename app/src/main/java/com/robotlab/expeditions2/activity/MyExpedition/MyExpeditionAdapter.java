@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.robotlab.expeditions2.activity.expedition.ItemClick;
-import com.robotlab.expeditions2.databinding.ExpeditionListLayoutBinding;
 import com.robotlab.expeditions2.databinding.MyExpeditionListLayoutBinding;
 import com.robotlab.expeditions2.model.Expedition;
 
@@ -55,7 +54,7 @@ public class MyExpeditionAdapter extends RecyclerView.Adapter<MyExpeditionAdapte
 
         public void bind(Expedition expedition) {
             binding.titleTextView.setText(expedition.getTitle());
-            binding.subtitleTextView.setText(expedition.getShortTitle());
+            binding.subtitleTextView.setText(expedition.getDescription());
             binding.lessonTextView.setText(expedition.getLesson());
             binding.gradeTextView.setText(expedition.getGrade());
             binding.typeTextView.setText(expedition.getType());
