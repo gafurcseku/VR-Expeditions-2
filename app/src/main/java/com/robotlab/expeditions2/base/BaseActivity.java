@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.robotlab.expeditions2.activity.main.MainActivity;
 import com.robotlab.expeditions2.base.ViewModelFactory;
+import com.robotlab.expeditions2.database.AppDatabase;
+import com.robotlab.expeditions2.database.DatabaseClient;
 
 /*
     This is Application base Activity
@@ -20,11 +22,13 @@ public class BaseActivity extends AppCompatActivity {
     protected Context context;
     protected Intent intent;
     protected ViewModelFactory viewModelFactory;
+    protected AppDatabase database;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.context = this;
         viewModelFactory = new ViewModelFactory(context);
+        database=  DatabaseClient.getInstance(getApplicationContext()).getAppDatabase();
     }
 
     /*
