@@ -27,7 +27,7 @@ public class ExpeditionViewModel extends ViewModel {
     private List<Expedition> getDummyData(){
         List<Expedition> expeditionList = new ArrayList<>();
         for (int i = 0 ; i < 30 ; i++){
-            expeditionList.add(new Expedition(1,"Ancient Maya","The Maya civilization was a Mesoamerican civilization developed by the Maya …","11 lessons","6-10 grade","Civilization"));
+            expeditionList.add(new Expedition(0,"https://cdn.slashgear.com/wp-content/uploads/2020/05/deadly-wallpaper-1280x720.jpg","Ancient Maya","The Maya civilization was a Mesoamerican civilization developed by the Maya …","11 lessons","6-10 grade","Civilization"));
         }
         return expeditionList;
     }

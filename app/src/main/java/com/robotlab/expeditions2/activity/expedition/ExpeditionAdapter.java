@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.bumptech.glide.Glide;
+import com.robotlab.expeditions2.R;
 import com.robotlab.expeditions2.databinding.ExpeditionListLayoutBinding;
 import com.robotlab.expeditions2.model.Expedition;
 
@@ -53,17 +55,17 @@ public class ExpeditionAdapter extends RecyclerView.Adapter<ExpeditionAdapter.Vi
         }
 
         public void bind(Expedition expedition) {
+            Glide.with(context)
+                    .load(expedition.getImage_url())
+                    .centerCrop()
+                    .placeholder(R.drawable.ic_application_icon)
+                    .into(binding.coverImageView);
             binding.titleTextView.setText(expedition.getTitle());
             binding.subtitleTextView.setText(expedition.getDescription());
             binding.lessonTextView.setText(expedition.getLesson());
             binding.gradeTextView.setText(expedition.getGrade());
             binding.typeTextView.setText(expedition.getType());
-            binding.rootView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    itemClick.OnClick(expedition);
-                }
-            });
+            binding.rootView.setOnClickListener(view -> itemClick.OnClick(expedition));
         }
     }
 }

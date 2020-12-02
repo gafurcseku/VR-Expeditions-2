@@ -60,8 +60,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
 
     @Override
     public void OnClick(Expedition expedition) {
-        showShortToast("YE");
-        getSupportFragmentManager().beginTransaction().add(binding.detailsFragment.getId(), ExpeditionDetailsFragment.newInstance(),ExpeditionDetailsFragment.class.getSimpleName()).addToBackStack(ExpeditionDetailsFragment.class.getSimpleName()).commit();
+        getSupportFragmentManager().beginTransaction().add(binding.detailsFragment.getId(), ExpeditionDetailsFragment.newInstance(expedition),ExpeditionDetailsFragment.class.getSimpleName()).addToBackStack(ExpeditionDetailsFragment.class.getSimpleName()).commit();
     }
 
     private void removeOtherBack(){

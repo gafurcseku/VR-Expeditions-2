@@ -1,11 +1,17 @@
 package com.robotlab.expeditions2.model;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+import java.io.Serializable;
 
 @Entity
-public class Expedition {
+public class Expedition implements Serializable {
+    @PrimaryKey(autoGenerate = true)
     private int _id;
-    private String image_url
+    //https://cdn.slashgear.com/wp-content/uploads/2020/05/deadly-wallpaper-1280x720.jpg
+    private String image_url;
     private String title;
     private String description;
     private int category;
@@ -19,8 +25,10 @@ public class Expedition {
 
     }
 
-    public Expedition(int _id, String title, String description, String lesson, String grade, String type) {
+    @Ignore
+    public Expedition(int _id,String image_url, String title, String description, String lesson, String grade, String type) {
         this._id = _id;
+        this.image_url = image_url;
         this.title = title;
         this.description = description;
         this.lesson = lesson;
@@ -34,6 +42,14 @@ public class Expedition {
 
     public void set_id(int _id) {
         this._id = _id;
+    }
+
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 
     public String getTitle() {
@@ -74,5 +90,29 @@ public class Expedition {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public int getCategory() {
+        return category;
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
+    }
+
+    public String getPdfUrl() {
+        return pdfUrl;
+    }
+
+    public void setPdfUrl(String pdfUrl) {
+        this.pdfUrl = pdfUrl;
+    }
+
+    public String getPdfName() {
+        return pdfName;
+    }
+
+    public void setPdfName(String pdfName) {
+        this.pdfName = pdfName;
     }
 }

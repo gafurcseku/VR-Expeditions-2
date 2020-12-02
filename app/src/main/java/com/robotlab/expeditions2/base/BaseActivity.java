@@ -27,8 +27,8 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.context = this;
-        viewModelFactory = new ViewModelFactory(context);
         database=  DatabaseClient.getInstance(getApplicationContext()).getAppDatabase();
+        viewModelFactory = new ViewModelFactory(context,database);
     }
 
     /*
