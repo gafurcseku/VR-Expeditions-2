@@ -10,7 +10,6 @@ import java.io.Serializable;
 public class Expedition implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int _id;
-    //https://cdn.slashgear.com/wp-content/uploads/2020/05/deadly-wallpaper-1280x720.jpg
     private String image_url;
     private String title;
     private String description;
@@ -20,20 +19,25 @@ public class Expedition implements Serializable {
     private String type;
     private String pdfUrl;
     private String pdfName;
+    private String pdfTitle;
 
     public Expedition(){
 
     }
 
     @Ignore
-    public Expedition(int _id,String image_url, String title, String description, String lesson, String grade, String type) {
+    public Expedition(int _id, String image_url, String title, String description, int category, String lesson, String grade, String type, String pdfUrl, String pdfName, String pdfTitle) {
         this._id = _id;
         this.image_url = image_url;
         this.title = title;
         this.description = description;
+        this.category = category;
         this.lesson = lesson;
         this.grade = grade;
         this.type = type;
+        this.pdfUrl = pdfUrl;
+        this.pdfName = pdfName;
+        this.pdfTitle = pdfTitle;
     }
 
     public int get_id() {
@@ -68,6 +72,14 @@ public class Expedition implements Serializable {
         this.description = description;
     }
 
+    public int getCategory() {
+        return category;
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
+    }
+
     public String getLesson() {
         return lesson;
     }
@@ -92,14 +104,6 @@ public class Expedition implements Serializable {
         this.type = type;
     }
 
-    public int getCategory() {
-        return category;
-    }
-
-    public void setCategory(int category) {
-        this.category = category;
-    }
-
     public String getPdfUrl() {
         return pdfUrl;
     }
@@ -114,5 +118,13 @@ public class Expedition implements Serializable {
 
     public void setPdfName(String pdfName) {
         this.pdfName = pdfName;
+    }
+
+    public String getPdfTitle() {
+        return pdfTitle;
+    }
+
+    public void setPdfTitle(String pdfTitle) {
+        this.pdfTitle = pdfTitle;
     }
 }

@@ -26,12 +26,4 @@ public class MyExpeditionViewModel extends ViewModel {
         expeditionLiveData = new MutableLiveData<>();
         expeditionLiveData.postValue(database.expeditionDao().getAllExpedition());
     }
-
-    private List<Expedition> getDummyData(){
-        List<Expedition> expeditionList = new ArrayList<>();
-        for (int i = 0 ; i < 30 ; i++){
-            expeditionList.add(new Expedition(1,"","Ancient Maya","The Maya civilization was a Mesoamerican civilization developed by the Maya …","11 lessons","6-10 grade","Civilization"));
-        }
-        return expeditionList;
-    }
 }

@@ -22,8 +22,7 @@ import com.robotlab.expeditions2.utility.FileStore;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
+import java.util.TooManyListenersException;
 
 
 public class ExpeditionDetailsFragment extends BaseFragment implements View.OnClickListener {
@@ -62,6 +61,7 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
         showInformation();
         binding.MyExpeditionTextView.setOnClickListener(view -> {
             database.expeditionDao().insert(expedition);
+            showLongToast("Add to My Expeditions complete");
         });
         binding.downloadImageView.setOnClickListener(view -> {
             FileDownload();
@@ -72,7 +72,7 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
     private List<Lesson> getDummy(){
         List<Lesson> lessonList = new ArrayList<>();
         for (int i= 0 ; i<50;i++){
-            lessonList.add(new Lesson("Etymology","Ready to broadcast",null));
+            lessonList.add(new Lesson("Etymology","Ready to broadcast","https://gisgeography.com/wp-content/uploads/2015/09/map-of-the-world-429784_1280-678x322.jpg"));
         }
         return  lessonList;
     }
@@ -102,6 +102,11 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
             Glide.with(context).load(expedition.getImage_url()).centerCrop().placeholder(R.drawable.ic_application_icon).into(binding.topLogoImageView);
             binding.titleTextView.setText(expedition.getTitle());
             binding.subtitleTextView.setText(expedition.getDescription());
+            binding.lessonNumberTextView.setText(expedition.getLesson());
+            binding.gradeTextView.setText(expedition.getGrade());
+            binding.typeTextView.setText(expedition.getType());
+            binding.fileNameTextView.setText(expedition.getPdfName());
+            binding.fileInformationTextView.setText(expedition.getPdfTitle());
         }
     }
 
