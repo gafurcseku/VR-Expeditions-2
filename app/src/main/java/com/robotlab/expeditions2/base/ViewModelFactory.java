@@ -10,6 +10,7 @@ import com.robotlab.expeditions2.activity.MyExpedition.MyExpeditionViewModel;
 import com.robotlab.expeditions2.activity.categorie.CategoriesViewModel;
 import com.robotlab.expeditions2.activity.deviceList.StudentFragmentViewModel;
 import com.robotlab.expeditions2.activity.expedition.ExpeditionViewModel;
+import com.robotlab.expeditions2.activity.expeditionDetails.ExpeditionDetailViewModel;
 import com.robotlab.expeditions2.activity.main.MainViewModel;
 import com.robotlab.expeditions2.database.AppDatabase;
 
@@ -21,6 +22,7 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
         this.context = context;
         this.database = database;
     }
+
 
     @NonNull
     @Override
@@ -35,6 +37,8 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
            return (T) new MyExpeditionViewModel(context,database);
        }else if(modelClass.isAssignableFrom(StudentFragmentViewModel.class)){
            return (T) new StudentFragmentViewModel(context);
+       }else if(modelClass.isAssignableFrom(ExpeditionDetailViewModel.class)){
+           return (T) new ExpeditionDetailViewModel(context,database);
        } else {
            return super.create(modelClass);
         }

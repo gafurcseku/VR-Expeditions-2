@@ -1,14 +1,20 @@
 package com.robotlab.expeditions2.model;
 
+import java.util.List;
+
 public class Lesson {
+    private int Id;
     private String title;
     private String subtitle;
-    private String image;
+    private String thumb;
+    private int expeditionId;
 
-    public Lesson(String title, String subtitle, String image) {
+
+    public Lesson(int id, String title, String subtitle, String thumb) {
+        Id = id;
         this.title = title;
         this.subtitle = subtitle;
-        this.image = image;
+        this.thumb = thumb;
     }
 
     public String getTitle() {
@@ -27,11 +33,12 @@ public class Lesson {
         this.subtitle = subtitle;
     }
 
-    public String getImage() {
-        return image;
+    public String getThumb() {
+        return thumb;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setThumb(String thumb) {
+        this.thumb = thumb;
     }
+
 }

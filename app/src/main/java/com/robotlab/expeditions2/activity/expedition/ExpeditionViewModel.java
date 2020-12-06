@@ -6,9 +6,10 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.robotlab.expeditions2.model.Expedition;
+import com.robotlab.expeditions2.utility.DummyData;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ExpeditionViewModel extends ViewModel {
     private Context context;
@@ -19,16 +20,10 @@ public class ExpeditionViewModel extends ViewModel {
         this.context = context;
     }
 
-    public void getExpeditions(){
+    public void getExpeditions(int categoryId){
         expeditionLiveData = new MutableLiveData<>();
-        expeditionLiveData.postValue(getDummyData());
+        List expeditions = DummyData.getExpedition().stream().filter(e -> e.getCategory() == categoryId).collect(Collectors.toList());
+        expeditionLiveData.postValue(expeditions);
     }
 
-    private List<Expedition> getDummyData(){
-        List<Expedition> expeditionList = new ArrayList<>();
-        for (int i = 0 ; i < 30 ; i++){
-            expeditionList.add(new Expedition(0,"https://cdn.slashgear.com/wp-content/uploads/2020/05/deadly-wallpaper-1280x720.jpg","Ancient Maya","The Maya civilization was a Mesoamerican civilization developed by the Maya …",1,i+" lessons","6-"+i+" grade","Civilization","","Student Handout Files","The_forest_of_the_world.pdf (452 KB)"));
-        }
-        return expeditionList;
-    }
 }

@@ -44,7 +44,7 @@ public class ExpeditionFragment extends BaseFragment implements ItemClick {
     }
 
     private void setLiveData() {
-        viewModel.getExpeditions();
+        viewModel.getExpeditions(0);
         viewModel.expeditionLiveData.observe(this, new Observer<List<Expedition>>() {
             @Override
             public void onChanged(List<Expedition> expeditions) {

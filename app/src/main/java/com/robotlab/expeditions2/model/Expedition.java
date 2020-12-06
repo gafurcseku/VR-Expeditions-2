@@ -17,16 +17,14 @@ public class Expedition implements Serializable {
     private String lesson;
     private String grade;
     private String type;
-    private String pdfUrl;
-    private String pdfName;
-    private String pdfTitle;
+
 
     public Expedition(){
 
     }
 
     @Ignore
-    public Expedition(int _id, String image_url, String title, String description, int category, String lesson, String grade, String type, String pdfUrl, String pdfName, String pdfTitle) {
+    public Expedition(int _id, String image_url, String title, String description, int category, String lesson, String grade, String type) {
         this._id = _id;
         this.image_url = image_url;
         this.title = title;
@@ -35,9 +33,6 @@ public class Expedition implements Serializable {
         this.lesson = lesson;
         this.grade = grade;
         this.type = type;
-        this.pdfUrl = pdfUrl;
-        this.pdfName = pdfName;
-        this.pdfTitle = pdfTitle;
     }
 
     public int get_id() {
@@ -104,27 +99,4 @@ public class Expedition implements Serializable {
         this.type = type;
     }
 
-    public String getPdfUrl() {
-        return pdfUrl;
-    }
-
-    public void setPdfUrl(String pdfUrl) {
-        this.pdfUrl = pdfUrl;
-    }
-
-    public String getPdfName() {
-        return pdfName;
-    }
-
-    public void setPdfName(String pdfName) {
-        this.pdfName = pdfName;
-    }
-
-    public String getPdfTitle() {
-        return pdfTitle;
-    }
-
-    public void setPdfTitle(String pdfTitle) {
-        this.pdfTitle = pdfTitle;
-    }
 }

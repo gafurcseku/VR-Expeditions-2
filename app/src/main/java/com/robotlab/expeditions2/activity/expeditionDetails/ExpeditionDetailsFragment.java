@@ -18,6 +18,7 @@ import com.robotlab.expeditions2.base.BaseFragment;
 import com.robotlab.expeditions2.databinding.FragmentExpeditionDetailsBinding;
 import com.robotlab.expeditions2.model.Expedition;
 import com.robotlab.expeditions2.model.Lesson;
+import com.robotlab.expeditions2.utility.DummyData;
 import com.robotlab.expeditions2.utility.FileStore;
 
 import java.util.ArrayList;
@@ -54,7 +55,7 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        adapter = new ExpeditionDetailAdapter(context,getDummy());
+        adapter = new ExpeditionDetailAdapter(context, DummyData.getLesson());
         binding.lessonRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         binding.lessonRecyclerView.setAdapter(adapter);
         binding.backImageView.setOnClickListener(this);
@@ -64,18 +65,12 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
             showLongToast("Add to My Expeditions complete");
         });
         binding.downloadImageView.setOnClickListener(view -> {
-            FileDownload();
+
         });
         return binding.getRoot();
     }
 
-    private List<Lesson> getDummy(){
-        List<Lesson> lessonList = new ArrayList<>();
-        for (int i= 0 ; i<50;i++){
-            lessonList.add(new Lesson("Etymology","Ready to broadcast","https://gisgeography.com/wp-content/uploads/2015/09/map-of-the-world-429784_1280-678x322.jpg"));
-        }
-        return  lessonList;
-    }
+
 
     @Override
     public void onClick(View view) {
@@ -105,23 +100,9 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
             binding.lessonNumberTextView.setText(expedition.getLesson());
             binding.gradeTextView.setText(expedition.getGrade());
             binding.typeTextView.setText(expedition.getType());
-            binding.fileNameTextView.setText(expedition.getPdfName());
-            binding.fileInformationTextView.setText(expedition.getPdfTitle());
+           // binding.fileNameTextView.setText(expedition.getPdfName());
+            //binding.fileInformationTextView.setText(expedition.getPdfTitle());
         }
     }
 
-    private void FileDownload(){
-        Log.i("path",FileStore.getCacheFolder(context).getPath());
-        PRDownloader.download("https://cdn.slashgear.com/wp-content/uploads/2020/05/deadly-wallpaper-1280x720.jpg", FileStore.getCacheFolder(context).getPath(),"sample.png").build().start(new OnDownloadListener() {
-            @Override
-            public void onDownloadComplete() {
-
-            }
-
-            @Override
-            public void onError(Error error) {
-                Log.i("Error",error.getServerErrorMessage());
-            }
-        });            ;
-    }
 }
