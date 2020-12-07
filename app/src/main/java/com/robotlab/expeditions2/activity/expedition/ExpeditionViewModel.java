@@ -15,15 +15,19 @@ public class ExpeditionViewModel extends ViewModel {
     private Context context;
 
     public MutableLiveData<List<Expedition>> expeditionLiveData;
-
     public ExpeditionViewModel(Context context) {
         this.context = context;
+        expeditionLiveData = new MutableLiveData<>();
     }
 
     public void getExpeditions(int categoryId){
-        expeditionLiveData = new MutableLiveData<>();
-        List expeditions = DummyData.getExpedition().stream().filter(e -> e.getCategory() == categoryId).collect(Collectors.toList());
-        expeditionLiveData.postValue(expeditions);
+        List expeditions = null;
+        if(categoryId == 0){
+             expeditions = DummyData.getExpedition();
+        }else {
+             expeditions = DummyData.getExpedition().stream().filter(e -> e.getCategory() == categoryId).collect(Collectors.toList());
+        }
+        expeditionLiveData.setValue(expeditions);
     }
 
 }

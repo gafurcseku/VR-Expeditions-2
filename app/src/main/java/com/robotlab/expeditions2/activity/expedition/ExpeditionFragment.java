@@ -3,6 +3,7 @@ package com.robotlab.expeditions2.activity.expedition;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -24,9 +25,13 @@ public class ExpeditionFragment extends BaseFragment implements ItemClick {
     private ExpeditionViewModel viewModel;
     private ExpeditionAdapter expeditionAdapter;
     private ItemClick itemClick;
+    private int CategoryId;
 
-    public static ExpeditionFragment newInstance() {
+    public static ExpeditionFragment newInstance(int CategoryId) {
         ExpeditionFragment fragment = new ExpeditionFragment();
+                Bundle args = new Bundle();
+        args.putInt("CATEGORY_ID", CategoryId);
+        fragment.setArguments(args);
         return fragment;
     }
 
@@ -35,26 +40,26 @@ public class ExpeditionFragment extends BaseFragment implements ItemClick {
         super.onCreate(savedInstanceState);
         binding = FragmentExpeditionBinding.inflate(getLayoutInflater());
         viewModel = new ViewModelProvider(this, viewModelFactory).get(ExpeditionViewModel.class);
-        setLiveData();
+        if (getArguments() != null) {
+            CategoryId = getArguments().getInt("CATEGORY_ID");
+        }
         onAttachToParentFragment(getParentFragment());
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
+        setLiveData();
     }
 
     private void setLiveData() {
-        viewModel.getExpeditions(0);
-        viewModel.expeditionLiveData.observe(this, new Observer<List<Expedition>>() {
-            @Override
-            public void onChanged(List<Expedition> expeditions) {
-                if (!expeditions.isEmpty()) {
-                    expeditionAdapter = new ExpeditionAdapter(context, expeditions, ExpeditionFragment.this);
-                    binding.expeditionRecyclerView.setLayoutManager(new GridLayoutManager(context, 3));
-                    binding.expeditionRecyclerView.setAdapter(expeditionAdapter);
-                }
+        viewModel.getExpeditions(CategoryId);
+        viewModel.expeditionLiveData.observe(this, expeditions -> {
+            if (!expeditions.isEmpty()) {
+                expeditionAdapter = new ExpeditionAdapter(context, expeditions, ExpeditionFragment.this);
+                binding.expeditionRecyclerView.setLayoutManager(new GridLayoutManager(context, 3));
+                binding.expeditionRecyclerView.setAdapter(expeditionAdapter);
             }
         });
+    }
+
+    public void setCategory(int CategoryId){
+        viewModel.getExpeditions(CategoryId);
     }
 
     @Override

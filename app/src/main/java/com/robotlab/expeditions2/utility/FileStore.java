@@ -10,7 +10,7 @@ public class FileStore {
     public static File getCacheFolder(Context context) {
         File cacheDir = null;
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            cacheDir = new File(Environment.getExternalStorageDirectory(), "cache_folder");
+            cacheDir = new File(context.getExternalCacheDir(), "cache_folder");
             if(!cacheDir.isDirectory()) {
                 cacheDir.mkdirs();
             }

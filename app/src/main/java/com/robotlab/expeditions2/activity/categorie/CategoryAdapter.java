@@ -24,6 +24,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewMo
     private Context context;
     private List<Category> categoryList;
     private int row_index = 0;
+    private OnItemListener onItemListener;
 
     public CategoryAdapter(Context context, List<Category> categoryList) {
         this.context = context;
@@ -53,12 +54,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewMo
             holder.titleTextView.setTypeface(typeface);
         }
 
-        holder.rootViewLinearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                row_index = position;
-                //categoryList.get(position).setSelected(true);
-                notifyDataSetChanged();
+        holder.rootViewLinearLayout.setOnClickListener(view -> {
+            row_index = position;
+            notifyDataSetChanged();
+            if(onItemListener!=null){
+                onItemListener.OnItemClickListener(position);
             }
         });
     }
@@ -79,5 +79,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewMo
             this.selectionImageView = itemView.findViewById(R.id.selectionImageView);
             this.titleTextView = itemView.findViewById(R.id.titleTextView);
         }
+    }
+
+    public void setOnItemListenerListener(OnItemListener listener){
+        this.onItemListener = listener;
     }
 }
