@@ -4,6 +4,7 @@ import com.robotlab.expeditions2.model.Category;
 import com.robotlab.expeditions2.model.Expedition;
 import com.robotlab.expeditions2.model.Lesson;
 import com.robotlab.expeditions2.model.LessonImage;
+import com.robotlab.expeditions2.model.PdfFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +61,14 @@ public class DummyData {
             lessonImages.add(new LessonImage(i,"https://www.hydrauliekmorreels.com/new_site/public/styles/Images/wallpapers/"+i+".jpg",i/2));
         }
         return  lessonImages;
+    }
+
+    public static List<PdfFile> getPdfList(){
+        List<PdfFile> pdfFiles = new ArrayList<>();
+        for (int i =1 ; i < 20 ; i++){
+            pdfFiles.add(new PdfFile(i,"http://www.africau.edu/images/default/sample.pdf","This is a small demonstration--"+i+" file","This is a small demonstration "+i+".pdf file",(i*5.6)+"KB",i));
+        }
+        return pdfFiles;
     }
 
 }

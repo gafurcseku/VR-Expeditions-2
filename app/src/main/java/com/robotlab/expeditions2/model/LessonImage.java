@@ -1,12 +1,19 @@
 package com.robotlab.expeditions2.model;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class LessonImage {
+    @PrimaryKey
     private int Id;
     private String url;
     private int lessonId;
     private int downloadId;
     private boolean status;
 
+    @Ignore
     public LessonImage(int id, String url, int lessonId) {
         Id = id;
         this.url = url;

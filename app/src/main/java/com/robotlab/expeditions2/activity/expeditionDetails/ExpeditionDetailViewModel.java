@@ -22,6 +22,7 @@ public class ExpeditionDetailViewModel extends ViewModel {
     private Context context;
     private AppDatabase database;
     private DownloadListener downloadListener;
+    private int currentDownloadId;
 
     public ExpeditionDetailViewModel(Context context, AppDatabase database) {
         this.context = context;
@@ -41,10 +42,10 @@ public class ExpeditionDetailViewModel extends ViewModel {
             return;
         }
 
-      int currentDownloadId = PRDownloader.download(filePath, FileStore.getCacheFolder(context).getPath(),fileName).build().setOnStartOrResumeListener(new OnStartOrResumeListener() {
+        currentDownloadId = PRDownloader.download(filePath, FileStore.getCacheFolder(context).getPath(),fileName).build().setOnStartOrResumeListener(new OnStartOrResumeListener() {
           @Override
           public void onStartOrResume() {
-
+              downloadListener.onDownloadComplete(2,currentDownloadId);
           }
       }).setOnPauseListener(() -> {
 
@@ -56,7 +57,7 @@ public class ExpeditionDetailViewModel extends ViewModel {
       }).start(new OnDownloadListener() {
             @Override
             public void onDownloadComplete() {
-                downloadListener.onDownloadComplete(true,1);
+                downloadListener.onDownloadComplete(1,1);
                 if(messageTextView!=null)
                     messageTextView.setVisibility(View.GONE);
             }
@@ -64,7 +65,7 @@ public class ExpeditionDetailViewModel extends ViewModel {
             @Override
             public void onError(Error error) {
                 Log.i("Error",error.getServerErrorMessage());
-                downloadListener.onDownloadComplete(false,0);
+                downloadListener.onDownloadComplete(0,0);
             }
         });            ;
     }

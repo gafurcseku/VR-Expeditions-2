@@ -18,12 +18,15 @@ import com.robotlab.expeditions2.base.BaseFragment;
 import com.robotlab.expeditions2.databinding.FragmentExpeditionDetailsBinding;
 import com.robotlab.expeditions2.model.Expedition;
 import com.robotlab.expeditions2.model.Lesson;
+import com.robotlab.expeditions2.model.PdfFile;
 import com.robotlab.expeditions2.utility.DummyData;
 import com.robotlab.expeditions2.utility.FileStore;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.TooManyListenersException;
+import java.util.stream.Collectors;
 
 
 public class ExpeditionDetailsFragment extends BaseFragment implements View.OnClickListener {
@@ -100,8 +103,10 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
             binding.lessonNumberTextView.setText(expedition.getLesson());
             binding.gradeTextView.setText(expedition.getGrade());
             binding.typeTextView.setText(expedition.getType());
-           // binding.fileNameTextView.setText(expedition.getPdfName());
-            //binding.fileInformationTextView.setText(expedition.getPdfTitle());
+
+            Optional<PdfFile> downloadPdf = DummyData.getPdfList().stream().filter(pdf -> pdf.getExpeditionId() == expedition.get_id()).findFirst();
+            binding.fileNameTextView.setText(downloadPdf.get().getPdfName());
+            binding.fileInformationTextView.setText(downloadPdf.get().getPdfTitle());
         }
     }
 
