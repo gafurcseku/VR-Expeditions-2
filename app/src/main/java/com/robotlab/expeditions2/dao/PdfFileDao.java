@@ -22,6 +22,6 @@ public interface PdfFileDao {
     PdfFile getPdfFile(int id);
 
     @Query("UPDATE PdfFile SET downloadId =:downloadId , status =:status WHERE PdfFile.pdfId ==:id ")
-    void downloadStatus(int downloadId, Boolean status, int id);
+    void downloadStatus(int downloadId, int status, int id);
 
 }

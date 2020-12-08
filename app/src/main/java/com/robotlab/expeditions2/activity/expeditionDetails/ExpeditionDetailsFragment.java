@@ -128,7 +128,7 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
     private void StartDownload(){
         if(expedition!=null){
             PdfFile pdfFile = database.pdfFileDao().getPdfFile(expedition.get_id());
-            if (!pdfFile.isStatus()){
+            if (pdfFile.getStatus() != 0){
                 viewModel.FileDownload(pdfFile.getDownloadId(), FileStore.getCacheFolder(context).getAbsolutePath(), ""+pdfFile.getPdfId()+".pdf", null, null, new DownloadListener() {
                     @Override
                     public void onDownloadComplete(int status, int DownloadId) {

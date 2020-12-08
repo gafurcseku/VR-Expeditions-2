@@ -15,7 +15,7 @@ public class PdfFile {
     private String pdfFileSize;
     private int expeditionId;
     private int downloadId;
-    private boolean status;
+    private int status;
 
     public PdfFile() {
     }
@@ -86,11 +86,11 @@ public class PdfFile {
         this.downloadId = downloadId;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 }
