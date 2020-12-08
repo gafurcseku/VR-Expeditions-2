@@ -1,20 +1,36 @@
 package com.robotlab.expeditions2.model;
 
-import java.util.List;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
+
+@Entity
 public class Lesson {
+    @PrimaryKey
     private int Id;
     private String title;
     private String subtitle;
     private String thumb;
     private int expeditionId;
 
+    public Lesson() {
+    }
 
+    @Ignore
     public Lesson(int id, String title, String subtitle, String thumb) {
         Id = id;
         this.title = title;
         this.subtitle = subtitle;
         this.thumb = thumb;
+    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
     }
 
     public String getTitle() {
@@ -41,4 +57,11 @@ public class Lesson {
         this.thumb = thumb;
     }
 
+    public int getExpeditionId() {
+        return expeditionId;
+    }
+
+    public void setExpeditionId(int expeditionId) {
+        this.expeditionId = expeditionId;
+    }
 }

@@ -17,6 +17,9 @@ public class PdfFile {
     private int downloadId;
     private boolean status;
 
+    public PdfFile() {
+    }
+
     @Ignore
     public PdfFile(int pdfId, String pdfFileUrl, String pdfName, String pdfTitle, String pdfFileSize, int expeditionId) {
         this.pdfId = pdfId;

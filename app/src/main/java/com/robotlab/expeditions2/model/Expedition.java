@@ -19,6 +19,7 @@ public class Expedition implements Serializable {
     private String type;
 
 
+
     public Expedition(){
 
     }

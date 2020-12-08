@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
@@ -14,8 +15,10 @@ import com.downloader.Error;
 import com.downloader.OnDownloadListener;
 import com.downloader.PRDownloader;
 import com.robotlab.expeditions2.R;
+import com.robotlab.expeditions2.activity.categorie.CategoriesViewModel;
 import com.robotlab.expeditions2.base.BaseFragment;
 import com.robotlab.expeditions2.databinding.FragmentExpeditionDetailsBinding;
+import com.robotlab.expeditions2.download.DownloadListener;
 import com.robotlab.expeditions2.model.Expedition;
 import com.robotlab.expeditions2.model.Lesson;
 import com.robotlab.expeditions2.model.PdfFile;
@@ -33,10 +36,13 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
 
     private static String ARG_PARAM = "ARG_PARAM";
 
+    private ExpeditionDetailViewModel viewModel;
     private FragmentExpeditionDetailsBinding binding;
     private ExpeditionDetailAdapter adapter;
     private BackClick backClick;
     private Expedition expedition;
+    private Optional<PdfFile> downloadPdf;
+    private List<Lesson> lessonList;
 
     public static ExpeditionDetailsFragment newInstance(Expedition expedition) {
         ExpeditionDetailsFragment fragment = new ExpeditionDetailsFragment();
@@ -50,6 +56,7 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = FragmentExpeditionDetailsBinding.inflate(getLayoutInflater());
+        viewModel = new ViewModelProvider(this,viewModelFactory).get(ExpeditionDetailViewModel.class);
         onAttachToParentFragment(requireActivity());
         if (getArguments() != null) {
             expedition = (Expedition) getArguments().getSerializable(ARG_PARAM);
@@ -58,14 +65,22 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        adapter = new ExpeditionDetailAdapter(context, DummyData.getLesson());
+        lessonList = DummyData.getLesson(expedition.get_id());
+        adapter = new ExpeditionDetailAdapter(context, lessonList);
         binding.lessonRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         binding.lessonRecyclerView.setAdapter(adapter);
         binding.backImageView.setOnClickListener(this);
+
         showInformation();
+
         binding.MyExpeditionTextView.setOnClickListener(view -> {
             database.expeditionDao().insert(expedition);
-            showLongToast("Add to My Expeditions complete");
+            database.pdfFileDao().insert(downloadPdf.get());
+            database.lessonDao().insert(lessonList);
+            for (Lesson lesson : lessonList){
+                database.lessonImageDao().insert(DummyData.getLessonImages(lesson.getId()));
+            }
+            showLongToast("Add to My Expeditions");
         });
         binding.downloadImageView.setOnClickListener(view -> {
 
@@ -104,10 +119,25 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
             binding.gradeTextView.setText(expedition.getGrade());
             binding.typeTextView.setText(expedition.getType());
 
-            Optional<PdfFile> downloadPdf = DummyData.getPdfList().stream().filter(pdf -> pdf.getExpeditionId() == expedition.get_id()).findFirst();
+            downloadPdf = DummyData.getPdfList().stream().filter(pdf -> pdf.getExpeditionId() == expedition.get_id()).findFirst();
             binding.fileNameTextView.setText(downloadPdf.get().getPdfName());
             binding.fileInformationTextView.setText(downloadPdf.get().getPdfTitle());
         }
+    }
+
+    private void StartDownload(){
+        if(expedition!=null){
+            PdfFile pdfFile = database.pdfFileDao().getPdfFile(expedition.get_id());
+            if (!pdfFile.isStatus()){
+                viewModel.FileDownload(pdfFile.getDownloadId(), FileStore.getCacheFolder(context).getAbsolutePath(), ""+pdfFile.getPdfId()+".pdf", null, null, new DownloadListener() {
+                    @Override
+                    public void onDownloadComplete(int status, int DownloadId) {
+                        database.pdfFileDao().downloadStatus(DownloadId,status,pdfFile.getPdfId());
+                    }
+                });
+            }
+        }
+
     }
 
 }

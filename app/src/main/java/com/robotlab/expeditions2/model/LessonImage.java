@@ -6,12 +6,16 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class LessonImage {
+
     @PrimaryKey
     private int Id;
     private String url;
     private int lessonId;
     private int downloadId;
     private boolean status;
+
+    public LessonImage() {
+    }
 
     @Ignore
     public LessonImage(int id, String url, int lessonId) {

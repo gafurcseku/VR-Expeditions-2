@@ -46,9 +46,13 @@ public class DummyData {
         return expeditionList;
     }
 
-    public static List<Lesson> getLesson(){
+    public static List<Lesson> getLesson(int number){
+        int loop = number * 3 ;
+        if(loop > 12){
+            loop = 12;
+        }
         List<Lesson> lessonList = new ArrayList<>();
-        for (int i= 1 ; i<26;i++){
+        for (int i= 1 ; i<loop; i++){
             lessonList.add(new Lesson(i,"Etymology","Ready to broadcast","http://auditoriumpalma.com/skin/default/congresos/images/bg/bg_"+i+".jpg"));
         }
         return  lessonList;
@@ -69,6 +73,14 @@ public class DummyData {
             pdfFiles.add(new PdfFile(i,"http://www.africau.edu/images/default/sample.pdf","This is a small demonstration--"+i+" file","This is a small demonstration "+i+".pdf file",(i*5.6)+"KB",i));
         }
         return pdfFiles;
+    }
+
+    public static List<LessonImage> getLessonImages(int Id){
+        List<LessonImage> lessonImages = new ArrayList<>();
+        for (int i =1 ; i<6 ; i++){
+            lessonImages.add(new LessonImage((i*Id),"http://auditoriumpalma.com/skin/default/congresos/images/bg/bg_"+i+".jpg",Id));
+        }
+        return lessonImages;
     }
 
 }

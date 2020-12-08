@@ -9,13 +9,11 @@ import androidx.lifecycle.ViewModel;
 
 import com.downloader.Error;
 import com.downloader.OnDownloadListener;
-import com.downloader.OnPauseListener;
-import com.downloader.OnProgressListener;
 import com.downloader.OnStartOrResumeListener;
 import com.downloader.PRDownloader;
-import com.downloader.Progress;
 import com.downloader.Status;
 import com.robotlab.expeditions2.database.AppDatabase;
+import com.robotlab.expeditions2.download.DownloadListener;
 import com.robotlab.expeditions2.utility.FileStore;
 
 public class ExpeditionDetailViewModel extends ViewModel {
@@ -30,7 +28,10 @@ public class ExpeditionDetailViewModel extends ViewModel {
     }
 
 
-    private void FileDownload(int downloadId, String filePath, String fileName, AppCompatTextView percentageTextView,AppCompatTextView messageTextView,DownloadListener downloadListener){
+
+
+
+    public void FileDownload(int downloadId, String filePath, String fileName, AppCompatTextView percentageTextView,AppCompatTextView messageTextView,DownloadListener downloadListener){
         Log.i("path", FileStore.getCacheFolder(context).getPath());
 
         if(Status.RUNNING ==PRDownloader.getStatus(downloadId)){
