@@ -12,7 +12,7 @@ public class LessonImage {
     private String url;
     private int lessonId;
     private int downloadId;
-    private boolean status;
+    private int status;
 
     public LessonImage() {
     }
@@ -22,6 +22,15 @@ public class LessonImage {
         Id = id;
         this.url = url;
         this.lessonId = lessonId;
+    }
+
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
     }
 
     public String getUrl() {
@@ -38,5 +47,21 @@ public class LessonImage {
 
     public void setLessonId(int lessonId) {
         this.lessonId = lessonId;
+    }
+
+    public int getDownloadId() {
+        return downloadId;
+    }
+
+    public void setDownloadId(int downloadId) {
+        this.downloadId = downloadId;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

@@ -59,8 +59,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
     }
 
     @Override
-    public void OnClick(Expedition expedition) {
-        getSupportFragmentManager().beginTransaction().add(binding.detailsFragment.getId(), ExpeditionDetailsFragment.newInstance(expedition),ExpeditionDetailsFragment.class.getSimpleName()).addToBackStack(ExpeditionDetailsFragment.class.getSimpleName()).commit();
+    public void OnClick(Expedition expedition,Boolean isMyExpedition) {
+        getSupportFragmentManager().beginTransaction().add(binding.detailsFragment.getId(), ExpeditionDetailsFragment.newInstance(expedition,isMyExpedition),ExpeditionDetailsFragment.class.getSimpleName()).addToBackStack(ExpeditionDetailsFragment.class.getSimpleName()).commit();
     }
 
     private void removeOtherBack(){

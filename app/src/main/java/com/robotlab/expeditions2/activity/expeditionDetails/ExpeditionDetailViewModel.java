@@ -46,7 +46,7 @@ public class ExpeditionDetailViewModel extends ViewModel {
         currentDownloadId = PRDownloader.download(filePath, FileStore.getCacheFolder(context).getPath(),fileName).build().setOnStartOrResumeListener(new OnStartOrResumeListener() {
           @Override
           public void onStartOrResume() {
-              downloadListener.onDownloadComplete(2,currentDownloadId);
+              downloadListener.onDownloadComplete(0,currentDownloadId);
           }
       }).setOnPauseListener(() -> {
 

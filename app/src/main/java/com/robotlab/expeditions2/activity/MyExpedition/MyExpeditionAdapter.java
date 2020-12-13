@@ -68,7 +68,7 @@ public class MyExpeditionAdapter extends RecyclerView.Adapter<MyExpeditionAdapte
             binding.rootView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    itemClick.OnClick(expedition);
+                    itemClick.OnClick(expedition, true);
                 }
             });
         }

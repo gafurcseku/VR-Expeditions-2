@@ -64,8 +64,8 @@ public class MyExpeditionFragment extends BaseFragment implements ItemClick {
     }
 
     @Override
-    public void OnClick(Expedition expedition) {
-        itemClick.OnClick(expedition);
+    public void OnClick(Expedition expedition,Boolean isMyExpedition) {
+        itemClick.OnClick(expedition,isMyExpedition);
     }
 
     public void onAttachToParentFragment(Fragment fragment) {

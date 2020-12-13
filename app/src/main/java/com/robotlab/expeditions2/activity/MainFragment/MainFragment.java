@@ -130,8 +130,8 @@ public class MainFragment extends BaseFragment implements View.OnClickListener ,
     }
 
     @Override
-    public void OnClick(Expedition expedition) {
-        itemClick.OnClick(expedition);
+    public void OnClick(Expedition expedition,Boolean isMyExpedition) {
+        itemClick.OnClick(expedition,isMyExpedition);
     }
 
     public void onAttachToParentActivity(Activity activity) {

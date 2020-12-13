@@ -65,7 +65,7 @@ public class ExpeditionAdapter extends RecyclerView.Adapter<ExpeditionAdapter.Vi
             binding.lessonTextView.setText(expedition.getLesson());
             binding.gradeTextView.setText(expedition.getGrade());
             binding.typeTextView.setText(expedition.getType());
-            binding.rootView.setOnClickListener(view -> itemClick.OnClick(expedition));
+            binding.rootView.setOnClickListener(view -> itemClick.OnClick(expedition,false));
         }
     }
 }

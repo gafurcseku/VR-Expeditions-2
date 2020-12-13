@@ -21,6 +21,9 @@ public interface PdfFileDao {
     @Query("SELECT * FROM PdfFile WHERE PdfFile.pdfId ==:id")
     PdfFile getPdfFile(int id);
 
+    @Query("SELECT * FROM PdfFile WHERE PdfFile.expeditionId ==:expeditionId")
+    PdfFile getPdfFileByExpeditionId(int expeditionId);
+
     @Query("UPDATE PdfFile SET downloadId =:downloadId , status =:status WHERE PdfFile.pdfId ==:id ")
     void downloadStatus(int downloadId, int status, int id);
 
