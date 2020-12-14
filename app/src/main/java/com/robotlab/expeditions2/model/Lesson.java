@@ -13,6 +13,10 @@ public class Lesson {
     private String subtitle;
     private String thumb;
     private int expeditionId;
+    private int status;
+
+    @Ignore
+    private Boolean isClock = false;
 
     public Lesson() {
     }
@@ -65,5 +69,21 @@ public class Lesson {
 
     public void setExpeditionId(int expeditionId) {
         this.expeditionId = expeditionId;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public Boolean getClock() {
+        return isClock;
+    }
+
+    public void setClock(Boolean clock) {
+        isClock = clock;
     }
 }

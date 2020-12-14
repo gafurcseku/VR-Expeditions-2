@@ -59,13 +59,13 @@ public class DummyData {
     }
 
 
-    public static List<LessonImage> getImages(){
-        List<LessonImage> lessonImages = new ArrayList<>();
-        for (int i= 0 ; i<25;i++){
-            lessonImages.add(new LessonImage(i,"https://www.hydrauliekmorreels.com/new_site/public/styles/Images/wallpapers/"+i+".jpg",i/2));
-        }
-        return  lessonImages;
-    }
+//    public static List<LessonImage> getImages(){
+//        List<LessonImage> lessonImages = new ArrayList<>();
+//        for (int i= 0 ; i<25;i++){
+//            lessonImages.add(new LessonImage(i,"https://www.hydrauliekmorreels.com/new_site/public/styles/Images/wallpapers/"+i+".jpg",(i/2)));
+//        }
+//        return  lessonImages;
+//    }
 
     public static List<PdfFile> getPdfList(){
         List<PdfFile> pdfFiles = new ArrayList<>();
@@ -78,7 +78,7 @@ public class DummyData {
     public static List<LessonImage> getLessonImages(int Id){
         List<LessonImage> lessonImages = new ArrayList<>();
         for (int i =1 ; i<6 ; i++){
-            lessonImages.add(new LessonImage((i*Id),"http://auditoriumpalma.com/skin/default/congresos/images/bg/bg_"+i+".jpg",Id));
+            lessonImages.add(new LessonImage("http://auditoriumpalma.com/skin/default/congresos/images/bg/bg_"+i+".jpg",Id));
         }
         return lessonImages;
     }

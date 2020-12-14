@@ -84,12 +84,13 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
             database.pdfFileDao().insert(downloadPdf.get());
             database.lessonDao().insert(lessonList);
             for (Lesson lesson : lessonList){
-                database.lessonImageDao().insert(DummyData.getLessonImages(lesson.getId()));
+                List<LessonImage> lessonImageList = DummyData.getLessonImages(lesson.getId());
+                database.lessonImageDao().insert(lessonImageList);
             }
             showLongToast("Add to My Expeditions");
             StartDownload();
             if(adapter!=null){
-                adapter.downloadLesson(viewModel);
+                adapter.setPreDownload(0);
             }
         });
         binding.downloadImageView.setOnClickListener(view -> {
@@ -141,7 +142,7 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
                 lessonList = DummyData.getLesson(expedition.get_id());
             }
 
-            adapter = new ExpeditionDetailAdapter(context,database, lessonList);
+            adapter = new ExpeditionDetailAdapter(context,database, lessonList,viewModel);
             binding.lessonRecyclerView.setLayoutManager(new LinearLayoutManager(context));
             binding.lessonRecyclerView.setAdapter(adapter);
 
@@ -152,7 +153,7 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
         if(expedition!=null){
             PdfFile pdfFile = database.pdfFileDao().getPdfFile(expedition.get_id());
             if (pdfFile.getStatus() == 0){
-                viewModel.FileDownload(pdfFile.getDownloadId(), pdfFile.getPdfFileUrl(), ""+pdfFile.getPdfId()+".pdf", null, null, new DownloadListener() {
+                viewModel.FileDownload(pdfFile.getDownloadId(),0,0, pdfFile.getPdfFileUrl(), ""+pdfFile.getPdfId()+".pdf", null, new DownloadListener() {
                     @Override
                     public void onDownloadComplete(int status, int DownloadId) {
                         database.pdfFileDao().downloadStatus(DownloadId,status,pdfFile.getPdfId());

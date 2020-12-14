@@ -1,11 +1,13 @@
 package com.robotlab.expeditions2.activity.expeditionDetails;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -16,6 +18,7 @@ import com.robotlab.expeditions2.download.DownloadListener;
 import com.robotlab.expeditions2.model.Lesson;
 import com.robotlab.expeditions2.model.LessonImage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDetailAdapter.ViewModel> {
@@ -23,11 +26,17 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
     private List<Lesson> lessonList;
     private LessonListLayoutBinding binding;
     private AppDatabase database;
+    private ExpeditionDetailViewModel viewModel;
+    private int position = 0;
+    private int downloadPosition = -1;
+    private List<LessonImage> lessonImageList;
 
-    public ExpeditionDetailAdapter(Context context, AppDatabase database, List<Lesson> lessonList) {
+
+    public ExpeditionDetailAdapter(Context context, AppDatabase database, List<Lesson> lessonList,ExpeditionDetailViewModel viewModel) {
         this.context = context;
         this.database= database;
         this.lessonList = lessonList;
+        this.viewModel = viewModel;
     }
 
     @NonNull
@@ -38,9 +47,9 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewModel holder, int position) {
-        Lesson lesson = lessonList.get(position);
-        holder.bind(lesson);
+    public void onBindViewHolder(@NonNull ViewModel holder, int itemPosition) {
+        Lesson lesson = lessonList.get(itemPosition);
+        holder.bind(lesson,itemPosition);
     }
 
     @Override
@@ -55,7 +64,20 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
             this.binding=binding;
         }
 
-        public void bind(Lesson lesson){
+        public void bind(Lesson lesson, int itemPosition){
+            Log.e("lesson",lesson.getId()+"");
+
+            if(itemPosition == downloadPosition ){
+                lessonImageList = database.lessonImageDao().getLessonImageByLessonId(lesson.getId());
+                if(lessonImageList.size() > 0){
+                    viewModel.totalCalculate = 0 ;
+                    position = 0;
+                    binding.downloadStatusTextView.setVisibility(View.VISIBLE);
+                    binding.subtitleTextView.setText("Downloading...");
+                    downloadLesson(lessonImageList.get(position),binding.downloadStatusTextView,binding.subtitleTextView);
+                }
+            }
+
             binding.titleTextView.setText(lesson.getTitle());
             binding.subtitleTextView.setText(lesson.getSubtitle());
             Glide.with(context)
@@ -63,6 +85,13 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
                     .centerCrop()
                     .placeholder(R.drawable.ic_application_icon)
                     .into(binding.logoImage);
+
+            if(lesson.getClock()){
+                binding.clockImageView.setVisibility(View.VISIBLE);
+                binding.subtitleTextView.setText("Pending...");
+            }else{
+                binding.clockImageView.setVisibility(View.GONE);
+            }
 
             if(database.lessonDao().isExists(lesson.getId())){
                 binding.broadcastTextView.setVisibility(View.VISIBLE);
@@ -72,20 +101,54 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
         }
     }
 
-    public void downloadLesson(ExpeditionDetailViewModel viewModel){
-        for (Lesson lesson : lessonList){
-            List<LessonImage> lessonImageList = database.lessonImageDao().getLessonImageByLessonId(lesson.getId());
-            for (LessonImage lessonImage :lessonImageList){
-                LessonImage aLessonImage = database.lessonImageDao().getLessonImage(lessonImage.getId());
-                if(aLessonImage.getStatus() == 0){
-                    viewModel.FileDownload(aLessonImage.getId(),aLessonImage.getUrl(), ""+aLessonImage.getId()+".png", null, null, new DownloadListener() {
-                        @Override
-                        public void onDownloadComplete(int status, int DownloadId) {
-                            database.lessonImageDao().downloadStatus(DownloadId,status,aLessonImage.getId());
-                        }
-                    });
+    public void setDownload(int position){
+        this.downloadPosition = position;
+        if(downloadPosition <lessonList.size()){
+            lessonList.get(downloadPosition).setClock(false);
+            database.lessonDao().downloadStatus(1,lessonList.get(downloadPosition).getId());
+            notifyItemChanged(downloadPosition);
+        }
+    }
+
+    public void setPreDownload(int position){
+        for (int i = 0 ; i<lessonList.size() ; i++){
+            lessonList.get(i).setClock(true);
+        }
+        notifyDataSetChanged();
+        setDownload(position);
+    }
+
+    public void downloadLesson(LessonImage lessonImage, AppCompatTextView percentageTextView, AppCompatTextView messageTextView) {
+        if(position >= lessonImageList.size()){
+            return;
+        }
+        LessonImage aLessonImage = database.lessonImageDao().getLessonImage(lessonImage.getId());
+        if (aLessonImage.getStatus() == 0) {
+            viewModel.FileDownload(aLessonImage.getId(), (position+1), lessonImageList.size(), aLessonImage.getUrl(), "" + aLessonImage.getId() + ".png", percentageTextView, new DownloadListener() {
+                @Override
+                public void onDownloadComplete(int status, int DownloadId) {
+                    if(status == 1){
+                        DownloadCompleteManager(percentageTextView, messageTextView);
+                    }
+                    database.lessonImageDao().downloadStatus(DownloadId, status, aLessonImage.getId());
                 }
-            }
+            });
+        }else{
+            DownloadCompleteManager(percentageTextView, messageTextView);
+        }
+
+    }
+
+    private void DownloadCompleteManager(AppCompatTextView percentageTextView, AppCompatTextView messageTextView) {
+        position++;
+        if(position < lessonImageList.size()){
+            downloadLesson(lessonImageList.get(position),percentageTextView,messageTextView);
+        }else{
+            percentageTextView.setVisibility(View.GONE);
+            messageTextView.setText(lessonList.get(downloadPosition).getSubtitle());
+            database.lessonDao().downloadStatus(1,lessonList.get(downloadPosition).getId());
+            downloadPosition++;
+            setDownload(downloadPosition);
         }
     }
 }

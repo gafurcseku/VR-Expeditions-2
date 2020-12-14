@@ -21,17 +21,16 @@ public class ExpeditionDetailViewModel extends ViewModel {
     private AppDatabase database;
     private DownloadListener downloadListener;
     private int currentDownloadId;
+    public float totalCalculate = 0.0f;
+    private float totalProgress = 0.0f;
+
 
     public ExpeditionDetailViewModel(Context context, AppDatabase database) {
         this.context = context;
         this.database = database;
     }
 
-
-
-
-
-    public void FileDownload(int downloadId, String filePath, String fileName, AppCompatTextView percentageTextView,AppCompatTextView messageTextView,DownloadListener downloadListener){
+    public void FileDownload(int downloadId, int position, int total, String filePath, String fileName, AppCompatTextView percentageTextView,DownloadListener downloadListener){
         Log.i("path", FileStore.getCacheFolder(context).getPath());
 
         if(Status.RUNNING ==PRDownloader.getStatus(downloadId)){
@@ -53,14 +52,20 @@ public class ExpeditionDetailViewModel extends ViewModel {
       }).setOnCancelListener(() -> {
 
       }).setOnProgressListener(progress -> {
-          if(percentageTextView!=null)
-              percentageTextView.setText(progress.toString());
+          if(percentageTextView!=null){
+              float pro =  ((float)progress.currentBytes / (float)progress.totalBytes)*100;
+              totalProgress = (pro /(float)total);
+
+             // totalCalculate = totalCalculate + (int) Math.ceil(totalProgress);
+             // Log.e("Progress",totalProgress+"-"+totalCalculate);
+
+              percentageTextView.setText(String.valueOf((int) Math.ceil(totalCalculate+totalProgress))+"%");
+          }
       }).start(new OnDownloadListener() {
             @Override
             public void onDownloadComplete() {
+                totalCalculate = totalCalculate +totalProgress;
                 downloadListener.onDownloadComplete(1,1);
-                if(messageTextView!=null)
-                    messageTextView.setVisibility(View.GONE);
             }
 
             @Override

@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 @Entity
 public class LessonImage {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int Id;
     private String url;
     private int lessonId;
@@ -18,8 +18,7 @@ public class LessonImage {
     }
 
     @Ignore
-    public LessonImage(int id, String url, int lessonId) {
-        Id = id;
+    public LessonImage(String url, int lessonId) {
         this.url = url;
         this.lessonId = lessonId;
     }
