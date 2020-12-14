@@ -20,6 +20,9 @@ public interface LessonDao {
     @Query("SELECT * FROM Lesson WHERE Lesson.expeditionId =:expeditionId")
     List<Lesson> getLessonByExpeditionId(int expeditionId);
 
+    @Query("SELECT EXISTS(SELECT * FROM Lesson WHERE Lesson.Id =:Id)")
+    Boolean isExists(int Id);
+
 //    @Query("UPDATE PdfFile SET downloadId =:downloadId , status =:status WHERE PdfFile.pdfId ==:id ")
 //    void downloadStatus(int downloadId, int status, int id);
 }

@@ -18,12 +18,14 @@ public class Lesson {
     }
 
     @Ignore
-    public Lesson(int id, String title, String subtitle, String thumb) {
+    public Lesson(int id, String title, String subtitle, String thumb, int expeditionId) {
         Id = id;
         this.title = title;
         this.subtitle = subtitle;
         this.thumb = thumb;
+        this.expeditionId = expeditionId;
     }
+
 
     public int getId() {
         return Id;

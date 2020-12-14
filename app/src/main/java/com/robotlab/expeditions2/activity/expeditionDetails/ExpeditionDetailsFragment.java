@@ -88,6 +88,9 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
             }
             showLongToast("Add to My Expeditions");
             StartDownload();
+            if(adapter!=null){
+                adapter.downloadLesson(viewModel);
+            }
         });
         binding.downloadImageView.setOnClickListener(view -> {
 
@@ -138,7 +141,7 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
                 lessonList = DummyData.getLesson(expedition.get_id());
             }
 
-            adapter = new ExpeditionDetailAdapter(context, lessonList);
+            adapter = new ExpeditionDetailAdapter(context,database, lessonList);
             binding.lessonRecyclerView.setLayoutManager(new LinearLayoutManager(context));
             binding.lessonRecyclerView.setAdapter(adapter);
 
@@ -153,9 +156,6 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
                     @Override
                     public void onDownloadComplete(int status, int DownloadId) {
                         database.pdfFileDao().downloadStatus(DownloadId,status,pdfFile.getPdfId());
-                        if(status == 1){
-                            downloadLesson();
-                        }
                     }
                 });
             }
@@ -163,21 +163,6 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
 
     }
 
-    private void downloadLesson(){
-        for (Lesson lesson : lessonList){
-            List<LessonImage> lessonImageList = database.lessonImageDao().getLessonImageByLessonId(lesson.getId());
-            for (LessonImage lessonImage :lessonImageList){
-                LessonImage aLessonImage = database.lessonImageDao().getLessonImage(lessonImage.getId());
-                if(aLessonImage.getStatus() == 0){
-                    viewModel.FileDownload(aLessonImage.getId(),aLessonImage.getUrl(), ""+aLessonImage.getId()+".png", null, null, new DownloadListener() {
-                        @Override
-                        public void onDownloadComplete(int status, int DownloadId) {
-                            database.lessonImageDao().downloadStatus(DownloadId,status,aLessonImage.getId());
-                        }
-                    });
-                }
-            }
-        }
-    }
+
 
 }

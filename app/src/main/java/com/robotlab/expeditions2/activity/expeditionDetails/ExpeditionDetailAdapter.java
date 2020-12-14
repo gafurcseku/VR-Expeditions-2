@@ -8,9 +8,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.robotlab.expeditions2.R;
+import com.robotlab.expeditions2.database.AppDatabase;
 import com.robotlab.expeditions2.databinding.LessonListLayoutBinding;
+import com.robotlab.expeditions2.download.DownloadListener;
 import com.robotlab.expeditions2.model.Lesson;
+import com.robotlab.expeditions2.model.LessonImage;
 
 import java.util.List;
 
@@ -18,9 +22,11 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
     private Context context;
     private List<Lesson> lessonList;
     private LessonListLayoutBinding binding;
+    private AppDatabase database;
 
-    public ExpeditionDetailAdapter(Context context, List<Lesson> lessonList) {
+    public ExpeditionDetailAdapter(Context context, AppDatabase database, List<Lesson> lessonList) {
         this.context = context;
+        this.database= database;
         this.lessonList = lessonList;
     }
 
@@ -52,11 +58,34 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
         public void bind(Lesson lesson){
             binding.titleTextView.setText(lesson.getTitle());
             binding.subtitleTextView.setText(lesson.getSubtitle());
-//            Glide.with(context)
-//                    .load(lesson.getImage())
-//                    .centerCrop()
-//                    .placeholder(R.drawable.ic_application_icon)
-//                    .into(binding.logoImage);
+            Glide.with(context)
+                    .load(lesson.getThumb())
+                    .centerCrop()
+                    .placeholder(R.drawable.ic_application_icon)
+                    .into(binding.logoImage);
+
+            if(database.lessonDao().isExists(lesson.getId())){
+                binding.broadcastTextView.setVisibility(View.VISIBLE);
+            }else{
+                binding.broadcastTextView.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    public void downloadLesson(ExpeditionDetailViewModel viewModel){
+        for (Lesson lesson : lessonList){
+            List<LessonImage> lessonImageList = database.lessonImageDao().getLessonImageByLessonId(lesson.getId());
+            for (LessonImage lessonImage :lessonImageList){
+                LessonImage aLessonImage = database.lessonImageDao().getLessonImage(lessonImage.getId());
+                if(aLessonImage.getStatus() == 0){
+                    viewModel.FileDownload(aLessonImage.getId(),aLessonImage.getUrl(), ""+aLessonImage.getId()+".png", null, null, new DownloadListener() {
+                        @Override
+                        public void onDownloadComplete(int status, int DownloadId) {
+                            database.lessonImageDao().downloadStatus(DownloadId,status,aLessonImage.getId());
+                        }
+                    });
+                }
+            }
         }
     }
 }

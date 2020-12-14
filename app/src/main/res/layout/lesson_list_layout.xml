@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_5"
-    app:cardBackgroundColor="@android:color/white"
-    app:strokeWidth="0.01dp"
-    app:strokeColor="#2D3236"
     android:theme="@style/Theme.MaterialComponents"
-    app:cardCornerRadius="@dimen/cardview_radius_10">
+    app:cardBackgroundColor="@android:color/white"
+    app:cardCornerRadius="@dimen/cardview_radius_10"
+    app:strokeColor="#2D3236"
+    app:strokeWidth="0.01dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -20,9 +20,9 @@
             android:id="@+id/logoImageView"
             android:layout_width="100dp"
             android:layout_height="80dp"
+            android:theme="@style/Theme.MaterialComponents.DayNight"
             app:cardCornerRadius="@dimen/cardview_radius_10"
             app:cardElevation="0dp"
-            android:theme="@style/Theme.MaterialComponents.DayNight"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -33,6 +33,19 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/sample_image" />
         </com.google.android.material.card.MaterialCardView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/downloadStatusTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:text="30%"
+            android:textSize="@dimen/font_size_12"
+            android:padding="@dimen/padding_5"
+            app:layout_constraintRight_toRightOf="@id/logoImageView"
+            app:layout_constraintBottom_toBottomOf="@id/logoImageView"
+            android:layout_margin="@dimen/margin_5"
+            android:textColor="@color/text_color" />
 
 
         <androidx.appcompat.widget.AppCompatTextView
