@@ -131,6 +131,7 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
                         DownloadCompleteManager(percentageTextView, messageTextView);
                     }
                     database.lessonImageDao().downloadStatus(DownloadId, status, aLessonImage.getId());
+                    messageTextView.setText("Downloading...");
                 }
             });
         }else{
@@ -148,6 +149,7 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
             messageTextView.setText(lessonList.get(downloadPosition).getSubtitle());
             database.lessonDao().downloadStatus(1,lessonList.get(downloadPosition).getId());
             downloadPosition++;
+            notifyItemChanged(downloadPosition-1);
             setDownload(downloadPosition);
         }
     }

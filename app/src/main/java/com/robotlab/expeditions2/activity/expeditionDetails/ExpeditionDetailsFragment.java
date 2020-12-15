@@ -78,6 +78,10 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
         if(isMyExpedition)
             binding.MyExpeditionTextView.setVisibility(View.GONE);
 
+        if(database.expeditionDao().isExists(expedition.get_id())){
+            binding.MyExpeditionTextView.setVisibility(View.GONE);
+        }
+
 
         binding.MyExpeditionTextView.setOnClickListener(view -> {
             database.expeditionDao().insert(expedition);
