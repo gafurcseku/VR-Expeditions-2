@@ -1,10 +1,12 @@
 package com.robotlab.expeditions2.activity.deviceList;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.robotlab.expeditions2.R;
@@ -52,8 +54,12 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewMode
         private void bind(Devices devices){
             binding.nameTextView.setText(devices.getName());
             if(devices.getOnline()){
+                Typeface typeface = ResourcesCompat.getFont(context, R.font.poppins_regular);
+                binding.nameTextView.setTypeface(typeface);
                 binding.statusImageView.setImageResource(R.drawable.ic_icon_online);
             }else{
+                Typeface typeface = ResourcesCompat.getFont(context, R.font.poppins_light);
+                binding.nameTextView.setTypeface(typeface);
                 binding.statusImageView.setImageResource(R.drawable.ic_icon_offonline);
             }
         }

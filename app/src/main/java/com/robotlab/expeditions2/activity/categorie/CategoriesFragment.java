@@ -1,5 +1,8 @@
 package com.robotlab.expeditions2.activity.categorie;
 
+import android.graphics.Color;
+import android.graphics.DashPathEffect;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +21,7 @@ import com.robotlab.expeditions2.activity.expedition.ItemClick;
 import com.robotlab.expeditions2.base.BaseFragment;
 import com.robotlab.expeditions2.databinding.FragmentCategoriesBinding;
 import com.robotlab.expeditions2.model.Category;
+import com.robotlab.expeditions2.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.List;
 
@@ -74,8 +78,13 @@ public class CategoriesFragment extends BaseFragment {
                     categoryAdapter = new CategoryAdapter(context,categories);
                     binding.categoriesRecyclerView.setLayoutManager(new LinearLayoutManager(context));
                     binding.categoriesRecyclerView.setItemAnimator(new DefaultItemAnimator());
-                    DividerItemDecoration itemDecoration = new DividerItemDecoration(binding.categoriesRecyclerView.getContext(),DividerItemDecoration.VERTICAL);
-                    binding.categoriesRecyclerView.addItemDecoration(itemDecoration);
+                    Paint paint = new Paint();
+                    paint.setStrokeWidth(1);
+                    paint.setColor(Color.GRAY);
+                    paint.setAntiAlias(true);
+                    paint.setPathEffect(new DashPathEffect(new float[]{15.0f, 15.0f}, 0));
+                 //   DividerItemDecoration itemDecoration = new DividerItemDecoration(binding.categoriesRecyclerView.getContext(),DividerItemDecoration.VERTICAL);
+                    binding.categoriesRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(context).paint(paint).build());
                     binding.categoriesRecyclerView.setAdapter(categoryAdapter);
                     categoryAdapter.setOnItemListenerListener(position -> {
                         onItemListener.OnItemClickListener(position);

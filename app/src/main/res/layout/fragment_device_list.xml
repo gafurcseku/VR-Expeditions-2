@@ -19,7 +19,7 @@
         android:drawablePadding="@dimen/padding_5"
         android:fontFamily="@font/poppins_regular"
         android:gravity="center"
-        android:text="Connected Devices (8)"
+        android:text="Connected Devices (50)"
         app:textAllCaps="true"
         android:textColor="@color/text_color"
         android:textSize="@dimen/font_size_18"
