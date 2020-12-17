@@ -5,7 +5,6 @@ import android.view.View;
 
 import androidx.lifecycle.ViewModelProvider;
 
-import com.robotlab.expeditions2.BuildConfig;
 import com.robotlab.expeditions2.R;
 import com.robotlab.expeditions2.activity.MainFragment.MainFragment;
 import com.robotlab.expeditions2.activity.expedition.ItemClick;
@@ -79,8 +78,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
     }
 
     private void setVersionAndBuild(){
-        int versionCode = BuildConfig.VERSION_CODE;
-        String versionName = BuildConfig.VERSION_NAME;
+        int versionCode = 1;
+        String versionName = "1.0";
         binding.versionTextView.setText("RobotLAB VR v"+versionCode+"(Build "+versionCode+")");
 
     }

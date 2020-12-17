@@ -25,6 +25,7 @@ import com.robotlab.expeditions2.model.LessonImage;
 import com.robotlab.expeditions2.model.PdfFile;
 import com.robotlab.expeditions2.utility.DummyData;
 import com.robotlab.expeditions2.utility.FileStore;
+import com.robotlab.expeditions2.utility.NetworkUtil;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -84,18 +85,23 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
 
 
         binding.MyExpeditionTextView.setOnClickListener(view -> {
-            database.expeditionDao().insert(expedition);
-            database.pdfFileDao().insert(downloadPdf.get());
-            database.lessonDao().insert(lessonList);
-            for (Lesson lesson : lessonList){
-                List<LessonImage> lessonImageList = DummyData.getLessonImages(lesson.getId());
-                database.lessonImageDao().insert(lessonImageList);
+            if(NetworkUtil.isConnected(context)){
+                database.expeditionDao().insert(expedition);
+                database.pdfFileDao().insert(downloadPdf.get());
+                database.lessonDao().insert(lessonList);
+                for (Lesson lesson : lessonList){
+                    List<LessonImage> lessonImageList = DummyData.getLessonImages(lesson.getId());
+                    database.lessonImageDao().insert(lessonImageList);
+                }
+                showLongToast("Add to My Expeditions");
+                StartDownload();
+                if(adapter!=null){
+                    adapter.setPreDownload(0);
+                }
+            }else{
+                customAlertDialog.showDialog("Please check your internet connection");
             }
-            showLongToast("Add to My Expeditions");
-            StartDownload();
-            if(adapter!=null){
-                adapter.setPreDownload(0);
-            }
+
         });
         binding.downloadImageView.setOnClickListener(view -> {
 

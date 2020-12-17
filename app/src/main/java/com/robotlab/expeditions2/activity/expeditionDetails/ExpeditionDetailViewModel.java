@@ -70,7 +70,7 @@ public class ExpeditionDetailViewModel extends ViewModel {
 
             @Override
             public void onError(Error error) {
-                Log.i("Error",error.getServerErrorMessage());
+                Log.i("Error",error.toString());
                 downloadListener.onDownloadComplete(0,0);
             }
         });            ;
