@@ -66,6 +66,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+    implementation 'com.github.pluscubed:recycler-fast-scroll:0.3.2@aar'
+
 //    implementation 'com.splunk:mint-android-sdk:5.2.5'
 
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.9'

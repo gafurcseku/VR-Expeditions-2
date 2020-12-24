@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_color"
+    android:background="@android:color/white"
     android:paddingLeft="@dimen/margin_20"
     android:paddingRight="@dimen/margin_20"
     tools:context=".activity.deviceList.StudentListFragment">
-
 
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -20,12 +19,12 @@
         android:fontFamily="@font/poppins_regular"
         android:gravity="center"
         android:text="Connected Devices (50)"
-        app:textAllCaps="true"
         android:textColor="@color/text_color"
         android:textSize="@dimen/font_size_18"
         app:layout_constraintBottom_toBottomOf="@+id/deviceScanTextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/deviceScanTextView" />
+        app:layout_constraintTop_toTopOf="@+id/deviceScanTextView"
+        app:textAllCaps="true" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/deviceScanTextView"
@@ -43,26 +42,40 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.cardview.widget.CardView
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_20"
-        app:cardBackgroundColor="@android:color/white"
-        app:cardCornerRadius="@dimen/cornerRadius_5"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_30"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/deviceScanTextView">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/studentRecyclerView"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/margin_10"
-            android:background="@color/bg_color"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="3"
-            tools:listitem="@layout/student_list_layout" />
-    </androidx.cardview.widget.CardView>
+            android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/studentRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/margin_15"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="3"
+                tools:listitem="@layout/student_list_layout" />
+
+            <com.pluscubed.recyclerfastscroll.RecyclerFastScroller
+                android:id="@+id/fastScroller"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                app:rfs_touchTargetWidth="5dp"
+                app:rfs_handleNormalColor="#802D3236"
+                app:rfs_handlePressedColor="#802D3236"
+                app:rfs_barColor="@android:color/white"
+                app:rfs_hidingEnabled="false" />
+
+        </FrameLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

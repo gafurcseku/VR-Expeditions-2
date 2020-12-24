@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +45,7 @@ public class StudentListFragment extends BaseFragment {
             adapter = new StudentAdapter(context,item);
             binding.studentRecyclerView.setLayoutManager(new GridLayoutManager(context,3));
             binding.studentRecyclerView.setAdapter(adapter);
+            binding.fastScroller.attachRecyclerView(binding.studentRecyclerView);
         } );
         return binding.getRoot();
     }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_color"
+    android:background="@android:color/white"
     android:paddingLeft="@dimen/margin_30"
     tools:context=".activity.expeditionDetails.ExpeditionDetailsFragment">
 
@@ -73,7 +73,8 @@
             android:text="@string/add_to_my_expeditions"
             android:textAllCaps="true"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/font_size_12" />
+            android:textSize="@dimen/font_size_12"
+            android:layout_alignParentRight="true" />
     </RelativeLayout>
 
     <androidx.cardview.widget.CardView
