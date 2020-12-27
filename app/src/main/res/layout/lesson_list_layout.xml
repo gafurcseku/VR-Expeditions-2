@@ -13,7 +13,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:background="#fff"
         android:padding="@dimen/padding_5">
 
@@ -38,8 +37,8 @@
                 android:id="@+id/clockImageView"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:scaleType="fitCenter"
                 android:layout_gravity="center"
+                android:scaleType="fitCenter"
                 android:src="@drawable/ic_pending_icon" />
         </com.google.android.material.card.MaterialCardView>
 
@@ -47,15 +46,15 @@
             android:id="@+id/downloadStatusTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:text="0%"
-            android:textSize="@dimen/font_size_12"
-            android:padding="@dimen/padding_5"
-            android:visibility="gone"
-            app:layout_constraintRight_toRightOf="@id/logoImageView"
-            app:layout_constraintBottom_toBottomOf="@id/logoImageView"
             android:layout_margin="@dimen/margin_5"
-            android:textColor="@color/text_color" />
+            android:background="@android:color/white"
+            android:padding="@dimen/padding_5"
+            android:text="0%"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/font_size_12"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/logoImageView"
+            app:layout_constraintRight_toRightOf="@id/logoImageView" />
 
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -89,9 +88,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/margin_10"
-            android:visibility="gone"
             android:background="@drawable/broadcast_bg"
             android:gravity="center"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/logoImageView">

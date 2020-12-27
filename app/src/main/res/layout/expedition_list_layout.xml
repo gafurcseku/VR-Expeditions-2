@@ -51,6 +51,7 @@
             android:fontFamily="@font/poppins_light"
             android:gravity="start"
             android:padding="@dimen/padding_10"
+            android:textAlignment="textStart"
             android:text="Relive the mystical world of the ancient Egyptian gods."
             android:textColor="@color/text_color"
             android:textSize="@dimen/font_size_12"

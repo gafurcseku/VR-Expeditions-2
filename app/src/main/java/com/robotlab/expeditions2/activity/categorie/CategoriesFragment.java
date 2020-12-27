@@ -79,10 +79,10 @@ public class CategoriesFragment extends BaseFragment {
                     binding.categoriesRecyclerView.setLayoutManager(new LinearLayoutManager(context));
                     binding.categoriesRecyclerView.setItemAnimator(new DefaultItemAnimator());
                     Paint paint = new Paint();
-                    paint.setStrokeWidth(1);
-                    paint.setColor(Color.GRAY);
+                    paint.setStrokeWidth(0.5f);
+                    paint.setColor(Color.parseColor("#802D3236"));
                     paint.setAntiAlias(true);
-                    paint.setPathEffect(new DashPathEffect(new float[]{15.0f, 15.0f}, 0));
+                    paint.setPathEffect(new DashPathEffect(new float[]{8.0f, 8.0f}, 0));
                  //   DividerItemDecoration itemDecoration = new DividerItemDecoration(binding.categoriesRecyclerView.getContext(),DividerItemDecoration.VERTICAL);
                     binding.categoriesRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(context).paint(paint).build());
                     binding.categoriesRecyclerView.setAdapter(categoryAdapter);

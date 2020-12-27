@@ -208,7 +208,7 @@
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/poppins_regular"
                         android:text="@string/setting"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text_color"
                         android:textSize="@dimen/font_size_12" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -220,7 +220,7 @@
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/poppins_light"
                     android:text="RobotLAB VR v1.8 (Build 31)"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/text_color_50"
                     android:textSize="@dimen/font_size_8"
                     android:layout_marginBottom="@dimen/margin_10"
                     app:layout_constraintBottom_toBottomOf="parent"

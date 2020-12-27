@@ -1,16 +1,22 @@
 package com.robotlab.expeditions2.activity.expeditionDetails;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.downloader.Error;
 import com.downloader.OnDownloadListener;
 import com.downloader.PRDownloader;
@@ -133,7 +139,19 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
 
     private void showInformation(){
         if(expedition!=null) {
-            Glide.with(context).load(expedition.getImage_url()).centerCrop().placeholder(R.drawable.ic_application_icon).into(binding.topLogoImageView);
+            Glide.with(context).load(expedition.getImage_url()).listener(new RequestListener<Drawable>() {
+                @Override
+                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                    return false;
+                }
+
+                @Override
+                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                    binding.topLogoImageView.setBackground(resource);
+                    return false;
+                }
+            }).centerCrop().placeholder(R.drawable.ic_application_icon);
+
             binding.titleTextView.setText(expedition.getTitle());
             binding.subtitleTextView.setText(expedition.getDescription());
             binding.lessonNumberTextView.setText(expedition.getLesson());
@@ -155,6 +173,7 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
             adapter = new ExpeditionDetailAdapter(context,database, lessonList,viewModel);
             binding.lessonRecyclerView.setLayoutManager(new LinearLayoutManager(context));
             binding.lessonRecyclerView.setAdapter(adapter);
+            binding.fastScroller.attachRecyclerView(binding.lessonRecyclerView);
 
         }
     }

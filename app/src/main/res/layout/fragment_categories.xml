@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context=".activity.categorie.CategoriesFragment">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -22,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin_8"
         android:fontFamily="@font/poppins_regular"
-        android:text="Categories"
+        android:text="@string/categories"
         android:textAllCaps="true"
         android:textColor="@color/text_color"
         android:textSize="@dimen/font_size_18"

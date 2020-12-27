@@ -70,7 +70,7 @@ public class DummyData {
     public static List<PdfFile> getPdfList(){
         List<PdfFile> pdfFiles = new ArrayList<>();
         for (int i =1 ; i < 20 ; i++){
-            pdfFiles.add(new PdfFile(i,"http://www.africau.edu/images/default/sample.pdf","This is a small demonstration--"+i+" file","This is a small demonstration "+i+".pdf file",(i*5.6)+"KB",i));
+            pdfFiles.add(new PdfFile(i,"http://www.africau.edu/images/default/sample.pdf","Student Handout Files-"+i+" file","The_forest_of_the_world-"+i+".pdf file",(i*5.6)+"KB",i));
         }
         return pdfFiles;
     }

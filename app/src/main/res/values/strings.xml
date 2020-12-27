@@ -10,4 +10,6 @@
     <string name="browse_expedition">Browse Expedition</string>
     <string name="lesson">Lesson</string>
     <string name="back_to_list">Back to List</string>
+    <string name="all_expeditions">ALL EXPEDITIONS</string>
+    <string name="categories">Categories</string>
 </resources>

@@ -54,6 +54,7 @@ public class ExpeditionFragment extends BaseFragment implements ItemClick {
                 expeditionAdapter = new ExpeditionAdapter(context, expeditions, ExpeditionFragment.this);
                 binding.expeditionRecyclerView.setLayoutManager(new GridLayoutManager(context, 3));
                 binding.expeditionRecyclerView.setAdapter(expeditionAdapter);
+                binding.fastScroller.attachRecyclerView(binding.expeditionRecyclerView);
             }
         });
     }
