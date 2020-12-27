@@ -94,9 +94,9 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
             }
 
             if(database.lessonDao().isExists(lesson.getId())){
-                binding.broadcastTextView.setVisibility(View.VISIBLE);
+                binding.broadcastLinearLayout.setVisibility(View.VISIBLE);
             }else{
-                binding.broadcastTextView.setVisibility(View.GONE);
+                binding.broadcastLinearLayout.setVisibility(View.GONE);
             }
         }
     }
