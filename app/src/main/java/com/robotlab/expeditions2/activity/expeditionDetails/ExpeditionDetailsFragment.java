@@ -170,7 +170,7 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
                 lessonList = DummyData.getLesson(expedition.get_id());
             }
 
-            adapter = new ExpeditionDetailAdapter(context,database, lessonList,viewModel);
+            adapter = new ExpeditionDetailAdapter(context,database, lessonList,viewModel , isMyExpedition);
             binding.lessonRecyclerView.setLayoutManager(new LinearLayoutManager(context));
             binding.lessonRecyclerView.setAdapter(adapter);
             binding.fastScroller.attachRecyclerView(binding.lessonRecyclerView);

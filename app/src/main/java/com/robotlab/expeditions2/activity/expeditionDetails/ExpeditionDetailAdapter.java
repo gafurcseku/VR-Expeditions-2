@@ -30,13 +30,15 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
     private int position = 0;
     private int downloadPosition = -1;
     private List<LessonImage> lessonImageList;
+    private Boolean isMyExpedition;
 
 
-    public ExpeditionDetailAdapter(Context context, AppDatabase database, List<Lesson> lessonList,ExpeditionDetailViewModel viewModel) {
+    public ExpeditionDetailAdapter(Context context, AppDatabase database, List<Lesson> lessonList,ExpeditionDetailViewModel viewModel, Boolean isMyExpedition) {
         this.context = context;
         this.database= database;
         this.lessonList = lessonList;
         this.viewModel = viewModel;
+        this.isMyExpedition = isMyExpedition;
     }
 
     @NonNull
@@ -49,7 +51,7 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
     @Override
     public void onBindViewHolder(@NonNull ViewModel holder, int itemPosition) {
         Lesson lesson = lessonList.get(itemPosition);
-        holder.bind(lesson,itemPosition);
+        holder.bind(lesson,itemPosition,isMyExpedition);
     }
 
     @Override
@@ -64,7 +66,7 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
             this.binding=binding;
         }
 
-        public void bind(Lesson lesson, int itemPosition){
+        public void bind(Lesson lesson, int itemPosition , Boolean isMyExpedition){
             Log.e("lesson",lesson.getId()+"");
 
             if(itemPosition == downloadPosition ){
@@ -93,7 +95,7 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
                 binding.clockImageView.setVisibility(View.GONE);
             }
 
-            if(database.lessonDao().isExists(lesson.getId())){
+            if(database.lessonDao().isExists(lesson.getId()) && isMyExpedition){
                 binding.broadcastLinearLayout.setVisibility(View.VISIBLE);
             }else{
                 binding.broadcastLinearLayout.setVisibility(View.GONE);
