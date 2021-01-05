@@ -1,14 +1,18 @@
 package com.robotlab.expeditions2.activity.expeditionDetails;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -34,11 +38,8 @@ import com.robotlab.expeditions2.utility.FileStore;
 import com.robotlab.expeditions2.utility.NetworkUtil;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.TooManyListenersException;
-import java.util.stream.Collectors;
 
 
 public class ExpeditionDetailsFragment extends BaseFragment implements View.OnClickListener {
@@ -80,6 +81,7 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         binding.backImageView.setOnClickListener(this);
+        binding.backTextView.setOnClickListener(this);
         showInformation();
 
         if(isMyExpedition)
@@ -92,6 +94,7 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
 
         binding.MyExpeditionTextView.setOnClickListener(view -> {
             if(NetworkUtil.isConnected(context)){
+                binding.MyExpeditionTextView.setVisibility(View.GONE);
                 database.expeditionDao().insert(expedition);
                 database.pdfFileDao().insert(downloadPdf.get());
                 database.lessonDao().insert(lessonList);
@@ -110,7 +113,8 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
 
         });
         binding.downloadImageView.setOnClickListener(view -> {
-
+            PdfFile pdfFile = database.pdfFileDao().getPdfFile(expedition.get_id());
+            OpenPdfFile(""+pdfFile.getPdfId()+".pdf");
         });
         return binding.getRoot();
     }
@@ -121,7 +125,7 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.backImageView:
-                showLongToast("Click");
+            case R.id.backTextView:
                 backClick.setDone(true);
                 break;
             default:
@@ -194,5 +198,20 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
     }
 
 
+    private void OpenPdfFile(String fileName){
+        File file = new File(FileStore.getCacheFolder(context).getPath()+"/"+fileName);
+        Log.i("file Path",file.getAbsolutePath());
+        if(file.exists()){
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            Uri apkURI = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", file);
+            intent.setDataAndType(apkURI, "application/pdf");
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            startActivity(intent);
+        }else{
+            customAlertDialog.showDialog("Please Download file first.");
+        }
+
+    }
 
 }

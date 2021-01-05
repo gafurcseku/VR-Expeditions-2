@@ -94,6 +94,11 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
             }else{
                 binding.clockImageView.setVisibility(View.GONE);
             }
+            if(isMyExpedition){
+                binding.subtitleTextView.setVisibility(View.VISIBLE);
+            }else {
+                binding.subtitleTextView.setVisibility(View.GONE);
+            }
 
             if(database.lessonDao().isExists(lesson.getId()) && isMyExpedition){
                 binding.broadcastLinearLayout.setVisibility(View.VISIBLE);

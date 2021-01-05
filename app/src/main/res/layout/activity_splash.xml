@@ -8,13 +8,40 @@
     tools:context=".activity.splash.SplashActivity">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="250dp"
+        android:id="@+id/logoImage"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
+        android:layout_marginLeft="220dp"
+        android:layout_marginRight="220dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_application_icon" />
+        app:srcCompat="@drawable/splash_screen_icon" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/titleTextView"
+        app:layout_constraintTop_toBottomOf="@id/logoImage"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="wrap_content"
+        android:text="Welcome To"
+        android:layout_marginTop="@dimen/margin_15"
+        android:textColor="@color/text_color"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="42sp"
+        android:layout_height="wrap_content"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        app:layout_constraintTop_toBottomOf="@id/titleTextView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="wrap_content"
+        android:text="RobotLAB Expeditions"
+        android:textColor="@color/text_color"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="42sp"
+        android:layout_height="wrap_content"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

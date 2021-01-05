@@ -28,6 +28,7 @@
             android:src="@drawable/ic_arrow_back_24" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/backTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -176,12 +177,11 @@
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-                <androidx.cardview.widget.CardView
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/bottomCardView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="@dimen/cornerRadius_5"
-                    app:cardElevation="5dp"
+                    android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -229,7 +229,7 @@
                             app:layout_constraintEnd_toEndOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </androidx.cardview.widget.CardView>
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
