@@ -30,4 +30,8 @@ public class ExpeditionViewModel extends ViewModel {
         expeditionLiveData.setValue(expeditions);
     }
 
+    public String getCategoryName(int categoryId){
+      return  DummyData.getCategoryDummyData().get(categoryId).getName();
+    }
+
 }

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.robotlab.expeditions2.R;
 import com.robotlab.expeditions2.databinding.ExpeditionListLayoutBinding;
 import com.robotlab.expeditions2.model.Expedition;
@@ -59,6 +60,7 @@ public class ExpeditionAdapter extends RecyclerView.Adapter<ExpeditionAdapter.Vi
                     .load(expedition.getImage_url())
                     .centerCrop()
                     .placeholder(R.drawable.ic_application_icon)
+                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                     .into(binding.coverImageView);
             binding.titleTextView.setText(expedition.getTitle());
             binding.subtitleTextView.setText(expedition.getDescription());

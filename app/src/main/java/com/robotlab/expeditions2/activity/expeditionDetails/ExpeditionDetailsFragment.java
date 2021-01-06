@@ -164,13 +164,18 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
 
             if(isMyExpedition){
                 PdfFile pdfFile = database.pdfFileDao().getPdfFileByExpeditionId(expedition.get_id());
-                binding.fileNameTextView.setText(pdfFile.getPdfName());
-                binding.fileInformationTextView.setText(pdfFile.getPdfTitle());
+                if(pdfFile != null){
+                    binding.fileNameTextView.setText(pdfFile.getPdfName());
+                    binding.fileInformationTextView.setText(pdfFile.getPdfTitle());
+                }
                 lessonList = database.lessonDao().getLessonByExpeditionId(expedition.get_id());
             }else{
                 downloadPdf = DummyData.getPdfList().stream().filter(pdf -> pdf.getExpeditionId() == expedition.get_id()).findFirst();
-                binding.fileNameTextView.setText(downloadPdf.get().getPdfName());
-                binding.fileInformationTextView.setText(downloadPdf.get().getPdfTitle());
+                if(downloadPdf != null){
+                    binding.fileNameTextView.setText(downloadPdf.get().getPdfName());
+                    binding.fileInformationTextView.setText(downloadPdf.get().getPdfTitle());
+                }
+
                 lessonList = DummyData.getLesson(expedition.get_id());
             }
 

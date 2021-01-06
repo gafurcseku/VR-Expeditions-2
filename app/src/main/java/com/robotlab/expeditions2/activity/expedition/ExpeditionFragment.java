@@ -42,6 +42,7 @@ public class ExpeditionFragment extends BaseFragment implements ItemClick {
         viewModel = new ViewModelProvider(this, viewModelFactory).get(ExpeditionViewModel.class);
         if (getArguments() != null) {
             CategoryId = getArguments().getInt("CATEGORY_ID");
+            binding.categoriesNameTextView.setText(viewModel.getCategoryName(CategoryId));
         }
         onAttachToParentFragment(getParentFragment());
         setLiveData();
@@ -61,6 +62,7 @@ public class ExpeditionFragment extends BaseFragment implements ItemClick {
 
     public void setCategory(int CategoryId){
         viewModel.getExpeditions(CategoryId);
+        binding.categoriesNameTextView.setText(viewModel.getCategoryName(CategoryId));
     }
 
     @Override
