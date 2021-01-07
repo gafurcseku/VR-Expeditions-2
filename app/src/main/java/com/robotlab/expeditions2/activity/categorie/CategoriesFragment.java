@@ -8,16 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.robotlab.expeditions2.R;
-import com.robotlab.expeditions2.activity.expedition.ItemClick;
 import com.robotlab.expeditions2.base.BaseFragment;
 import com.robotlab.expeditions2.databinding.FragmentCategoriesBinding;
 import com.robotlab.expeditions2.model.Category;
@@ -89,6 +85,14 @@ public class CategoriesFragment extends BaseFragment {
                     categoryAdapter.setOnItemListenerListener(position -> {
                         onItemListener.OnItemClickListener(position);
                     });
+
+                    LinearLayoutManager layoutManager = ((LinearLayoutManager) binding.categoriesRecyclerView.getLayoutManager());
+                    int visibleItemCount = layoutManager.findLastVisibleItemPosition();
+
+                    if(visibleItemCount < categories.size()){
+                        binding.loadMoreImageView.setVisibility(View.INVISIBLE);
+                    }
+
                 }
             }
         });
