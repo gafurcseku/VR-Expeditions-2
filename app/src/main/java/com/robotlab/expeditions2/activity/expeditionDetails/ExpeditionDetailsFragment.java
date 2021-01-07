@@ -143,18 +143,35 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
 
     private void showInformation(){
         if(expedition!=null) {
-            Glide.with(context).load(expedition.getImage_url()).listener(new RequestListener<Drawable>() {
-                @Override
-                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                    return false;
-                }
+            if(isMyExpedition){
+                File file = new File(FileStore.getCacheFolder(context).getPath()+"/"+expedition.getImage_url());
+                Glide.with(context).load(file).listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        return false;
+                    }
 
-                @Override
-                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                    binding.topLogoImageView.setBackground(resource);
-                    return false;
-                }
-            }).centerCrop().placeholder(R.drawable.ic_application_icon);
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        binding.topLogoImageView.setBackground(resource);
+                        return false;
+                    }
+                }).centerCrop().placeholder(R.drawable.ic_application_icon);
+            }else{
+                Glide.with(context).load(expedition.getImage_url()).listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        binding.topLogoImageView.setBackground(resource);
+                        return false;
+                    }
+                }).centerCrop().placeholder(R.drawable.ic_application_icon);
+            }
+
 
             binding.titleTextView.setText(expedition.getTitle());
             binding.subtitleTextView.setText(expedition.getDescription());
@@ -198,7 +215,16 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
                     }
                 });
             }
+
+            viewModel.FileDownload(expedition.get_id(), 0, 0, expedition.getImage_url(), expedition.getImage_url(), null, new DownloadListener() {
+                @Override
+                public void onDownloadComplete(int status, int DownloadId) {
+
+                }
+            });
         }
+
+
 
     }
 
