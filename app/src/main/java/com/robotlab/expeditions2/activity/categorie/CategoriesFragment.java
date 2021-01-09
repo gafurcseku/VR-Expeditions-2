@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -29,13 +30,11 @@ public class CategoriesFragment extends BaseFragment {
     private CategoriesViewModel viewModel;
     private CategoryAdapter categoryAdapter;
     private OnItemListener onItemListener;
+    private int totalCategory = 0;
+    private RecyclerViewReadyCallback recyclerViewReadyCallback;
 
     public static CategoriesFragment newInstance(String param1, String param2) {
         CategoriesFragment fragment = new CategoriesFragment();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
         return fragment;
     }
 
@@ -51,11 +50,26 @@ public class CategoriesFragment extends BaseFragment {
 //        }
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setLiveData();
+        recyclerViewReadyCallback = new RecyclerViewReadyCallback() {
+            @Override
+            public void onLayoutReady() {
+                LinearLayoutManager layoutManager = ((LinearLayoutManager) binding.categoriesRecyclerView.getLayoutManager());
+                int visibleItemCount = layoutManager.findLastVisibleItemPosition();
+
+                if(visibleItemCount < totalCategory){
+                    binding.loadMoreImageView.setVisibility(View.VISIBLE);
+                }else{
+                    binding.loadMoreImageView.setVisibility(View.INVISIBLE);
+                }
+            }
+        };
         return binding.getRoot();
     }
+
 
     public void onAttachToParentFragment(Fragment fragment) {
         try {
@@ -86,12 +100,17 @@ public class CategoriesFragment extends BaseFragment {
                         onItemListener.OnItemClickListener(position);
                     });
 
-                    LinearLayoutManager layoutManager = ((LinearLayoutManager) binding.categoriesRecyclerView.getLayoutManager());
-                    int visibleItemCount = layoutManager.findLastVisibleItemPosition();
+                    binding.categoriesRecyclerView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                        @Override
+                        public void onGlobalLayout() {
+                            if (recyclerViewReadyCallback != null) {
+                                recyclerViewReadyCallback.onLayoutReady();
+                            }
+                            binding.categoriesRecyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        }
+                    });
 
-                    if(visibleItemCount < categories.size()){
-                        binding.loadMoreImageView.setVisibility(View.INVISIBLE);
-                    }
+                    totalCategory = categories.size();
 
                 }
             }

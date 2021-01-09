@@ -56,6 +56,7 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
     private List<Lesson> lessonList;
     private Boolean isMyExpedition;
 
+
     public static ExpeditionDetailsFragment newInstance(Expedition expedition,Boolean isMyExpedition) {
         ExpeditionDetailsFragment fragment = new ExpeditionDetailsFragment();
         Bundle args = new Bundle();
@@ -156,11 +157,12 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
                         binding.topLogoImageView.setBackground(resource);
                         return false;
                     }
-                }).centerCrop().placeholder(R.drawable.ic_application_icon);
+                }).centerCrop().placeholder(R.drawable.ic_application_icon).submit();
             }else{
                 Glide.with(context).load(expedition.getImage_url()).listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        Log.i("Image Details",e.getMessage());
                         return false;
                     }
 
@@ -169,7 +171,7 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
                         binding.topLogoImageView.setBackground(resource);
                         return false;
                     }
-                }).centerCrop().placeholder(R.drawable.ic_application_icon);
+                }).centerCrop().placeholder(R.drawable.ic_application_icon).submit();
             }
 
 
