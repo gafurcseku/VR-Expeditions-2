@@ -67,6 +67,7 @@
                 <androidx.fragment.app.FragmentContainerView
                     android:id="@+id/leftFragmentViw"
                     android:name="com.robotlab.expeditions2.activity.categorie.CategoriesFragment"
+                    android:tag="CATEGORY"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2.5"

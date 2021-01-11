@@ -70,6 +70,12 @@ public class CategoriesFragment extends BaseFragment {
         return binding.getRoot();
     }
 
+    public void setCategoryPosition(int position){
+        if(categoryAdapter!=null){
+            categoryAdapter.setIndex(0);
+        }
+    }
+
 
     public void onAttachToParentFragment(Fragment fragment) {
         try {

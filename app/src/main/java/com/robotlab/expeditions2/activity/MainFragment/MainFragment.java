@@ -66,15 +66,17 @@ public class MainFragment extends BaseFragment implements View.OnClickListener ,
     }
 
     public void showMyExpedition(){
-        getChildFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), MyExpeditionFragment.newInstance()).commit();
+        getChildFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), MyExpeditionFragment.newInstance(),MyExpeditionFragment.class.getName()).commit();
         getChildFragmentManager().executePendingTransactions();
         binding.leftFragmentViw.setVisibility(View.VISIBLE);
+        initCategoryPosition();
     }
 
     public void showExpedition(){
         getChildFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), ExpeditionFragment.newInstance(0),ExpeditionFragment.class.getName()).commit();
         getChildFragmentManager().executePendingTransactions();
         binding.leftFragmentViw.setVisibility(View.VISIBLE);
+        initCategoryPosition();
     }
 
     public void showStudent(){
@@ -82,6 +84,13 @@ public class MainFragment extends BaseFragment implements View.OnClickListener ,
         getChildFragmentManager().executePendingTransactions();
         binding.leftFragmentViw.setVisibility(View.GONE);
 
+    }
+
+    private void initCategoryPosition(){
+        CategoriesFragment categoriesFragment = (CategoriesFragment) getChildFragmentManager().findFragmentByTag("CATEGORY");
+        if(categoriesFragment!=null){
+            categoriesFragment.setCategoryPosition(0);
+        }
     }
 
     private void setUpLiveData(){
@@ -145,8 +154,11 @@ public class MainFragment extends BaseFragment implements View.OnClickListener ,
     @Override
     public void OnItemClickListener(int position) {
         ExpeditionFragment expeditionFragment = (ExpeditionFragment) getChildFragmentManager().findFragmentByTag(ExpeditionFragment.class.getName());
+        MyExpeditionFragment myExpeditionFragment = (MyExpeditionFragment) getChildFragmentManager().findFragmentByTag(MyExpeditionFragment.class.getName());
         if(expeditionFragment!=null){
             expeditionFragment.setCategory(position);
+        }else if(myExpeditionFragment != null){
+            myExpeditionFragment.setCategory(position);
         }
     }
 }
