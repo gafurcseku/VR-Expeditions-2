@@ -96,7 +96,14 @@ public class MainFragment extends BaseFragment implements View.OnClickListener ,
     private void setUpLiveData(){
         viewModel.getSearchLiveData().observe(requireActivity(), item -> {
             if(item.getValid()){
-                showLongToast("Call Search Rest Api");
+                ExpeditionFragment expeditionFragment = (ExpeditionFragment) getChildFragmentManager().findFragmentByTag(ExpeditionFragment.class.getName());
+                MyExpeditionFragment myExpeditionFragment = (MyExpeditionFragment) getChildFragmentManager().findFragmentByTag(MyExpeditionFragment.class.getName());
+                if(expeditionFragment!=null){
+                    expeditionFragment.searchText(item.getData());
+                }else if(myExpeditionFragment != null){
+                    myExpeditionFragment.searchText(item.getData());
+                }
+               // showLongToast("Call Search Rest Api");
             }else if(!item.getValid()){
                 showLongToast(item.getMessage());
             }

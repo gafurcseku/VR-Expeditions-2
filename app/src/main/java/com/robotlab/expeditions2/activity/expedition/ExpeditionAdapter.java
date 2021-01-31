@@ -15,18 +15,21 @@ import com.robotlab.expeditions2.R;
 import com.robotlab.expeditions2.databinding.ExpeditionListLayoutBinding;
 import com.robotlab.expeditions2.model.Expedition;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ExpeditionAdapter extends RecyclerView.Adapter<ExpeditionAdapter.ViewModel> {
 
     private Context context;
     private List<Expedition> expeditionList;
+    private List<Expedition> OldExpeditionList = new ArrayList<>();
     private ExpeditionListLayoutBinding binding;
     private ItemClick itemClick;
 
     public ExpeditionAdapter(Context context, List<Expedition> expeditionList, ItemClick itemClick) {
         this.context = context;
         this.expeditionList = expeditionList;
+        this.OldExpeditionList.addAll(expeditionList);
         this.itemClick = itemClick;
     }
 
@@ -41,6 +44,23 @@ public class ExpeditionAdapter extends RecyclerView.Adapter<ExpeditionAdapter.Vi
     public void onBindViewHolder(@NonNull ExpeditionAdapter.ViewModel holder, int position) {
         Expedition expedition = expeditionList.get(position);
         holder.bind(expedition);
+    }
+
+    public void searchText(String text){
+       if(!expeditionList.isEmpty()){
+           expeditionList.clear();
+           if(text.isEmpty()){
+               expeditionList.addAll(OldExpeditionList);
+           }else{
+               text = text.toLowerCase();
+               for (Expedition expedition : OldExpeditionList) {
+                   if(expedition.getTitle().toLowerCase().contains(text) || expedition.getDescription().toLowerCase().contains(text)){
+                       expeditionList.add(expedition);
+                   }
+               }
+           }
+           notifyDataSetChanged();
+       }
     }
 
     @Override
