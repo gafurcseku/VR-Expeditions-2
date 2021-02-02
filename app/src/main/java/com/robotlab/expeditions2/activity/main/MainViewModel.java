@@ -24,8 +24,9 @@ public class MainViewModel extends ViewModel {
 
     public void setBrowserClick(ActivityMainBinding binding){
         binding.browseLinearLayout.setBackgroundResource(R.drawable.main_menu_selected);
-        binding.expeditionLinearLayout.setBackgroundResource(R.drawable.main_menu_normal);
+       binding.expeditionLinearLayout.setBackgroundResource(R.drawable.main_menu_normal);
         binding.studentLinearLayout.setBackgroundResource(R.drawable.main_menu_normal);
+
 
         binding.browseTextViewt.setTextColor(Color.parseColor("#ffffff"));
         binding.expeditionTextView.setTextColor(Color.parseColor("#000000"));
