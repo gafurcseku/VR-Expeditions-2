@@ -103,7 +103,7 @@ public class MainFragment extends BaseFragment implements View.OnClickListener ,
                 }else if(myExpeditionFragment != null){
                     myExpeditionFragment.searchText(item.getData());
                 }
-               // showLongToast("Call Search Rest Api");
+                binding.searchEditText.setText("");
             }else if(!item.getValid()){
                 showLongToast(item.getMessage());
             }
