@@ -8,6 +8,7 @@ import com.robotlab.expeditions2.model.PdfFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class DummyData {
 
@@ -53,9 +54,14 @@ public class DummyData {
         }
         List<Lesson> lessonList = new ArrayList<>();
         for (int i= 1 ; i<loop; i++){
-            lessonList.add(new Lesson(i,"Etymology","Ready to broadcast","http://auditoriumpalma.com/skin/default/congresos/images/bg/bg_"+i+".jpg",number));
+            lessonList.add(new Lesson(getRandom()*i,"Etymology","Ready to broadcast","http://auditoriumpalma.com/skin/default/congresos/images/bg/bg_"+i+".jpg",number));
         }
         return  lessonList;
+    }
+
+    public static int getRandom(){
+        int random = new Random().nextInt((100 - 1) + 1) + 1;
+        return  random;
     }
 
 

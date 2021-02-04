@@ -70,6 +70,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewMo
 
     public void setIndex(int position){
         this.row_index = position;
+        notifyDataSetChanged();
     }
 
     public class ViewModel extends RecyclerView.ViewHolder {

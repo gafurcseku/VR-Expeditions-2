@@ -1,68 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
+    android:orientation="vertical"
     tools:context=".activity.expedition.ExpeditionFragment">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/categories_icon_ImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:layout_marginLeft="@dimen/margin_5"
-        android:src="@drawable/ic_icon_categorie_favorite"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/categoriesNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_8"
-        android:text="MY EXPEDITIONS"
-        android:textAllCaps="true"
-        android:fontFamily="@font/poppins_regular"
-        android:textSize="@dimen/font_size_18"
-        android:textColor="@color/text_color"
-        app:layout_constraintBottom_toBottomOf="@+id/categories_icon_ImageView"
-        app:layout_constraintStart_toEndOf="@id/categories_icon_ImageView"
-        app:layout_constraintTop_toTopOf="@+id/categories_icon_ImageView" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/categories_icon_ImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_icon_categorie_favorite"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/filter_icon_ImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:src="@drawable/ic_icon_filter"
-        android:layout_marginRight="@dimen/margin_30"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/categoriesNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_8"
+            android:fontFamily="@font/poppins_regular"
+            android:text="MY EXPEDITIONS"
+            android:textAllCaps="true"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/font_size_18"
+            app:layout_constraintBottom_toBottomOf="@+id/categories_icon_ImageView"
+            app:layout_constraintStart_toEndOf="@id/categories_icon_ImageView"
+            app:layout_constraintTop_toTopOf="@+id/categories_icon_ImageView" />
 
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/myExpeditionRecyclerView"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginLeft="@dimen/margin_5"-->
-<!--        android:layout_marginTop="@dimen/margin_15"-->
-<!--        android:layout_marginRight="@dimen/margin_5"-->
-<!--        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/categories_icon_ImageView"-->
-<!--        tools:listitem="@layout/my_expedition_list_layout" />-->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/filter_icon_ImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_30"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_icon_filter"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout
         android:id="@+id/boot"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_marginTop="@dimen/margin_20"
-        android:layout_marginRight="@dimen/margin_15"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/categories_icon_ImageView">
+        android:layout_marginBottom="@dimen/margin_5"
+        android:layout_marginRight="@dimen/margin_5">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/myExpeditionRecyclerView"
@@ -84,4 +75,4 @@
             app:rfs_touchTargetWidth="5dp" />
     </FrameLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

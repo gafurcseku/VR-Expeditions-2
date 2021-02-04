@@ -55,11 +55,12 @@ public class ExpeditionDetailViewModel extends ViewModel {
           if(percentageTextView!=null){
               float pro =  ((float)progress.currentBytes / (float)progress.totalBytes)*100;
               totalProgress = (pro /(float)total);
+              float totalPercentage = totalCalculate+totalProgress ;
+              if(totalPercentage > 100.0){
+                  totalPercentage = 100.0f;
+              }
 
-             // totalCalculate = totalCalculate + (int) Math.ceil(totalProgress);
-             // Log.e("Progress",totalProgress+"-"+totalCalculate);
-
-              percentageTextView.setText(String.valueOf((int) Math.ceil(totalCalculate+totalProgress))+"%");
+              percentageTextView.setText(String.valueOf((int) Math.ceil(totalPercentage))+"%");
           }
       }).start(new OnDownloadListener() {
             @Override
