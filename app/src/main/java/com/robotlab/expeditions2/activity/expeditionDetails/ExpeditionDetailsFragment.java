@@ -103,7 +103,7 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
                     List<LessonImage> lessonImageList = DummyData.getLessonImages(lesson.getId());
                     database.lessonImageDao().insert(lessonImageList);
                 }
-                showLongToast("Add to My Expeditions");
+              //  showLongToast("Add to My Expeditions");
                 StartDownload();
                 if(adapter!=null){
                     adapter.setPreDownload(0);
