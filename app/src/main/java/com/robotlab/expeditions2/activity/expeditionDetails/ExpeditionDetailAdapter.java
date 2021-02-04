@@ -32,9 +32,9 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
     private LessonListLayoutBinding binding;
     private AppDatabase database;
     private ExpeditionDetailViewModel viewModel;
-    private int position = 0;
+
     private int downloadPosition = -1;
-    private List<LessonImage> lessonImageList;
+ //   private List<LessonImage> lessonImageList;
     private Boolean isMyExpedition;
 
 
@@ -72,17 +72,11 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
         }
 
         public void bind(Lesson lesson, int itemPosition , Boolean isMyExpedition){
-            Log.e("lesson",lesson.getId()+"");
 
-            if(itemPosition == downloadPosition ){
-                lessonImageList = database.lessonImageDao().getLessonImageByLessonId(lesson.getId());
-                if(lessonImageList.size() > 0){
-                    viewModel.totalCalculate = 0 ;
-                    position = 0;
-                    binding.downloadStatusTextView.setVisibility(View.VISIBLE);
-                    binding.subtitleTextView.setText("Downloading...");
-                    downloadLesson(lessonImageList.get(position),binding.downloadStatusTextView,binding.subtitleTextView);
-                }
+            if (itemPosition == downloadPosition) {
+                binding.downloadStatusTextView.setVisibility(View.VISIBLE);
+                binding.subtitleTextView.setText("Downloading...");
+                downloadLesson(lesson, binding.downloadStatusTextView, binding.subtitleTextView);
             }
 
             binding.titleTextView.setText(lesson.getTitle());
@@ -136,7 +130,6 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
         this.downloadPosition = position;
         if(downloadPosition <lessonList.size()){
             lessonList.get(downloadPosition).setClock(false);
-            database.lessonDao().downloadStatus(1,lessonList.get(downloadPosition).getId());
             notifyItemChanged(downloadPosition);
         }
     }
@@ -149,20 +142,17 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
         setDownload(position);
     }
 
-    public void downloadLesson(LessonImage lessonImage, AppCompatTextView percentageTextView, AppCompatTextView messageTextView) {
-        if(position >= lessonImageList.size()){
-            return;
-        }
-        LessonImage aLessonImage = database.lessonImageDao().getLessonImage(lessonImage.getId());
-        if (aLessonImage.getStatus() == 0) {
-            viewModel.FileDownload(aLessonImage.getId(), (position+1), lessonImageList.size(), aLessonImage.getUrl(), "" + aLessonImage.getId() + ".png", percentageTextView, new DownloadListener() {
+    public void downloadLesson(Lesson lesson, AppCompatTextView percentageTextView, AppCompatTextView messageTextView) {
+
+        int status = database.lessonDao().getStatus(lesson.getId());
+        if (status == 0) {
+            viewModel.FileDownload(lesson.getId(), 0, 0, lesson.getImage(), "" + lesson.getId() + ".png", percentageTextView, new DownloadListener() {
                 @Override
                 public void onDownloadComplete(int status, int DownloadId) {
                     if(status == 1){
                         DownloadCompleteManager(percentageTextView, messageTextView);
                     }
-                    database.lessonImageDao().downloadStatus(DownloadId, status, aLessonImage.getId());
-                    messageTextView.setText("Downloading...");
+                    database.lessonDao().downloadStatus(DownloadId, status, DownloadId);
                 }
             });
         }else{
@@ -172,16 +162,10 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
     }
 
     private void DownloadCompleteManager(AppCompatTextView percentageTextView, AppCompatTextView messageTextView) {
-        position++;
-        if(position < lessonImageList.size()){
-            downloadLesson(lessonImageList.get(position),percentageTextView,messageTextView);
-        }else{
             percentageTextView.setVisibility(View.GONE);
             messageTextView.setText(lessonList.get(downloadPosition).getSubtitle());
-            database.lessonDao().downloadStatus(1,lessonList.get(downloadPosition).getId());
             downloadPosition++;
             notifyItemChanged(downloadPosition-1);
             setDownload(downloadPosition);
-        }
     }
 }

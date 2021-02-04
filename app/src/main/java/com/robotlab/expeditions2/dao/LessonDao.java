@@ -28,4 +28,7 @@ public interface LessonDao {
 
     @Query("SELECT Lesson.status FROM Lesson WHERE Lesson.Id =:id")
     int getStatus(int id);
+
+    @Query("UPDATE Lesson SET downloadId =:downloadId , status =:status WHERE Lesson.Id ==:id ")
+    void downloadStatus(int downloadId, int status, int id);
 }

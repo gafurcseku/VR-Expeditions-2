@@ -15,6 +15,7 @@ public class Lesson {
     private String image;
     private int expeditionId;
     private int status;
+    private int downloadId;
 
     @Ignore
     private Boolean isClock = false;
@@ -87,5 +88,21 @@ public class Lesson {
 
     public void setClock(Boolean clock) {
         isClock = clock;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public int getDownloadId() {
+        return downloadId;
+    }
+
+    public void setDownloadId(int downloadId) {
+        this.downloadId = downloadId;
     }
 }

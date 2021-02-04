@@ -99,11 +99,10 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
                 database.expeditionDao().insert(expedition);
                 database.pdfFileDao().insert(downloadPdf.get());
                 database.lessonDao().insert(lessonList);
-                for (Lesson lesson : lessonList){
-                    List<LessonImage> lessonImageList = DummyData.getLessonImages(lesson.getId());
-                    database.lessonImageDao().insert(lessonImageList);
-                }
-              //  showLongToast("Add to My Expeditions");
+//                for (Lesson lesson : lessonList){
+//                    List<LessonImage> lessonImageList = DummyData.getLessonImages(lesson.getId());
+//                    database.lessonImageDao().insert(lessonImageList);
+//                }
                 StartDownload();
                 if(adapter!=null){
                     adapter.setPreDownload(0);

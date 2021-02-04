@@ -21,8 +21,8 @@ public class ExpeditionDetailViewModel extends ViewModel {
     private AppDatabase database;
     private DownloadListener downloadListener;
     private int currentDownloadId;
-    public float totalCalculate = 0.0f;
-    private float totalProgress = 0.0f;
+//    public float totalCalculate = 0.0f;
+//    private float totalProgress = 0.0f;
 
 
     public ExpeditionDetailViewModel(Context context, AppDatabase database) {
@@ -53,19 +53,19 @@ public class ExpeditionDetailViewModel extends ViewModel {
 
       }).setOnProgressListener(progress -> {
           if(percentageTextView!=null){
-              float pro =  ((float)progress.currentBytes / (float)progress.totalBytes)*100;
-              totalProgress = (pro /(float)total);
-              float totalPercentage = totalCalculate+totalProgress ;
-              if(totalPercentage > 100.0){
-                  totalPercentage = 100.0f;
-              }
+              float totalPercentage =  ((float)progress.currentBytes / (float)progress.totalBytes)*100;
+//              totalProgress = (pro /(float)total);
+//              float totalPercentage = totalCalculate+totalProgress ;
+//              if(totalPercentage > 100.0){
+//                  totalPercentage = 100.0f;
+//              }
 
               percentageTextView.setText(String.valueOf((int) Math.ceil(totalPercentage))+"%");
           }
       }).start(new OnDownloadListener() {
             @Override
             public void onDownloadComplete() {
-                totalCalculate = totalCalculate +totalProgress;
+                //totalCalculate = totalCalculate +totalProgress;
                 downloadListener.onDownloadComplete(1,1);
             }
 

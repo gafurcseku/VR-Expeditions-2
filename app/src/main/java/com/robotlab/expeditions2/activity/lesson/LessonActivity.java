@@ -39,9 +39,11 @@ public class LessonActivity extends BaseActivity implements View.OnClickListener
         handler = new Handler() ;
         setContentView(binding.getRoot());
 
-        if(intent.getExtras()!= null){
-            expeditionId = intent.getIntExtra("expedition_id",0);
-            lessonId = intent.getIntExtra("lesson_id",0);
+        Bundle bundle = getIntent().getExtras();
+
+        if(bundle!= null){
+            expeditionId = bundle.getInt("expedition_id",0);
+            lessonId = bundle.getInt("lesson_id",0);
             lessonList = database.lessonDao().getLessonByExpeditionId(expeditionId);
             for (int i =0 ; i < lessonList.size() ; i++) {
                 if(lessonList.get(i).getId() == lessonId){
@@ -61,7 +63,7 @@ public class LessonActivity extends BaseActivity implements View.OnClickListener
                 .load(file)
                 .centerCrop()
                 .placeholder(R.drawable.ic_application_icon)
-                .into(binding.playPause);
+                .into(binding.lessonImageView);
     }
 
     @Override
@@ -78,7 +80,7 @@ public class LessonActivity extends BaseActivity implements View.OnClickListener
                 }
                 break;
             case R.id.nextLinearLayout:
-                if(index <= lessonList.size()){
+                if(index < lessonList.size()){
                     index++;
                     showImage(lessonList.get(index).getId());
                 }
@@ -100,7 +102,7 @@ public class LessonActivity extends BaseActivity implements View.OnClickListener
     public Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            if(index <= lessonList.size()){
+            if(index < lessonList.size()){
                 index++;
                 showImage(lessonList.get(index).getId());
             }
