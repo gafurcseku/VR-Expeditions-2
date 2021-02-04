@@ -1,6 +1,8 @@
 package com.robotlab.expeditions2.activity.expeditionDetails;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.robotlab.expeditions2.R;
+import com.robotlab.expeditions2.activity.lesson.LessonActivity;
 import com.robotlab.expeditions2.database.AppDatabase;
 import com.robotlab.expeditions2.databinding.LessonListLayoutBinding;
 import com.robotlab.expeditions2.download.DownloadListener;
@@ -117,6 +120,15 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
             }else{
                 binding.broadcastLinearLayout.setVisibility(View.GONE);
             }
+
+            binding.broadcastLinearLayout.setOnClickListener(view -> {
+                Bundle bundle = new Bundle();
+                Intent intent = new Intent(context, LessonActivity.class);
+                bundle.putInt("expedition_id",lesson.getExpeditionId());
+                bundle.putInt("lesson_id",lesson.getId());
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            });
         }
     }
 

@@ -12,6 +12,7 @@ public class Lesson {
     private String title;
     private String subtitle;
     private String thumb;
+    private String image;
     private int expeditionId;
     private int status;
 
@@ -22,11 +23,12 @@ public class Lesson {
     }
 
     @Ignore
-    public Lesson(int id, String title, String subtitle, String thumb, int expeditionId) {
+    public Lesson(int id, String title, String subtitle, String thumb, String image, int expeditionId) {
         Id = id;
         this.title = title;
         this.subtitle = subtitle;
         this.thumb = thumb;
+        this.image = image;
         this.expeditionId = expeditionId;
     }
 

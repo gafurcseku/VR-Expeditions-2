@@ -54,7 +54,7 @@ public class DummyData {
 //        }
         List<Lesson> lessonList = new ArrayList<>();
         for (int i= 1 ; i<loop; i++){
-            lessonList.add(new Lesson(getRandom()*i,"Etymology","Ready to broadcast","http://auditoriumpalma.com/skin/default/congresos/images/bg/bg_"+i+".jpg",number));
+            lessonList.add(new Lesson(getRandom()*i,"Etymology","Ready to broadcast","http://auditoriumpalma.com/skin/default/congresos/images/bg/bg_"+i+".jpg","http://auditoriumpalma.com/skin/default/congresos/images/bg/bg_"+i+".jpg",number));
         }
         return  lessonList;
     }
