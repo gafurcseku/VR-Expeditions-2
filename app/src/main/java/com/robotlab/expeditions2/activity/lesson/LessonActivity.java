@@ -44,7 +44,9 @@ public class LessonActivity extends BaseActivity implements View.OnClickListener
         if(bundle!= null){
             expeditionId = bundle.getInt("expedition_id",0);
             lessonId = bundle.getInt("lesson_id",0);
+
             lessonList = database.lessonDao().getLessonByExpeditionId(expeditionId);
+
             for (int i =0 ; i < lessonList.size() ; i++) {
                 if(lessonList.get(i).getId() == lessonId){
                     index = i ;
@@ -74,13 +76,13 @@ public class LessonActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.previousLinearLayout:
 
-                if(index >= 0){
+                if(index > 0){
                     index --;
                     showImage(lessonList.get(index).getId());
                 }
                 break;
             case R.id.nextLinearLayout:
-                if(index < lessonList.size()){
+                if(index < lessonList.size()-1){
                     index++;
                     showImage(lessonList.get(index).getId());
                 }
@@ -102,7 +104,7 @@ public class LessonActivity extends BaseActivity implements View.OnClickListener
     public Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            if(index < lessonList.size()){
+            if(index < lessonList.size()-1){
                 index++;
                 showImage(lessonList.get(index).getId());
             }
