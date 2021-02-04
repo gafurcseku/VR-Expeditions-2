@@ -7,7 +7,7 @@
     android:theme="@style/Theme.MaterialComponents"
     app:cardBackgroundColor="@android:color/white"
     app:cardCornerRadius="@dimen/cardview_radius_10"
-    app:strokeColor="#2D3236"
+    app:strokeColor="#d3d3d3"
     app:strokeWidth="0.01dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,12 +47,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_5"
-            android:background="@android:color/white"
+            android:background="@drawable/round_text"
             android:padding="@dimen/padding_5"
             android:text="0%"
             android:textColor="@color/text_color"
             android:textSize="@dimen/font_size_12"
             android:visibility="gone"
+
             app:layout_constraintBottom_toBottomOf="@id/logoImageView"
             app:layout_constraintRight_toRightOf="@id/logoImageView" />
 

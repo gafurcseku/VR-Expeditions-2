@@ -213,7 +213,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_15"
                             android:fontFamily="@font/poppins_regular"
-                            android:text="The_forest_of_the_world.pdf (452 KB)"
+                            android:text=""
                             android:textColor="@color/text_color"
                             android:textSize="@dimen/font_size_12"
                             app:layout_constraintStart_toStartOf="parent"
@@ -238,6 +238,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/margin_25"
+            android:background="@android:color/transparent"
             android:layout_weight="3">
 
             <androidx.appcompat.widget.AppCompatTextView

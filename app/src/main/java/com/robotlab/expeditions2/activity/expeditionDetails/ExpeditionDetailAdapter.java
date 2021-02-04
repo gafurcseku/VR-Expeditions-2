@@ -112,7 +112,7 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
                 binding.subtitleTextView.setVisibility(View.GONE);
             }
 
-            if(database.lessonDao().isExists(lesson.getId()) && isMyExpedition){
+            if(database.lessonDao().isExists(lesson.getId())){
                 binding.broadcastLinearLayout.setVisibility(View.VISIBLE);
             }else{
                 binding.broadcastLinearLayout.setVisibility(View.GONE);

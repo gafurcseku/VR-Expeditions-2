@@ -71,6 +71,7 @@ dependencies {
 //    implementation 'com.splunk:mint-android-sdk:5.2.5'
 
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.9'
+    implementation 'com.github.chathuralakmal:AndroidImagePopup:1.2.2'
 
 
 }

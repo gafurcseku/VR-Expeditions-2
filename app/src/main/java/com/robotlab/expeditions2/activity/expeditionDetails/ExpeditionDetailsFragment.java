@@ -114,11 +114,16 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
 
         });
         binding.downloadImageView.setOnClickListener(view -> {
-            PdfFile pdfFile = database.pdfFileDao().getPdfFile(expedition.get_id());
-            if(pdfFile != null){
-                OpenPdfFile(""+pdfFile.getPdfId()+".pdf");
-            }
+            if(isMyExpedition){
+                PdfFile pdfFile = database.pdfFileDao().getPdfFile(expedition.get_id());
+                if(pdfFile != null){
+                    OpenPdfFile(""+pdfFile.getPdfId()+".pdf");
+                }
+            }else{
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(downloadPdf.get().getPdfFileUrl()));
+                startActivity(browserIntent);
 
+            }
         });
         return binding.getRoot();
     }
@@ -187,14 +192,13 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
             if(isMyExpedition){
                 PdfFile pdfFile = database.pdfFileDao().getPdfFileByExpeditionId(expedition.get_id());
                 if(pdfFile != null){
-                    binding.fileNameTextView.setText(pdfFile.getPdfName());
+                   // binding.fileNameTextView.setText(pdfFile.getPdfName());
                     binding.fileInformationTextView.setText(pdfFile.getPdfTitle());
                 }
                 lessonList = database.lessonDao().getLessonByExpeditionId(expedition.get_id());
             }else{
                 downloadPdf = DummyData.getPdfList().stream().filter(pdf -> pdf.getExpeditionId() == expedition.get_id()).findFirst();
                 if(downloadPdf.isPresent()){
-                    binding.fileNameTextView.setText(downloadPdf.get().getPdfName());
                     binding.fileInformationTextView.setText(downloadPdf.get().getPdfTitle());
                 }
 

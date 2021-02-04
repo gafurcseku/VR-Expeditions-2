@@ -18,6 +18,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
     private ActivityMainBinding binding;
     private  MainViewModel viewModel;
     private MainFragment mainFragment;
+    private Boolean isDetails = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,30 +41,37 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
                 viewModel.setBrowserClick(binding);
                 mainFragment = (MainFragment) getSupportFragmentManager().findFragmentByTag(MainFragment.class.getSimpleName());
                 mainFragment.showExpedition();
+                isDetails = true;
                 break;
             case R.id.expeditionLinearLayout:
                 removeOtherBack();
                 viewModel.setExpeditionClick(binding);
                 mainFragment = (MainFragment) getSupportFragmentManager().findFragmentByTag(MainFragment.class.getSimpleName());
                 mainFragment.showMyExpedition();
+                isDetails = true;
                 break;
             case R.id.studentLinearLayout:
                 removeOtherBack();
                 viewModel.setStudentClick(binding);
                 mainFragment = (MainFragment) getSupportFragmentManager().findFragmentByTag(MainFragment.class.getSimpleName());
                 mainFragment.showStudent();
+                isDetails = true;
                 break;
             case R.id.settingLinearLayout:
                 removeOtherBack();
                 mainFragment = (MainFragment) getSupportFragmentManager().findFragmentByTag(MainFragment.class.getSimpleName());
                 mainFragment.showSetting();
+                isDetails = true;
                 break;
         }
     }
 
     @Override
     public void OnClick(Expedition expedition,Boolean isMyExpedition) {
-        getSupportFragmentManager().beginTransaction().add(binding.detailsFragment.getId(), ExpeditionDetailsFragment.newInstance(expedition,isMyExpedition),ExpeditionDetailsFragment.class.getSimpleName()).addToBackStack(ExpeditionDetailsFragment.class.getSimpleName()).commit();
+        if(isDetails){
+            getSupportFragmentManager().beginTransaction().add(binding.detailsFragment.getId(), ExpeditionDetailsFragment.newInstance(expedition,isMyExpedition),ExpeditionDetailsFragment.class.getSimpleName()).addToBackStack(ExpeditionDetailsFragment.class.getSimpleName()).commit();
+            isDetails = false;
+        }
     }
 
     private void removeOtherBack(){
@@ -76,6 +84,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
     public void setDone(Boolean isComplete) {
         if(isComplete){
             if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                isDetails = true;
                 getSupportFragmentManager().popBackStackImmediate();
             }
         }

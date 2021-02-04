@@ -41,17 +41,17 @@ public class DummyData {
             if(i<26){
                 expeditionList.add(new Expedition(i,"http://auditoriumpalma.com/skin/default/congresos/images/bg/bg_"+i+".jpg","Ancient Maya-"+i,"The Maya civilization was a Mesoamerican civilization developed by the Maya …",i/2,i+" lessons","6-"+i+" grade","Civilization"));
             }else{
-                expeditionList.add(new Expedition(i,"https://www.hydrauliekmorreels.com/new_site/public/styles/Images/wallpapers/"+(i-26)+".jpg","Ancient Maya","The Maya civilization was a Mesoamerican civilization developed by the Maya …",i/3,i+" lessons","6-"+i+" grade","Civilization"));
+                expeditionList.add(new Expedition(i,"https://www.hydrauliekmorreels.com/new_site/public/styles/Images/wallpapers/"+(i-26)+".jpg","Ancient Maya-"+i,"The Maya civilization was a Mesoamerican civilization developed by the Maya …",i/3,i+" lessons","6-"+i+" grade","Civilization"));
             }
         }
         return expeditionList;
     }
 
     public static List<Lesson> getLesson(int number){
-        int loop = number * 3 ;
-        if(loop > 12){
-            loop = 12;
-        }
+        int loop = number+1 ;
+//        if(loop > 12){
+//            loop = 12;
+//        }
         List<Lesson> lessonList = new ArrayList<>();
         for (int i= 1 ; i<loop; i++){
             lessonList.add(new Lesson(getRandom()*i,"Etymology","Ready to broadcast","http://auditoriumpalma.com/skin/default/congresos/images/bg/bg_"+i+".jpg",number));
@@ -75,7 +75,7 @@ public class DummyData {
 
     public static List<PdfFile> getPdfList(){
         List<PdfFile> pdfFiles = new ArrayList<>();
-        for (int i =1 ; i < 20 ; i++){
+        for (int i =1 ; i < 60 ; i++){
             pdfFiles.add(new PdfFile(i,"http://www.africau.edu/images/default/sample.pdf","Student Handout Files-"+i+" file","The_forest_of_the_world-"+i+".pdf file",(i*5.6)+"KB",i));
         }
         return pdfFiles;
