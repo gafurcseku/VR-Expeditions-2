@@ -68,6 +68,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewMo
         return categoryList.size();
     }
 
+    public void setIndex(int position){
+        this.row_index = position;
+    }
+
     public class ViewModel extends RecyclerView.ViewHolder {
         private LinearLayoutCompat rootViewLinearLayout;
         private AppCompatImageView selectionImageView;

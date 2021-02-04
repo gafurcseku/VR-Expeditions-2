@@ -21,6 +21,7 @@ import com.robotlab.expeditions2.activity.deviceList.StudentListFragment;
 import com.robotlab.expeditions2.activity.expedition.ExpeditionFragment;
 import com.robotlab.expeditions2.activity.expedition.ItemClick;
 import com.robotlab.expeditions2.activity.main.MainViewModel;
+import com.robotlab.expeditions2.activity.setting.SettingFragment;
 import com.robotlab.expeditions2.base.BaseFragment;
 import com.robotlab.expeditions2.databinding.FragmentMainBinding;
 import com.robotlab.expeditions2.model.Expedition;
@@ -66,28 +67,49 @@ public class MainFragment extends BaseFragment implements View.OnClickListener ,
     }
 
     public void showMyExpedition(){
-        getChildFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), MyExpeditionFragment.newInstance()).commit();
+        getChildFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), MyExpeditionFragment.newInstance(),MyExpeditionFragment.class.getName()).commit();
         getChildFragmentManager().executePendingTransactions();
         binding.leftFragmentViw.setVisibility(View.VISIBLE);
+        initCategoryPosition();
     }
 
     public void showExpedition(){
         getChildFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), ExpeditionFragment.newInstance(0),ExpeditionFragment.class.getName()).commit();
         getChildFragmentManager().executePendingTransactions();
         binding.leftFragmentViw.setVisibility(View.VISIBLE);
+        initCategoryPosition();
     }
 
     public void showStudent(){
         getChildFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), StudentListFragment.newInstance()).commit();
         getChildFragmentManager().executePendingTransactions();
         binding.leftFragmentViw.setVisibility(View.GONE);
+    }
 
+    public void showSetting(){
+        getChildFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), SettingFragment.newInstance()).commit();
+        getChildFragmentManager().executePendingTransactions();
+        binding.leftFragmentViw.setVisibility(View.VISIBLE);
+    }
+
+    private void initCategoryPosition(){
+        CategoriesFragment categoriesFragment = (CategoriesFragment) getChildFragmentManager().findFragmentByTag("CATEGORY");
+        if(categoriesFragment!=null){
+            categoriesFragment.setCategoryPosition(0);
+        }
     }
 
     private void setUpLiveData(){
         viewModel.getSearchLiveData().observe(requireActivity(), item -> {
             if(item.getValid()){
-                showLongToast("Call Search Rest Api");
+                ExpeditionFragment expeditionFragment = (ExpeditionFragment) getChildFragmentManager().findFragmentByTag(ExpeditionFragment.class.getName());
+                MyExpeditionFragment myExpeditionFragment = (MyExpeditionFragment) getChildFragmentManager().findFragmentByTag(MyExpeditionFragment.class.getName());
+                if(expeditionFragment!=null){
+                    expeditionFragment.searchText(item.getData());
+                }else if(myExpeditionFragment != null){
+                    myExpeditionFragment.searchText(item.getData());
+                }
+                binding.searchEditText.setText("");
             }else if(!item.getValid()){
                 showLongToast(item.getMessage());
             }
@@ -145,8 +167,11 @@ public class MainFragment extends BaseFragment implements View.OnClickListener ,
     @Override
     public void OnItemClickListener(int position) {
         ExpeditionFragment expeditionFragment = (ExpeditionFragment) getChildFragmentManager().findFragmentByTag(ExpeditionFragment.class.getName());
+        MyExpeditionFragment myExpeditionFragment = (MyExpeditionFragment) getChildFragmentManager().findFragmentByTag(MyExpeditionFragment.class.getName());
         if(expeditionFragment!=null){
             expeditionFragment.setCategory(position);
+        }else if(myExpeditionFragment != null){
+            myExpeditionFragment.setCategory(position);
         }
     }
 }

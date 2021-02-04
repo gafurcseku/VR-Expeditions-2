@@ -65,6 +65,12 @@ public class ExpeditionFragment extends BaseFragment implements ItemClick {
         binding.categoriesNameTextView.setText(viewModel.getCategoryName(CategoryId));
     }
 
+    public void searchText(String text){
+        if(expeditionAdapter!=null){
+            expeditionAdapter.searchText(text);
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return binding.getRoot();

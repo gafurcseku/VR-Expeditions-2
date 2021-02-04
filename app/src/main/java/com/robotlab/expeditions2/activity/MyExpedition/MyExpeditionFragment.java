@@ -45,18 +45,31 @@ public class MyExpeditionFragment extends BaseFragment implements ItemClick {
     }
 
     private void setLiveData(){
-        viewModel.getExpeditions();
-        viewModel.expeditionLiveData.observe(this, new Observer<List<Expedition>>() {
-            @Override
-            public void onChanged(List<Expedition> expeditions) {
+        viewModel.getExpeditions(0);
+        viewModel.expeditionLiveData.observe(this,  expeditions -> {
                 if(!expeditions.isEmpty()){
                     expeditionAdapter = new MyExpeditionAdapter(context,expeditions,MyExpeditionFragment.this);
                     binding.myExpeditionRecyclerView.setLayoutManager(new LinearLayoutManager(context));
                     binding.myExpeditionRecyclerView.setAdapter(expeditionAdapter);
                     binding.fastScroller.attachRecyclerView(binding.myExpeditionRecyclerView);
+                }else{
+                    binding.myExpeditionRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+                    binding.myExpeditionRecyclerView.setAdapter(null);
+                    binding.fastScroller.attachRecyclerView(binding.myExpeditionRecyclerView);
                 }
-            }
+
         });
+    }
+
+    public void setCategory(int CategoryId){
+        viewModel.getExpeditions(CategoryId);
+        binding.categoriesNameTextView.setText(viewModel.getCategoryName(CategoryId));
+    }
+
+    public void searchText(String text){
+        if(expeditionAdapter!=null){
+            expeditionAdapter.searchText(text);
+        }
     }
 
     @Override

@@ -26,6 +26,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         binding.browseLinearLayout.setOnClickListener(this);
         binding.expeditionLinearLayout.setOnClickListener(this);
         binding.studentLinearLayout.setOnClickListener(this);
+        binding.settingLinearLayout.setOnClickListener(this);
         setContentView(binding.getRoot());
         setVersionAndBuild();
         getSupportFragmentManager().beginTransaction().add(binding.detailsFragment.getId(), MainFragment.newInstance(false),MainFragment.class.getSimpleName()).addToBackStack(MainFragment.class.getSimpleName()).commit();
@@ -53,6 +54,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
                 mainFragment.showStudent();
                 break;
             case R.id.settingLinearLayout:
+                removeOtherBack();
+                mainFragment = (MainFragment) getSupportFragmentManager().findFragmentByTag(MainFragment.class.getSimpleName());
+                mainFragment.showSetting();
                 break;
         }
     }

@@ -115,7 +115,10 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
         });
         binding.downloadImageView.setOnClickListener(view -> {
             PdfFile pdfFile = database.pdfFileDao().getPdfFile(expedition.get_id());
-            OpenPdfFile(""+pdfFile.getPdfId()+".pdf");
+            if(pdfFile != null){
+                OpenPdfFile(""+pdfFile.getPdfId()+".pdf");
+            }
+
         });
         return binding.getRoot();
     }
@@ -190,7 +193,7 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
                 lessonList = database.lessonDao().getLessonByExpeditionId(expedition.get_id());
             }else{
                 downloadPdf = DummyData.getPdfList().stream().filter(pdf -> pdf.getExpeditionId() == expedition.get_id()).findFirst();
-                if(downloadPdf != null){
+                if(downloadPdf.isPresent()){
                     binding.fileNameTextView.setText(downloadPdf.get().getPdfName());
                     binding.fileInformationTextView.setText(downloadPdf.get().getPdfTitle());
                 }

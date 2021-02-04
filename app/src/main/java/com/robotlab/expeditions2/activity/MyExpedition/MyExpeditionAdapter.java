@@ -14,18 +14,21 @@ import com.robotlab.expeditions2.activity.expedition.ItemClick;
 import com.robotlab.expeditions2.databinding.MyExpeditionListLayoutBinding;
 import com.robotlab.expeditions2.model.Expedition;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyExpeditionAdapter extends RecyclerView.Adapter<MyExpeditionAdapter.ViewModel> {
 
     private Context context;
     private List<Expedition> expeditionList;
+    private List<Expedition> OldExpeditionList = new ArrayList<>();
     private MyExpeditionListLayoutBinding binding;
     private ItemClick itemClick;
 
     public MyExpeditionAdapter(Context context, List<Expedition> expeditionList,ItemClick itemClick) {
         this.context = context;
         this.expeditionList = expeditionList;
+        this.OldExpeditionList.addAll(expeditionList);
         this.itemClick=itemClick;
     }
 
@@ -34,6 +37,23 @@ public class MyExpeditionAdapter extends RecyclerView.Adapter<MyExpeditionAdapte
     public ViewModel onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         binding = MyExpeditionListLayoutBinding.inflate(LayoutInflater.from(parent.getContext()),parent, false);
         return new ViewModel(binding);
+    }
+
+    public void searchText(String text){
+        if(!expeditionList.isEmpty()){
+            expeditionList.clear();
+            if(text.isEmpty()){
+                expeditionList.addAll(OldExpeditionList);
+            }else{
+                text = text.toLowerCase();
+                for (Expedition expedition : OldExpeditionList) {
+                    if(expedition.getTitle().toLowerCase().contains(text) || expedition.getDescription().toLowerCase().contains(text)){
+                        expeditionList.add(expedition);
+                    }
+                }
+            }
+            notifyDataSetChanged();
+        }
     }
 
     @Override

@@ -10,10 +10,8 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/logoImage"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="350dp"
         android:adjustViewBounds="true"
-        android:layout_marginLeft="220dp"
-        android:layout_marginRight="220dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +23,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_width="wrap_content"
-        android:text="Welcome To"
+        android:text="VR Expeditions 2.0"
         android:layout_marginTop="@dimen/margin_15"
         android:textColor="@color/text_color"
         android:fontFamily="@font/poppins_regular"
@@ -39,6 +37,7 @@
         android:layout_width="wrap_content"
         android:text="RobotLAB Expeditions"
         android:textColor="@color/text_color"
+        android:visibility="gone"
         android:fontFamily="@font/poppins_regular"
         android:textSize="42sp"
         android:layout_height="wrap_content"/>
