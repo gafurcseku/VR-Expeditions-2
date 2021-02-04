@@ -21,6 +21,7 @@ import com.robotlab.expeditions2.activity.deviceList.StudentListFragment;
 import com.robotlab.expeditions2.activity.expedition.ExpeditionFragment;
 import com.robotlab.expeditions2.activity.expedition.ItemClick;
 import com.robotlab.expeditions2.activity.main.MainViewModel;
+import com.robotlab.expeditions2.activity.setting.SettingFragment;
 import com.robotlab.expeditions2.base.BaseFragment;
 import com.robotlab.expeditions2.databinding.FragmentMainBinding;
 import com.robotlab.expeditions2.model.Expedition;
@@ -83,7 +84,12 @@ public class MainFragment extends BaseFragment implements View.OnClickListener ,
         getChildFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), StudentListFragment.newInstance()).commit();
         getChildFragmentManager().executePendingTransactions();
         binding.leftFragmentViw.setVisibility(View.GONE);
+    }
 
+    public void showSetting(){
+        getChildFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), SettingFragment.newInstance()).commit();
+        getChildFragmentManager().executePendingTransactions();
+        binding.leftFragmentViw.setVisibility(View.VISIBLE);
     }
 
     private void initCategoryPosition(){
