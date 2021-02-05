@@ -13,6 +13,7 @@ import com.robotlab.expeditions2.activity.expeditionDetails.ExpeditionDetailsFra
 import com.robotlab.expeditions2.base.BaseActivity;
 import com.robotlab.expeditions2.databinding.ActivityMainBinding;
 import com.robotlab.expeditions2.model.Expedition;
+import com.robotlab.expeditions2.utility.DummyData;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener , ItemClick , BackClick {
     private ActivityMainBinding binding;
@@ -31,6 +32,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         setContentView(binding.getRoot());
         setVersionAndBuild();
         getSupportFragmentManager().beginTransaction().add(binding.detailsFragment.getId(), MainFragment.newInstance(false),MainFragment.class.getSimpleName()).addToBackStack(MainFragment.class.getSimpleName()).commit();
+
+
+        /// For Dummy data , please remove it
+        DummyData.saveDummyLesson(database);
     }
 
     @Override
@@ -82,9 +87,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
 
     @Override
     public void setDone(Boolean isComplete) {
+        isDetails = true;
         if(isComplete){
             if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-                isDetails = true;
                 getSupportFragmentManager().popBackStackImmediate();
             }
         }

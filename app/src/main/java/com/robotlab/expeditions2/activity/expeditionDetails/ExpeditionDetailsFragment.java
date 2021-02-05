@@ -1,37 +1,35 @@
 package com.robotlab.expeditions2.activity.expeditionDetails;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.downloader.Error;
-import com.downloader.OnDownloadListener;
-import com.downloader.PRDownloader;
 import com.robotlab.expeditions2.R;
-import com.robotlab.expeditions2.activity.categorie.CategoriesViewModel;
 import com.robotlab.expeditions2.base.BaseFragment;
 import com.robotlab.expeditions2.databinding.FragmentExpeditionDetailsBinding;
 import com.robotlab.expeditions2.download.DownloadListener;
 import com.robotlab.expeditions2.model.Expedition;
 import com.robotlab.expeditions2.model.Lesson;
-import com.robotlab.expeditions2.model.LessonImage;
 import com.robotlab.expeditions2.model.PdfFile;
 import com.robotlab.expeditions2.utility.DummyData;
 import com.robotlab.expeditions2.utility.FileStore;
@@ -40,6 +38,8 @@ import com.robotlab.expeditions2.utility.NetworkUtil;
 import java.io.File;
 import java.util.List;
 import java.util.Optional;
+
+
 
 
 public class ExpeditionDetailsFragment extends BaseFragment implements View.OnClickListener {
@@ -201,7 +201,7 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
                     binding.fileInformationTextView.setText(downloadPdf.get().getPdfTitle());
                 }
 
-                lessonList = DummyData.getLesson(expedition.get_id());
+                lessonList = DummyData.getLesson(expedition.get_id(),database);
             }
 
             adapter = new ExpeditionDetailAdapter(context,database, lessonList,viewModel , isMyExpedition);
@@ -227,13 +227,9 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
             viewModel.FileDownload(expedition.get_id(), 0, 0, expedition.getImage_url(), expedition.getImage_url(), null, new DownloadListener() {
                 @Override
                 public void onDownloadComplete(int status, int DownloadId) {
-
                 }
             });
         }
-
-
-
     }
 
 
@@ -241,12 +237,17 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
         File file = new File(FileStore.getCacheFolder(context).getPath()+"/"+fileName);
         Log.i("file Path",file.getAbsolutePath());
         if(file.exists()){
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            Uri apkURI = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", file);
-            intent.setDataAndType(apkURI, "application/pdf");
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            startActivity(intent);
+            try {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                Uri apkURI = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", file);
+                intent.setDataAndType(apkURI, "application/pdf");
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                startActivity(intent);
+            }catch (ActivityNotFoundException e) {
+                Toast.makeText(context, " You don't have any App to open PDF", Toast.LENGTH_LONG).show();
+            }
+
         }else{
             customAlertDialog.showDialog("Please Download file first.");
         }

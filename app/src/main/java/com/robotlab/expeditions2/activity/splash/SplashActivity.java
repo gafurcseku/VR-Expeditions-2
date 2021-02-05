@@ -8,6 +8,7 @@ import com.robotlab.expeditions2.R;
 import com.robotlab.expeditions2.activity.main.MainActivity;
 import com.robotlab.expeditions2.base.BaseActivity;
 import com.robotlab.expeditions2.databinding.ActivitySplashBinding;
+import com.robotlab.expeditions2.utility.DummyData;
 
 /*
   * This is Application starting point.
@@ -22,13 +23,14 @@ public class SplashActivity extends BaseActivity {
         binding = ActivitySplashBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
+
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
                 setActivityLunch(MainActivity.class,null,true);
             }
         },3000);
-
 
     }
 }

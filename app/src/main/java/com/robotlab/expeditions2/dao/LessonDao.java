@@ -6,6 +6,9 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import com.robotlab.expeditions2.model.Lesson;
+import com.robotlab.expeditions2.utility.DummyData;
+import com.robotlab.expeditions2.utility.DummyLesson;
+
 import java.util.List;
 
 @Dao
@@ -16,6 +19,8 @@ public interface LessonDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Lesson lesson);
+
+
 
     @Query("SELECT * FROM Lesson WHERE Lesson.expeditionId =:expeditionId")
     List<Lesson> getLessonByExpeditionId(int expeditionId);
@@ -31,4 +36,5 @@ public interface LessonDao {
 
     @Query("UPDATE Lesson SET downloadId =:downloadId , status =:status WHERE Lesson.Id ==:id ")
     void downloadStatus(int downloadId, int status, int id);
+
 }

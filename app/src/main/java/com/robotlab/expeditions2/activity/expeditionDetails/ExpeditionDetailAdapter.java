@@ -26,6 +26,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDetailAdapter.ViewModel> {
     private Context context;
     private List<Lesson> lessonList;
@@ -34,8 +36,9 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
     private ExpeditionDetailViewModel viewModel;
 
     private int downloadPosition = -1;
- //   private List<LessonImage> lessonImageList;
     private Boolean isMyExpedition;
+    private Boolean isPendingDownload = false;
+
 
 
     public ExpeditionDetailAdapter(Context context, AppDatabase database, List<Lesson> lessonList,ExpeditionDetailViewModel viewModel, Boolean isMyExpedition) {
@@ -100,29 +103,33 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
             if(lesson.getClock()){
                 binding.clockImageView.setVisibility(View.VISIBLE);
                 binding.subtitleTextView.setText("Pending...");
+                binding.clockOverlyImageView.setVisibility(View.VISIBLE);
             }else{
                 binding.clockImageView.setVisibility(View.GONE);
+                binding.clockOverlyImageView.setVisibility(View.GONE);
             }
+
             if(isMyExpedition){
                 binding.subtitleTextView.setVisibility(View.VISIBLE);
             }else {
                 binding.subtitleTextView.setVisibility(View.GONE);
             }
 
-            if(database.lessonDao().isExists(lesson.getId())){
+            if(database.lessonDao().isExists(lesson.getId()) && database.lessonDao().getStatus(lesson.getId()) ==1 ){
                 binding.broadcastLinearLayout.setVisibility(View.VISIBLE);
             }else{
                 binding.broadcastLinearLayout.setVisibility(View.GONE);
             }
 
-            binding.broadcastLinearLayout.setOnClickListener(view -> {
-                Bundle bundle = new Bundle();
-                Intent intent = new Intent(context, LessonActivity.class);
-                bundle.putInt("expedition_id",lesson.getExpeditionId());
-                bundle.putInt("lesson_id",lesson.getId());
-                intent.putExtras(bundle);
-                context.startActivity(intent);
-            });
+
+//            binding.broadcastLinearLayout.setOnClickListener(view -> {
+//                Bundle bundle = new Bundle();
+//                Intent intent = new Intent(context, LessonActivity.class);
+//                bundle.putInt("expedition_id",lesson.getExpeditionId());
+//                bundle.putInt("lesson_id",lesson.getId());
+//                intent.putExtras(bundle);
+//                context.startActivity(intent);
+//            });
         }
     }
 
@@ -143,7 +150,6 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
     }
 
     public void downloadLesson(Lesson lesson, AppCompatTextView percentageTextView, AppCompatTextView messageTextView) {
-
         int status = database.lessonDao().getStatus(lesson.getId());
         if (status == 0) {
             viewModel.FileDownload(lesson.getId(), 0, 0, lesson.getImage(), "" + lesson.getId() + ".png", percentageTextView, new DownloadListener() {
@@ -152,13 +158,12 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
                     if(status == 1){
                         DownloadCompleteManager(percentageTextView, messageTextView);
                     }
-                    database.lessonDao().downloadStatus(DownloadId, status, DownloadId);
+                    database.lessonDao().downloadStatus(DownloadId, status, lesson.getId());
                 }
             });
         }else{
             DownloadCompleteManager(percentageTextView, messageTextView);
         }
-
     }
 
     private void DownloadCompleteManager(AppCompatTextView percentageTextView, AppCompatTextView messageTextView) {

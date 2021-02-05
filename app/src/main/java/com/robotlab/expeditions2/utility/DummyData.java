@@ -1,5 +1,6 @@
 package com.robotlab.expeditions2.utility;
 
+import com.robotlab.expeditions2.database.AppDatabase;
 import com.robotlab.expeditions2.model.Category;
 import com.robotlab.expeditions2.model.Expedition;
 import com.robotlab.expeditions2.model.Lesson;
@@ -47,21 +48,44 @@ public class DummyData {
         return expeditionList;
     }
 
-    public static List<Lesson> getLesson(int number){
-        int loop = number+1 ;
-//        if(loop > 12){
-//            loop = 12;
-//        }
+    public static List<Lesson> getLesson(int expeditionId, AppDatabase database){
         List<Lesson> lessonList = new ArrayList<>();
-        for (int i= 1 ; i<loop; i++){
-            lessonList.add(new Lesson(getRandom()*i,"Etymology","Ready to broadcast","http://auditoriumpalma.com/skin/default/congresos/images/bg/bg_"+i+".jpg","http://auditoriumpalma.com/skin/default/congresos/images/bg/bg_"+i+".jpg",number));
+
+        List<DummyLesson> dummyLessonList = database.dummyLessonDao().getDummyLessonByExpeditionId(expeditionId);
+        for (DummyLesson dummyLesson:dummyLessonList){
+            lessonList.add(new Lesson(dummyLesson.getId(),dummyLesson.getTitle(),dummyLesson.getSubtitle(),dummyLesson.getThumb(),dummyLesson.getImage(),dummyLesson.getExpeditionId()));
         }
         return  lessonList;
+
+//        int loop = number+1 ;
+////        if(loop > 12){
+////            loop = 12;
+////        }
+//        List<Lesson> lessonList = new ArrayList<>();
+//        for (int i= 1 ; i<loop; i++){
+//            lessonList.add(new Lesson(getRandom()*i,"Etymology","Ready to broadcast","http://auditoriumpalma.com/skin/default/congresos/images/bg/bg_"+i+".jpg","http://auditoriumpalma.com/skin/default/congresos/images/bg/bg_"+i+".jpg",number));
+//        }
+//        return  lessonList;
     }
 
     public static int getRandom(){
         int random = new Random().nextInt((100 - 1) + 1) + 1;
         return  random;
+    }
+
+
+    public static void saveDummyLesson (AppDatabase database){
+      //  int cout = database.dummyLessonDao().Count();
+        if(database.dummyLessonDao().Count()==0){
+            List<DummyLesson> lessonList;
+            for (int i = 1 ; i < 60 ; i++){
+                lessonList = new ArrayList<>();
+                for (int j= 1 ; j<=i; j++){
+                    lessonList.add(new DummyLesson(0,"Etymology","Ready to broadcast","http://auditoriumpalma.com/skin/default/congresos/images/bg/bg_"+j+".jpg","http://auditoriumpalma.com/skin/default/congresos/images/bg/bg_"+j+".jpg",i));
+                }
+                database.dummyLessonDao().insertDummy(lessonList);
+            }
+        }
     }
 
 
