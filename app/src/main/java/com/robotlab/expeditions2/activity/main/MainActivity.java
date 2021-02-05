@@ -64,6 +64,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
                 break;
             case R.id.settingLinearLayout:
                 removeOtherBack();
+                viewModel.setSettingClick(binding);
                 mainFragment = (MainFragment) getSupportFragmentManager().findFragmentByTag(MainFragment.class.getSimpleName());
                 mainFragment.showSetting();
                 isDetails = true;

@@ -26,11 +26,13 @@ public class MainViewModel extends ViewModel {
         binding.browseLinearLayout.setBackgroundResource(R.drawable.main_menu_selected);
        binding.expeditionLinearLayout.setBackgroundResource(R.drawable.main_menu_normal);
         binding.studentLinearLayout.setBackgroundResource(R.drawable.main_menu_normal);
+        binding.settingLinearLayout.setBackgroundResource(R.drawable.main_menu_normal);
 
 
         binding.browseTextViewt.setTextColor(Color.parseColor("#ffffff"));
         binding.expeditionTextView.setTextColor(Color.parseColor("#000000"));
         binding.studentTextView.setTextColor(Color.parseColor("#000000"));
+        binding.settingTextView.setTextColor(Color.parseColor("#000000"));
 
         Typeface typeface = ResourcesCompat.getFont(context, R.font.poppins_bold);
         binding.browseTextViewt.setTypeface(typeface);
@@ -38,16 +40,19 @@ public class MainViewModel extends ViewModel {
         Typeface typefaceOther = ResourcesCompat.getFont(context, R.font.poppins_regular);
         binding.expeditionTextView.setTypeface(typefaceOther);
         binding.studentTextView.setTypeface(typefaceOther);
+        binding.settingTextView.setTypeface(typefaceOther);
     }
 
     public void setExpeditionClick(ActivityMainBinding binding){
         binding.browseLinearLayout.setBackgroundResource(R.drawable.main_menu_normal);
         binding.expeditionLinearLayout.setBackgroundResource(R.drawable.main_menu_selected);
         binding.studentLinearLayout.setBackgroundResource(R.drawable.main_menu_normal);
+        binding.settingLinearLayout.setBackgroundResource(R.drawable.main_menu_normal);
 
         binding.browseTextViewt.setTextColor(Color.parseColor("#000000"));
         binding.expeditionTextView.setTextColor(Color.parseColor("#ffffff"));
         binding.studentTextView.setTextColor(Color.parseColor("#000000"));
+        binding.settingTextView.setTextColor(Color.parseColor("#000000"));
 
         Typeface typeface = ResourcesCompat.getFont(context, R.font.poppins_bold);
         binding.expeditionTextView.setTypeface(typeface);
@@ -55,21 +60,46 @@ public class MainViewModel extends ViewModel {
         Typeface typefaceOther = ResourcesCompat.getFont(context, R.font.poppins_regular);
         binding.browseTextViewt.setTypeface(typefaceOther);
         binding.studentTextView.setTypeface(typefaceOther);
+        binding.settingTextView.setTypeface(typefaceOther);
     }
 
     public void setStudentClick(ActivityMainBinding binding){
         binding.browseLinearLayout.setBackgroundResource(R.drawable.main_menu_normal);
         binding.expeditionLinearLayout.setBackgroundResource(R.drawable.main_menu_normal);
         binding.studentLinearLayout.setBackgroundResource(R.drawable.main_menu_selected);
+        binding.settingLinearLayout.setBackgroundResource(R.drawable.main_menu_normal);
 
         binding.browseTextViewt.setTextColor(Color.parseColor("#000000"));
         binding.expeditionTextView.setTextColor(Color.parseColor("#000000"));
         binding.studentTextView.setTextColor(Color.parseColor("#ffffff"));
+        binding.settingTextView.setTextColor(Color.parseColor("#000000"));
 
         Typeface typeface = ResourcesCompat.getFont(context, R.font.poppins_bold);
         binding.studentTextView.setTypeface(typeface);
 
         Typeface typefaceOther = ResourcesCompat.getFont(context, R.font.poppins_regular);
+        binding.browseTextViewt.setTypeface(typefaceOther);
+        binding.expeditionTextView.setTypeface(typefaceOther);
+        binding.settingTextView.setTypeface(typefaceOther);
+    }
+
+
+    public void setSettingClick(ActivityMainBinding binding){
+        binding.browseLinearLayout.setBackgroundResource(R.drawable.main_menu_normal);
+        binding.expeditionLinearLayout.setBackgroundResource(R.drawable.main_menu_normal);
+        binding.studentLinearLayout.setBackgroundResource(R.drawable.main_menu_normal);
+        binding.settingLinearLayout.setBackgroundResource(R.drawable.main_menu_selected);
+
+        binding.browseTextViewt.setTextColor(Color.parseColor("#000000"));
+        binding.expeditionTextView.setTextColor(Color.parseColor("#000000"));
+        binding.studentTextView.setTextColor(Color.parseColor("#000000"));
+        binding.settingTextView.setTextColor(Color.parseColor("#ffffff"));
+
+        Typeface typeface = ResourcesCompat.getFont(context, R.font.poppins_bold);
+        binding.settingTextView.setTypeface(typeface);
+
+        Typeface typefaceOther = ResourcesCompat.getFont(context, R.font.poppins_regular);
+        binding.studentTextView.setTypeface(typefaceOther);
         binding.browseTextViewt.setTypeface(typefaceOther);
         binding.expeditionTextView.setTypeface(typefaceOther);
     }

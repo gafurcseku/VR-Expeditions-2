@@ -185,6 +185,7 @@
                     android:gravity="center_vertical|start"
                     android:orientation="horizontal"
                     android:layout_marginBottom="@dimen/margin_20"
+                    android:background="@drawable/main_menu_normal"
                     app:layout_constraintBottom_toTopOf="@id/versionTextView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent">
@@ -197,11 +198,13 @@
                         android:src="@drawable/ic_icon_forward" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/settingTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/poppins_regular"
                         android:text="@string/setting"
+                        android:layout_marginLeft="@dimen/margin_8"
                         android:textColor="@color/text_color"
                         android:textSize="@dimen/font_size_12" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
