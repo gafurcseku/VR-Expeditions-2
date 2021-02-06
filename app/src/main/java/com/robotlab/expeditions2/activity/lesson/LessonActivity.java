@@ -109,6 +109,10 @@ public class LessonActivity extends BaseActivity implements View.OnClickListener
             if(index < lessonList.size()-1){
                 index++;
                 showImage(lessonList.get(index).getId());
+            }else{
+                handler.removeCallbacks(runnable);
+                isPlay = false;
+                binding.playPause.setImageResource(R.drawable.ic_button_play);
             }
             handler.postDelayed(this, 5000);
         }
