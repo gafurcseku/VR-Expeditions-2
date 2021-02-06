@@ -58,6 +58,11 @@ public class MyExpeditionFragment extends BaseFragment implements ItemClick {
                     binding.fastScroller.attachRecyclerView(binding.myExpeditionRecyclerView);
                 }
 
+            binding.myExpeditionRecyclerView.setNestedScrollingEnabled(false);
+            binding.myExpeditionRecyclerView.setItemViewCacheSize(20);
+            binding.myExpeditionRecyclerView.setDrawingCacheEnabled(true);
+            binding.myExpeditionRecyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+
         });
     }
 

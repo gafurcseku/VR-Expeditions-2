@@ -87,6 +87,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        isDetails = true;
+    }
+
+    @Override
     public void setDone(Boolean isComplete) {
         isDetails = true;
         if(isComplete){

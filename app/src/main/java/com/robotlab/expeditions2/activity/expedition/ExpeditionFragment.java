@@ -54,6 +54,10 @@ public class ExpeditionFragment extends BaseFragment implements ItemClick {
             if (!expeditions.isEmpty()) {
                 expeditionAdapter = new ExpeditionAdapter(context, expeditions, ExpeditionFragment.this);
                 binding.expeditionRecyclerView.setLayoutManager(new GridLayoutManager(context, 3));
+                binding.expeditionRecyclerView.setNestedScrollingEnabled(false);
+                binding.expeditionRecyclerView.setItemViewCacheSize(20);
+                binding.expeditionRecyclerView.setDrawingCacheEnabled(true);
+                binding.expeditionRecyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
                 binding.expeditionRecyclerView.setAdapter(expeditionAdapter);
                 binding.fastScroller.attachRecyclerView(binding.expeditionRecyclerView);
             }

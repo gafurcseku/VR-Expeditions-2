@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
@@ -153,32 +154,21 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
         if(expedition!=null) {
             if(isMyExpedition){
                 File file = new File(FileStore.getCacheFolder(context).getPath()+"/"+expedition.getImage_url());
-                Glide.with(context).load(file).listener(new RequestListener<Drawable>() {
-                    @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        binding.topLogoImageView.setBackground(resource);
-                        return false;
-                    }
-                }).centerCrop().placeholder(R.drawable.ic_application_icon).submit();
+                Glide.with(context)
+                        .load(file)
+                        .centerCrop()
+                        .placeholder(R.drawable.ic_application_icon)
+                        .dontAnimate()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(binding.topLogoImageView);
             }else{
-                Glide.with(context).load(expedition.getImage_url()).listener(new RequestListener<Drawable>() {
-                    @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        Log.i("Image Details",e.getMessage());
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        binding.topLogoImageView.setBackground(resource);
-                        return false;
-                    }
-                }).centerCrop().placeholder(R.drawable.ic_application_icon).submit();
+                Glide.with(context)
+                        .load(expedition.getImage_url())
+                        .centerCrop()
+                        .dontAnimate()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .placeholder(R.drawable.ic_application_icon)
+                        .into(binding.topLogoImageView);
             }
 
 
@@ -205,7 +195,12 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
             }
 
             adapter = new ExpeditionDetailAdapter(context,database, lessonList,viewModel , isMyExpedition);
+
             binding.lessonRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+            binding.lessonRecyclerView.setNestedScrollingEnabled(false);
+            binding.lessonRecyclerView.setItemViewCacheSize(200);
+            binding.lessonRecyclerView.setDrawingCacheEnabled(true);
+            binding.lessonRecyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
             binding.lessonRecyclerView.setAdapter(adapter);
             binding.fastScroller.attachRecyclerView(binding.lessonRecyclerView);
 

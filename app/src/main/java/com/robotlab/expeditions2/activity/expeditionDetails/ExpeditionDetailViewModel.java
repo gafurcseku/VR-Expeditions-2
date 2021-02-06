@@ -16,6 +16,8 @@ import com.robotlab.expeditions2.database.AppDatabase;
 import com.robotlab.expeditions2.download.DownloadListener;
 import com.robotlab.expeditions2.utility.FileStore;
 
+import java.lang.ref.WeakReference;
+
 public class ExpeditionDetailViewModel extends ViewModel {
     private Context context;
     private AppDatabase database;
@@ -30,8 +32,8 @@ public class ExpeditionDetailViewModel extends ViewModel {
         this.database = database;
     }
 
-    public void FileDownload(int downloadId, int position, int total, String filePath, String fileName, AppCompatTextView percentageTextView,DownloadListener downloadListener){
-        Log.i("path", FileStore.getCacheFolder(context).getPath());
+    public void FileDownload(int downloadId, int position, int total, String filePath, String fileName, AppCompatTextView percentageTextView, DownloadListener downloadListener){
+      //  Log.i("path", FileStore.getCacheFolder(context).getPath());
 
         if(Status.RUNNING ==PRDownloader.getStatus(downloadId)){
             return;
@@ -54,19 +56,13 @@ public class ExpeditionDetailViewModel extends ViewModel {
       }).setOnProgressListener(progress -> {
           if(percentageTextView!=null){
               float totalPercentage =  ((float)progress.currentBytes / (float)progress.totalBytes)*100;
-//              totalProgress = (pro /(float)total);
-//              float totalPercentage = totalCalculate+totalProgress ;
-//              if(totalPercentage > 100.0){
-//                  totalPercentage = 100.0f;
-//              }
-
               percentageTextView.setText(String.valueOf((int) Math.ceil(totalPercentage))+"%");
           }
       }).start(new OnDownloadListener() {
             @Override
             public void onDownloadComplete() {
                 //totalCalculate = totalCalculate +totalProgress;
-                downloadListener.onDownloadComplete(1,1);
+                downloadListener.onDownloadComplete(1,downloadId);
             }
 
             @Override

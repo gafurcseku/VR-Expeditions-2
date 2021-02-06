@@ -13,6 +13,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.robotlab.expeditions2.R;
 import com.robotlab.expeditions2.activity.lesson.LessonActivity;
 import com.robotlab.expeditions2.database.AppDatabase;
@@ -23,6 +24,7 @@ import com.robotlab.expeditions2.model.LessonImage;
 import com.robotlab.expeditions2.utility.FileStore;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +39,8 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
 
     private int downloadPosition = -1;
     private Boolean isMyExpedition;
-    private Boolean isPendingDownload = false;
+    private Boolean isDownloadStart = false;
+
 
 
 
@@ -59,7 +62,10 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
     @Override
     public void onBindViewHolder(@NonNull ViewModel holder, int itemPosition) {
         Lesson lesson = lessonList.get(itemPosition);
+        Log.i("onBindViewHolder",itemPosition+"");
         holder.bind(lesson,itemPosition,isMyExpedition);
+
+
     }
 
     @Override
@@ -76,29 +82,36 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
 
         public void bind(Lesson lesson, int itemPosition , Boolean isMyExpedition){
 
-            if (itemPosition == downloadPosition) {
+            if (itemPosition == downloadPosition && isDownloadStart) {
                 binding.downloadStatusTextView.setVisibility(View.VISIBLE);
                 binding.subtitleTextView.setText("Downloading...");
-                downloadLesson(lesson, binding.downloadStatusTextView, binding.subtitleTextView);
+                WeakReference<AppCompatTextView>  downloadStatusTextView = new WeakReference<>(binding.downloadStatusTextView);
+                WeakReference<AppCompatTextView>  subtitleTextView = new WeakReference<>(binding.subtitleTextView);
+                downloadLesson(lesson, downloadStatusTextView, subtitleTextView);
+                isDownloadStart = false;
             }
 
             binding.titleTextView.setText(lesson.getTitle());
             binding.subtitleTextView.setText(lesson.getSubtitle());
 
-            if(isMyExpedition){
-                File file = new File(FileStore.getCacheFolder(context).getPath()+"/"+lesson.getId() + ".png");
-                Glide.with(context)
-                        .load(file)
-                        .centerCrop()
-                        .placeholder(R.drawable.ic_application_icon)
-                        .into(binding.logoImage);
-            }else{
-                Glide.with(context)
-                        .load(lesson.getThumb())
-                        .centerCrop()
-                        .placeholder(R.drawable.ic_application_icon)
-                        .into(binding.logoImage);
-            }
+//            if(isMyExpedition){
+//                File file = new File(FileStore.getCacheFolder(context).getPath()+"/"+lesson.getId() + ".png");
+//                Glide.with(context)
+//                        .load(file)
+//                        .centerCrop()
+//                        .placeholder(R.drawable.ic_application_icon)
+//                        .dontAnimate()
+//                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                        .into(binding.logoImage);
+//            }else{
+//                Glide.with(context)
+//                        .load(lesson.getThumb())
+//                        .centerCrop()
+//                        .dontAnimate()
+//                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                        .placeholder(R.drawable.ic_application_icon)
+//                        .into(binding.logoImage);
+//            }
 
             if(lesson.getClock()){
                 binding.clockImageView.setVisibility(View.VISIBLE);
@@ -115,7 +128,7 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
                 binding.subtitleTextView.setVisibility(View.GONE);
             }
 
-            if(database.lessonDao().isExists(lesson.getId()) && database.lessonDao().getStatus(lesson.getId()) ==1 ){
+            if(database.lessonDao().isExists(lesson.getId()) && database.lessonDao().getStatus(lesson.getId()) == 1 ){
                 binding.broadcastLinearLayout.setVisibility(View.VISIBLE);
             }else{
                 binding.broadcastLinearLayout.setVisibility(View.GONE);
@@ -135,9 +148,13 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
 
     public void setDownload(int position){
         this.downloadPosition = position;
-        if(downloadPosition <lessonList.size()){
+        if(downloadPosition < lessonList.size()){
+            isDownloadStart = true;
             lessonList.get(downloadPosition).setClock(false);
-            notifyItemChanged(downloadPosition);
+            notifyItemRangeChanged(downloadPosition-1,2);
+        }else if(downloadPosition == lessonList.size()){
+           // notifyItemChanged(downloadPosition-1);
+            notifyDataSetChanged();
         }
     }
 
@@ -149,16 +166,19 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
         setDownload(position);
     }
 
-    public void downloadLesson(Lesson lesson, AppCompatTextView percentageTextView, AppCompatTextView messageTextView) {
+    public void downloadLesson(Lesson lesson, WeakReference<AppCompatTextView> percentageTextView, WeakReference<AppCompatTextView> messageTextView) {
         int status = database.lessonDao().getStatus(lesson.getId());
         if (status == 0) {
-            viewModel.FileDownload(lesson.getId(), 0, 0, lesson.getImage(), "" + lesson.getId() + ".png", percentageTextView, new DownloadListener() {
+            viewModel.FileDownload(lesson.getId(), 0, 0, lesson.getImage(), "" + lesson.getId() + ".png", percentageTextView.get(), new DownloadListener() {
                 @Override
                 public void onDownloadComplete(int status, int DownloadId) {
-                    if(status == 1){
+                    Log.i("Status",status+"-"+DownloadId);
+                    if(status == 1 && DownloadId > 0){
+                        DownloadCompleteManager(percentageTextView, messageTextView);
+                        database.lessonDao().downloadStatus(DownloadId, status, lesson.getId());
+                    }else if(status == 0  && DownloadId == 0){
                         DownloadCompleteManager(percentageTextView, messageTextView);
                     }
-                    database.lessonDao().downloadStatus(DownloadId, status, lesson.getId());
                 }
             });
         }else{
@@ -166,11 +186,13 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
         }
     }
 
-    private void DownloadCompleteManager(AppCompatTextView percentageTextView, AppCompatTextView messageTextView) {
-            percentageTextView.setVisibility(View.GONE);
-            messageTextView.setText(lessonList.get(downloadPosition).getSubtitle());
+    private void DownloadCompleteManager(WeakReference<AppCompatTextView> percentageTextView, WeakReference<AppCompatTextView> messageTextView) {
+        if(lessonList.size()>downloadPosition){
+            percentageTextView.get().setVisibility(View.GONE);
+            messageTextView.get().setText(lessonList.get(downloadPosition).getSubtitle());
             downloadPosition++;
-            notifyItemChanged(downloadPosition-1);
             setDownload(downloadPosition);
+        }
+
     }
 }

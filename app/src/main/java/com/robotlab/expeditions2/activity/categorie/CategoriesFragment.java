@@ -106,6 +106,11 @@ public class CategoriesFragment extends BaseFragment {
                         onItemListener.OnItemClickListener(position);
                     });
 
+                    binding.categoriesRecyclerView.setNestedScrollingEnabled(false);
+                    binding.categoriesRecyclerView.setItemViewCacheSize(20);
+                    binding.categoriesRecyclerView.setDrawingCacheEnabled(true);
+                    binding.categoriesRecyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+
                     binding.categoriesRecyclerView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                         @Override
                         public void onGlobalLayout() {

@@ -8,6 +8,7 @@ import android.view.View;
 
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.robotlab.expeditions2.R;
 import com.robotlab.expeditions2.base.BaseActivity;
 import com.robotlab.expeditions2.databinding.ActivityLessonBinding;
@@ -64,7 +65,8 @@ public class LessonActivity extends BaseActivity implements View.OnClickListener
         Glide.with(context)
                 .load(file)
                 .centerCrop()
-                .placeholder(R.drawable.ic_application_icon)
+                .dontAnimate()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(binding.lessonImageView);
     }
 
@@ -94,7 +96,7 @@ public class LessonActivity extends BaseActivity implements View.OnClickListener
                     binding.playPause.setImageResource(R.drawable.ic_button_play);
                 }else{
                     isPlay = true;
-                    handler.postDelayed(runnable, 0);
+                    handler.postDelayed(runnable, 5000);
                     binding.playPause.setImageResource(R.drawable.ic_button_pause);
                 }
                 break;

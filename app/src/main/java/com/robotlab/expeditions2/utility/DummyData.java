@@ -56,31 +56,28 @@ public class DummyData {
             lessonList.add(new Lesson(dummyLesson.getId(),dummyLesson.getTitle(),dummyLesson.getSubtitle(),dummyLesson.getThumb(),dummyLesson.getImage(),dummyLesson.getExpeditionId()));
         }
         return  lessonList;
-
-//        int loop = number+1 ;
-////        if(loop > 12){
-////            loop = 12;
-////        }
-//        List<Lesson> lessonList = new ArrayList<>();
-//        for (int i= 1 ; i<loop; i++){
-//            lessonList.add(new Lesson(getRandom()*i,"Etymology","Ready to broadcast","http://auditoriumpalma.com/skin/default/congresos/images/bg/bg_"+i+".jpg","http://auditoriumpalma.com/skin/default/congresos/images/bg/bg_"+i+".jpg",number));
-//        }
-//        return  lessonList;
     }
 
     public static int getRandom(){
-        int random = new Random().nextInt((100 - 1) + 1) + 1;
+        int random = new Random().nextInt((24 - 1) + 1) + 1;
         return  random;
     }
 
 
     public static void saveDummyLesson (AppDatabase database){
-      //  int cout = database.dummyLessonDao().Count();
         if(database.dummyLessonDao().Count()==0){
             List<DummyLesson> lessonList;
             for (int i = 1 ; i < 60 ; i++){
                 lessonList = new ArrayList<>();
-                for (int j= 1 ; j<=i; j++){
+
+                int max ;
+//                max = i;
+                if(i>25){
+                    max = getRandom();
+                }else{
+                    max = i;
+                }
+                for (int j= 1 ; j<=max; j++){
                     lessonList.add(new DummyLesson(0,"Etymology","Ready to broadcast","http://auditoriumpalma.com/skin/default/congresos/images/bg/bg_"+j+".jpg","http://auditoriumpalma.com/skin/default/congresos/images/bg/bg_"+j+".jpg",i));
                 }
                 database.dummyLessonDao().insertDummy(lessonList);
