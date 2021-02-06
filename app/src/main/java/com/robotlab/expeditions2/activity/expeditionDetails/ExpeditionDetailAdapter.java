@@ -94,24 +94,24 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
             binding.titleTextView.setText(lesson.getTitle());
             binding.subtitleTextView.setText(lesson.getSubtitle());
 
-//            if(isMyExpedition){
-//                File file = new File(FileStore.getCacheFolder(context).getPath()+"/"+lesson.getId() + ".png");
-//                Glide.with(context)
-//                        .load(file)
-//                        .centerCrop()
-//                        .placeholder(R.drawable.ic_application_icon)
-//                        .dontAnimate()
-//                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                        .into(binding.logoImage);
-//            }else{
-//                Glide.with(context)
-//                        .load(lesson.getThumb())
-//                        .centerCrop()
-//                        .dontAnimate()
-//                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                        .placeholder(R.drawable.ic_application_icon)
-//                        .into(binding.logoImage);
-//            }
+            if(isMyExpedition){
+                File file = new File(FileStore.getCacheFolder(context).getPath()+"/"+lesson.getId() + ".png");
+                Glide.with(context)
+                        .load(file)
+                        .centerCrop()
+                        .placeholder(R.drawable.ic_application_icon)
+                        .dontAnimate()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(binding.logoImage);
+            }else{
+                Glide.with(context)
+                        .load(lesson.getThumb())
+                        .centerCrop()
+                        .dontAnimate()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .placeholder(R.drawable.ic_application_icon)
+                        .into(binding.logoImage);
+            }
 
             if(lesson.getClock()){
                 binding.clockImageView.setVisibility(View.VISIBLE);
