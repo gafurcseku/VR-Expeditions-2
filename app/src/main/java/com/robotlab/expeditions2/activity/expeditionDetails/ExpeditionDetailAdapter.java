@@ -122,14 +122,14 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
             }
 
 
-//            binding.broadcastLinearLayout.setOnClickListener(view -> {
-//                Bundle bundle = new Bundle();
-//                Intent intent = new Intent(context, LessonActivity.class);
-//                bundle.putInt("expedition_id",lesson.getExpeditionId());
-//                bundle.putInt("lesson_id",lesson.getId());
-//                intent.putExtras(bundle);
-//                context.startActivity(intent);
-//            });
+            binding.broadcastLinearLayout.setOnClickListener(view -> {
+                Bundle bundle = new Bundle();
+                Intent intent = new Intent(context, LessonActivity.class);
+                bundle.putInt("expedition_id",lesson.getExpeditionId());
+                bundle.putInt("lesson_id",lesson.getId());
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            });
         }
     }
 
