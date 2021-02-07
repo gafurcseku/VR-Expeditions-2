@@ -14,18 +14,17 @@ public class Expedition implements Serializable {
     private String title;
     private String description;
     private int category;
-    private String lesson;
+    private int lesson;
     private String grade;
     private String type;
 
 
-
-    public Expedition(){
+    public Expedition() {
 
     }
 
     @Ignore
-    public Expedition(int _id, String image_url, String title, String description, int category, String lesson, String grade, String type) {
+    public Expedition(int _id, String image_url, String title, String description, int category, int lesson, String grade, String type) {
         this._id = _id;
         this.image_url = image_url;
         this.title = title;
@@ -76,11 +75,11 @@ public class Expedition implements Serializable {
         this.category = category;
     }
 
-    public String getLesson() {
+    public int getLesson() {
         return lesson;
     }
 
-    public void setLesson(String lesson) {
+    public void setLesson(int lesson) {
         this.lesson = lesson;
     }
 

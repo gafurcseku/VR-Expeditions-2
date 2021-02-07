@@ -19,4 +19,7 @@ public interface DummyLessonDao {
 
     @Query("SELECT COUNT(*) FROM DummyLesson")
     int Count();
+
+    @Query("SELECT COUNT(*) FROM DummyLesson WHERE DummyLesson.expeditionId =:expeditionId")
+    int getLessonCountByExpedition(int expeditionId);
 }

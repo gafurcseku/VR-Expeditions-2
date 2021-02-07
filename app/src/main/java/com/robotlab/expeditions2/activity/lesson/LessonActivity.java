@@ -61,6 +61,9 @@ public class LessonActivity extends BaseActivity implements View.OnClickListener
 
 
     private void showImage(int index){
+
+        ControlNextAndPrevious(index);
+
         File file = new File(FileStore.getCacheFolder(context).getPath()+"/"+index + ".png");
         Glide.with(context)
                 .load(file)
@@ -68,6 +71,17 @@ public class LessonActivity extends BaseActivity implements View.OnClickListener
                 .dontAnimate()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(binding.lessonImageView);
+    }
+
+    private void ControlNextAndPrevious(int index){
+        if(index == 0){
+            binding.previousLinearLayout.setVisibility(View.INVISIBLE);
+        }else if(index == lessonList.size()){
+            binding.nextLinearLayout.setVisibility(View.INVISIBLE);
+        }else if(index > 0){
+            binding.previousLinearLayout.setVisibility(View.VISIBLE);
+            binding.nextLinearLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

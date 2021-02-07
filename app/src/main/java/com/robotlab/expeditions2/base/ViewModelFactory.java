@@ -32,7 +32,7 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
         }else if(modelClass.isAssignableFrom(CategoriesViewModel.class)){
            return (T) new CategoriesViewModel(context);
         }else if(modelClass.isAssignableFrom(ExpeditionViewModel.class)){
-           return (T) new ExpeditionViewModel(context);
+           return (T) new ExpeditionViewModel(context,database);
        }else if(modelClass.isAssignableFrom(MyExpeditionViewModel.class)){
            return (T) new MyExpeditionViewModel(context,database);
        }else if(modelClass.isAssignableFrom(StudentFragmentViewModel.class)){

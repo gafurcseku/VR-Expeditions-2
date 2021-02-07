@@ -99,7 +99,7 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
                 Glide.with(context)
                         .load(file)
                         .centerCrop()
-                        .placeholder(R.drawable.ic_application_icon)
+                        .placeholder(R.drawable.empty_image_icon)
                         .dontAnimate()
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(binding.logoImage);
@@ -109,7 +109,7 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
                         .centerCrop()
                         .dontAnimate()
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .placeholder(R.drawable.ic_application_icon)
+                        .placeholder(R.drawable.empty_image_icon)
                         .into(binding.logoImage);
             }
 

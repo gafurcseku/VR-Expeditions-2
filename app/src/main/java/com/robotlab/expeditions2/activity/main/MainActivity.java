@@ -34,8 +34,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         getSupportFragmentManager().beginTransaction().add(binding.detailsFragment.getId(), MainFragment.newInstance(false),MainFragment.class.getSimpleName()).addToBackStack(MainFragment.class.getSimpleName()).commit();
 
 
-        /// For Dummy data , please remove it
-        DummyData.saveDummyLesson(database);
+
     }
 
     @Override

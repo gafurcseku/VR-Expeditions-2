@@ -79,12 +79,12 @@ public class ExpeditionAdapter extends RecyclerView.Adapter<ExpeditionAdapter.Vi
             Glide.with(context)
                     .load(expedition.getImage_url())
                     .centerCrop()
-                    .placeholder(R.drawable.ic_application_icon)
+                    .placeholder(R.drawable.empty_image_icon)
                     .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                     .into(binding.coverImageView);
             binding.titleTextView.setText(expedition.getTitle());
             binding.subtitleTextView.setText(expedition.getDescription());
-            binding.lessonTextView.setText(expedition.getLesson());
+            binding.lessonTextView.setText(expedition.getLesson()+" lessons");
             binding.gradeTextView.setText(expedition.getGrade());
             binding.typeTextView.setText(expedition.getType());
             binding.rootView.setOnClickListener(view -> itemClick.OnClick(expedition,false));

@@ -100,10 +100,6 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
                 database.expeditionDao().insert(expedition);
                 database.pdfFileDao().insert(downloadPdf.get());
                 database.lessonDao().insert(lessonList);
-//                for (Lesson lesson : lessonList){
-//                    List<LessonImage> lessonImageList = DummyData.getLessonImages(lesson.getId());
-//                    database.lessonImageDao().insert(lessonImageList);
-//                }
                 StartDownload();
                 if(adapter!=null){
                     adapter.setPreDownload(0);
@@ -157,7 +153,7 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
                 Glide.with(context)
                         .load(file)
                         .centerCrop()
-                        .placeholder(R.drawable.ic_application_icon)
+                        .placeholder(R.drawable.empty_image_icon)
                         .dontAnimate()
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(binding.topLogoImageView);
@@ -167,21 +163,19 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
                         .centerCrop()
                         .dontAnimate()
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .placeholder(R.drawable.ic_application_icon)
+                        .placeholder(R.drawable.empty_image_icon)
                         .into(binding.topLogoImageView);
             }
 
-
             binding.titleTextView.setText(expedition.getTitle());
             binding.subtitleTextView.setText(expedition.getDescription());
-            binding.lessonNumberTextView.setText(expedition.getLesson());
+
             binding.gradeTextView.setText(expedition.getGrade());
             binding.typeTextView.setText(expedition.getType());
 
             if(isMyExpedition){
                 PdfFile pdfFile = database.pdfFileDao().getPdfFileByExpeditionId(expedition.get_id());
                 if(pdfFile != null){
-                   // binding.fileNameTextView.setText(pdfFile.getPdfName());
                     binding.fileInformationTextView.setText(pdfFile.getPdfTitle());
                 }
                 lessonList = database.lessonDao().getLessonByExpeditionId(expedition.get_id());
@@ -190,10 +184,10 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
                 if(downloadPdf.isPresent()){
                     binding.fileInformationTextView.setText(downloadPdf.get().getPdfTitle());
                 }
-
                 lessonList = DummyData.getLesson(expedition.get_id(),database);
             }
 
+            binding.lessonNumberTextView.setText(lessonList.size()+" lessons");
             adapter = new ExpeditionDetailAdapter(context,database, lessonList,viewModel , isMyExpedition);
 
             binding.lessonRecyclerView.setLayoutManager(new LinearLayoutManager(context));

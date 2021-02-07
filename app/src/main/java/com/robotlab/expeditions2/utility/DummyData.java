@@ -36,13 +36,13 @@ public class DummyData {
     }
 
 
-    public static List<Expedition> getExpedition(){
+    public static List<Expedition> getExpedition(AppDatabase database){
         List<Expedition> expeditionList = new ArrayList<>();
         for (int i = 1 ; i < 60 ; i++){
             if(i<26){
-                expeditionList.add(new Expedition(i,"http://auditoriumpalma.com/skin/default/congresos/images/bg/bg_"+i+".jpg","Ancient Maya-"+i,"The Maya civilization was a Mesoamerican civilization developed by the Maya …",i/2,i+" lessons","6-"+i+" grade","Civilization"));
+                expeditionList.add(new Expedition(i,"http://auditoriumpalma.com/skin/default/congresos/images/bg/bg_"+i+".jpg","Ancient Maya-"+i,"The Maya civilization was a Mesoamerican civilization developed by the Maya …",i/2,database.dummyLessonDao().getLessonCountByExpedition(i),"6-"+i+" grade","Civilization"));
             }else{
-                expeditionList.add(new Expedition(i,"https://www.hydrauliekmorreels.com/new_site/public/styles/Images/wallpapers/"+(i-26)+".jpg","Ancient Maya-"+i,"The Maya civilization was a Mesoamerican civilization developed by the Maya …",i/3,i+" lessons","6-"+i+" grade","Civilization"));
+                expeditionList.add(new Expedition(i,"https://www.hydrauliekmorreels.com/new_site/public/styles/Images/wallpapers/"+(i-26)+".jpg","Ancient Maya-"+i,"The Maya civilization was a Mesoamerican civilization developed by the Maya …",i/3,database.dummyLessonDao().getLessonCountByExpedition(i),"6-"+i+" grade","Civilization"));
             }
         }
         return expeditionList;
@@ -69,9 +69,7 @@ public class DummyData {
             List<DummyLesson> lessonList;
             for (int i = 1 ; i < 60 ; i++){
                 lessonList = new ArrayList<>();
-
                 int max ;
-//                max = i;
                 if(i>25){
                     max = getRandom();
                 }else{
