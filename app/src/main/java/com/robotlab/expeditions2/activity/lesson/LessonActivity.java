@@ -4,6 +4,7 @@ package com.robotlab.expeditions2.activity.lesson;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 
 
@@ -51,7 +52,7 @@ public class LessonActivity extends BaseActivity implements View.OnClickListener
             for (int i =0 ; i < lessonList.size() ; i++) {
                 if(lessonList.get(i).getId() == lessonId){
                     index = i ;
-                    showImage(lessonList.get(index).getId());
+                    showImage(lessonList.get(index).getId(),index);
                     break;
                 }
 
@@ -60,15 +61,14 @@ public class LessonActivity extends BaseActivity implements View.OnClickListener
     }
 
 
-    private void showImage(int index){
-
+    private void showImage(int lessonId, int index){
+        Log.i("index",lessonId+"-"+index);
         ControlNextAndPrevious(index);
 
-        File file = new File(FileStore.getCacheFolder(context).getPath()+"/"+index + ".png");
+        File file = new File(FileStore.getCacheFolder(context).getPath()+"/"+lessonId + ".png");
         Glide.with(context)
                 .load(file)
                 .centerCrop()
-                .dontAnimate()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(binding.lessonImageView);
     }
@@ -76,7 +76,7 @@ public class LessonActivity extends BaseActivity implements View.OnClickListener
     private void ControlNextAndPrevious(int index){
         if(index == 0){
             binding.previousLinearLayout.setVisibility(View.INVISIBLE);
-        }else if(index == lessonList.size()){
+        }else if(index == lessonList.size()-1){
             binding.nextLinearLayout.setVisibility(View.INVISIBLE);
         }else if(index > 0){
             binding.previousLinearLayout.setVisibility(View.VISIBLE);
@@ -94,13 +94,13 @@ public class LessonActivity extends BaseActivity implements View.OnClickListener
 
                 if(index > 0){
                     index --;
-                    showImage(lessonList.get(index).getId());
+                    showImage(lessonList.get(index).getId(),index);
                 }
                 break;
             case R.id.nextLinearLayout:
                 if(index < lessonList.size()-1){
                     index++;
-                    showImage(lessonList.get(index).getId());
+                    showImage(lessonList.get(index).getId(),index);
                 }
                 break;
             case R.id.playPause:
@@ -122,7 +122,7 @@ public class LessonActivity extends BaseActivity implements View.OnClickListener
         public void run() {
             if(index < lessonList.size()-1){
                 index++;
-                showImage(lessonList.get(index).getId());
+                showImage(lessonList.get(index).getId(),index);
             }else{
                 handler.removeCallbacks(runnable);
                 isPlay = false;
