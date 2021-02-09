@@ -82,7 +82,7 @@ public class MyExpeditionAdapter extends RecyclerView.Adapter<MyExpeditionAdapte
                     .into(binding.coverImage);
             binding.titleTextView.setText(expedition.getTitle());
             binding.subtitleTextView.setText(expedition.getDescription());
-            binding.lessonTextView.setText(expedition.getLesson());
+            binding.lessonTextView.setText(expedition.getLesson()+" lessons");
             binding.gradeTextView.setText(expedition.getGrade());
             binding.typeTextView.setText(expedition.getType());
             binding.rootView.setOnClickListener(new View.OnClickListener() {

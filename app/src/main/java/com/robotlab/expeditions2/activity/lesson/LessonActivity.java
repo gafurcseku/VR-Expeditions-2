@@ -52,7 +52,7 @@ public class LessonActivity extends BaseActivity implements View.OnClickListener
             for (int i =0 ; i < lessonList.size() ; i++) {
                 if(lessonList.get(i).getId() == lessonId){
                     index = i ;
-                    showImage(lessonList.get(index).getId(),index);
+                    showImage(lessonList,index);
                     break;
                 }
 
@@ -60,24 +60,42 @@ public class LessonActivity extends BaseActivity implements View.OnClickListener
         }
     }
 
-
-    private void showImage(int lessonId, int index){
-        Log.i("index",lessonId+"-"+index);
-        ControlNextAndPrevious(index);
-
-        File file = new File(FileStore.getCacheFolder(context).getPath()+"/"+lessonId + ".png");
-        Glide.with(context)
-                .load(file)
-                .centerCrop()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(binding.lessonImageView);
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(handler != null){
+            handler.removeCallbacks(runnable);
+            handler.removeCallbacksAndMessages(null);
+            index = lessonList.size();
+        }
+       // handler.removeCallbacks(runnable);
     }
 
-    private void ControlNextAndPrevious(int index){
-        if(index == 0){
+    private void showImage(List<Lesson> lessonList, int index){
+
+        ControlNextAndPrevious(index,lessonList.size());
+
+        File file = new File(FileStore.getCacheFolder(context).getPath()+"/"+lessonList.get(index).getId() + ".png");
+        if (!LessonActivity.this.isFinishing()) {
+            Glide.with(context)
+                    .load(file)
+                    .centerCrop()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(binding.lessonImageView);
+        }
+
+    }
+
+    private void ControlNextAndPrevious(int index, int totalCount){
+        if(totalCount == 1){
             binding.previousLinearLayout.setVisibility(View.INVISIBLE);
+            binding.nextLinearLayout.setVisibility(View.INVISIBLE);
+        }else if(index == 0){
+            binding.previousLinearLayout.setVisibility(View.INVISIBLE);
+            binding.nextLinearLayout.setVisibility(View.VISIBLE);
         }else if(index == lessonList.size()-1){
             binding.nextLinearLayout.setVisibility(View.INVISIBLE);
+            binding.previousLinearLayout.setVisibility(View.VISIBLE);
         }else if(index > 0){
             binding.previousLinearLayout.setVisibility(View.VISIBLE);
             binding.nextLinearLayout.setVisibility(View.VISIBLE);
@@ -94,25 +112,28 @@ public class LessonActivity extends BaseActivity implements View.OnClickListener
 
                 if(index > 0){
                     index --;
-                    showImage(lessonList.get(index).getId(),index);
+                    showImage(lessonList,index);
                 }
                 break;
             case R.id.nextLinearLayout:
                 if(index < lessonList.size()-1){
                     index++;
-                    showImage(lessonList.get(index).getId(),index);
+                    showImage(lessonList,index);
                 }
                 break;
             case R.id.playPause:
-                if(isPlay){
-                    isPlay = false;
-                    handler.removeCallbacks(runnable);
-                    binding.playPause.setImageResource(R.drawable.ic_button_play);
-                }else{
-                    isPlay = true;
-                    handler.postDelayed(runnable, 5000);
-                    binding.playPause.setImageResource(R.drawable.ic_button_pause);
+                if(lessonList.size() > 1 && index < lessonList.size() - 1){
+                    if(isPlay){
+                        isPlay = false;
+                        handler.removeCallbacks(runnable);
+                        binding.playPause.setImageResource(R.drawable.ic_button_play);
+                    }else{
+                        isPlay = true;
+                        handler.postDelayed(runnable, 5000);
+                        binding.playPause.setImageResource(R.drawable.ic_button_pause);
+                    }
                 }
+
                 break;
         }
     }
@@ -120,15 +141,19 @@ public class LessonActivity extends BaseActivity implements View.OnClickListener
     public Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            if(index < lessonList.size()-1){
+            Log.i("handler" , "Runnable");
+            if(index < lessonList.size() - 1){
                 index++;
-                showImage(lessonList.get(index).getId(),index);
-            }else{
-                handler.removeCallbacks(runnable);
-                isPlay = false;
-                binding.playPause.setImageResource(R.drawable.ic_button_play);
+                showImage(lessonList,index);
+                if(index == lessonList.size() - 1){
+                    handler.removeCallbacks(runnable);
+                    isPlay = false;
+                    binding.playPause.setImageResource(R.drawable.ic_button_play);
+                }else{
+                    handler.postDelayed(this, 5000);
+                }
             }
-            handler.postDelayed(this, 5000);
+
         }
     };
 }
