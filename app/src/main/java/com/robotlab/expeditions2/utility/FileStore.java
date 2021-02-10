@@ -7,6 +7,12 @@ import java.io.File;
 
 public class FileStore {
 
+    /**
+     * Use this function create  and return Image and file store folder
+     *
+     * @param context A context
+     * @return cacheDir A File
+     */
     public static File getCacheFolder(Context context) {
         File cacheDir = null;
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {

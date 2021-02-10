@@ -19,6 +19,10 @@ public class CategoriesViewModel extends ViewModel {
         this.context = context;
     }
 
+    /**
+     * Get Category Dummy Data
+     */
+
     public void getCategory(){
         categoryLiveData = new MutableLiveData<>();
         categoryLiveData.postValue(DummyData.getCategoryDummyData());

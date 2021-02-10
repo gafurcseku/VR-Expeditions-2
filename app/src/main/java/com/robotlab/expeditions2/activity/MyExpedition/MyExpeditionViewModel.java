@@ -25,6 +25,12 @@ public class MyExpeditionViewModel extends ViewModel {
         expeditionLiveData = new MutableLiveData<>();
     }
 
+    /**
+     * This function use to get all save expedition from database
+     *
+     * @param categoryId A int, it accept select category id
+    */
+
     public void getExpeditions(int categoryId){
 
         List expeditions = null;

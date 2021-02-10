@@ -20,7 +20,7 @@ public interface ExpeditionDao {
 
 
     @Query("SELECT * FROM Expedition")
-    public List<Expedition> getAllExpedition();
+    List<Expedition> getAllExpedition();
 
     @Query("SELECT EXISTS(SELECT * FROM Expedition WHERE Expedition._id =:Id)")
     Boolean isExists(int Id);

@@ -56,13 +56,9 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewMode
             binding.nameTextView.setText(devices.getName());
             if(devices.getOnline()){
                 binding.nameTextView.setTextColor(context.getResources().getColor(R.color.text_color));
-              //  Typeface typeface = ResourcesCompat.getFont(context, R.font.poppins_regular);
-               // binding.nameTextView.setTypeface(typeface);
                 binding.statusImageView.setImageResource(R.drawable.ic_icon_online);
             }else{
                 binding.nameTextView.setTextColor(context.getResources().getColor(R.color.text_color_50));
-              //  Typeface typeface = ResourcesCompat.getFont(context, R.font.poppins_light);
-              //  binding.nameTextView.setTypeface(typeface);
                 binding.statusImageView.setImageResource(R.drawable.ic_icon_offonline);
             }
         }

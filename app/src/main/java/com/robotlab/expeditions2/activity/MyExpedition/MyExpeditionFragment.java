@@ -38,10 +38,6 @@ public class MyExpeditionFragment extends BaseFragment implements ItemClick {
         viewModel = new ViewModelProvider(this, viewModelFactory).get(MyExpeditionViewModel.class);
         setLiveData();
         onAttachToParentFragment(getParentFragment());
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
     }
 
     private void setLiveData(){

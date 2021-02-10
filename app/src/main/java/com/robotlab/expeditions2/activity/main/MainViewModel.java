@@ -21,13 +21,17 @@ public class MainViewModel extends ViewModel {
         this.context = context;
     }
 
+    /**
+     * Use this function call, when user click Browser Expedition Left Menu
+     *
+     * @param binding A ActivityMainBinding
+     */
 
     public void setBrowserClick(ActivityMainBinding binding){
         binding.browseLinearLayout.setBackgroundResource(R.drawable.main_menu_selected);
        binding.expeditionLinearLayout.setBackgroundResource(R.drawable.main_menu_normal);
         binding.studentLinearLayout.setBackgroundResource(R.drawable.main_menu_normal);
         binding.settingLinearLayout.setBackgroundResource(R.drawable.main_menu_normal);
-
 
         binding.browseTextViewt.setTextColor(Color.parseColor("#ffffff"));
         binding.expeditionTextView.setTextColor(Color.parseColor("#000000"));
@@ -42,6 +46,12 @@ public class MainViewModel extends ViewModel {
         binding.studentTextView.setTypeface(typefaceOther);
         binding.settingTextView.setTypeface(typefaceOther);
     }
+
+    /**
+     * Use this function call, when user click My Expedition Left Menu
+     *
+     * @param binding A ActivityMainBinding
+     */
 
     public void setExpeditionClick(ActivityMainBinding binding){
         binding.browseLinearLayout.setBackgroundResource(R.drawable.main_menu_normal);
@@ -63,6 +73,12 @@ public class MainViewModel extends ViewModel {
         binding.settingTextView.setTypeface(typefaceOther);
     }
 
+    /**
+     * Use this function call, when user click My Students Left Menu
+     *
+     * @param binding A ActivityMainBinding
+     */
+
     public void setStudentClick(ActivityMainBinding binding){
         binding.browseLinearLayout.setBackgroundResource(R.drawable.main_menu_normal);
         binding.expeditionLinearLayout.setBackgroundResource(R.drawable.main_menu_normal);
@@ -82,6 +98,12 @@ public class MainViewModel extends ViewModel {
         binding.expeditionTextView.setTypeface(typefaceOther);
         binding.settingTextView.setTypeface(typefaceOther);
     }
+
+    /**
+     * Use this function call, when user click Setting Left Menu
+     *
+     * @param binding A ActivityMainBinding
+     */
 
 
     public void setSettingClick(ActivityMainBinding binding){
@@ -106,6 +128,11 @@ public class MainViewModel extends ViewModel {
 
     private final MutableLiveData<Validation> searchLiveData = new MutableLiveData<Validation>();
 
+    /**
+     * Use this function  to call search and return back search text to activity
+     *
+     * @param text A String
+     */
     public void searchText(String text){
         if(text.isEmpty()){
             searchLiveData.setValue(new Validation(false,context.getResources().getString(R.string.seachEmpty)));

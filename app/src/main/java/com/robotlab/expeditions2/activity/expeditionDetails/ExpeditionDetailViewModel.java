@@ -2,7 +2,6 @@ package com.robotlab.expeditions2.activity.expeditionDetails;
 
 import android.content.Context;
 import android.util.Log;
-import android.view.View;
 
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.lifecycle.ViewModel;
@@ -16,15 +15,11 @@ import com.robotlab.expeditions2.database.AppDatabase;
 import com.robotlab.expeditions2.download.DownloadListener;
 import com.robotlab.expeditions2.utility.FileStore;
 
-import java.lang.ref.WeakReference;
-
 public class ExpeditionDetailViewModel extends ViewModel {
     private Context context;
     private AppDatabase database;
     private DownloadListener downloadListener;
     private int currentDownloadId;
-//    public float totalCalculate = 0.0f;
-//    private float totalProgress = 0.0f;
 
 
     public ExpeditionDetailViewModel(Context context, AppDatabase database) {
@@ -32,8 +27,11 @@ public class ExpeditionDetailViewModel extends ViewModel {
         this.database = database;
     }
 
+    /**
+     * This function use to monitor file or Image download
+     */
+
     public void FileDownload(int downloadId, int position, int total, String filePath, String fileName, AppCompatTextView percentageTextView, DownloadListener downloadListener){
-      //  Log.i("path", FileStore.getCacheFolder(context).getPath());
 
         if(Status.RUNNING ==PRDownloader.getStatus(downloadId)){
             return;
@@ -56,7 +54,7 @@ public class ExpeditionDetailViewModel extends ViewModel {
       }).setOnProgressListener(progress -> {
           if(percentageTextView!=null){
               float totalPercentage =  ((float)progress.currentBytes / (float)progress.totalBytes)*100;
-              percentageTextView.setText(String.valueOf((int) Math.ceil(totalPercentage))+"%");
+              percentageTextView.setText((int) Math.ceil(totalPercentage) +"%");
           }
       }).start(new OnDownloadListener() {
             @Override
@@ -70,7 +68,7 @@ public class ExpeditionDetailViewModel extends ViewModel {
                 Log.i("Error",error.toString());
                 downloadListener.onDownloadComplete(0,0);
             }
-        });            ;
+        });
     }
 }
 

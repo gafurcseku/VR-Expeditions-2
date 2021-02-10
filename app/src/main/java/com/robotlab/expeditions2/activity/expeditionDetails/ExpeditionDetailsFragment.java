@@ -3,28 +3,20 @@ package com.robotlab.expeditions2.activity.expeditionDetails;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.robotlab.expeditions2.R;
 import com.robotlab.expeditions2.base.BaseFragment;
 import com.robotlab.expeditions2.databinding.FragmentExpeditionDetailsBinding;
@@ -146,6 +138,10 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
         }
     }
 
+    /**
+     * This function use to show detail of an expedition
+     */
+
     private void showInformation(){
         if(expedition!=null) {
             if(isMyExpedition){
@@ -201,6 +197,10 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
         }
     }
 
+    /**
+     * This function use to start Pdf and image download for details of and expedition
+     */
+
     private void StartDownload(){
         if(expedition!=null){
             PdfFile pdfFile = database.pdfFileDao().getPdfFile(expedition.get_id());
@@ -221,10 +221,14 @@ public class ExpeditionDetailsFragment extends BaseFragment implements View.OnCl
         }
     }
 
+    /**
+     * This function use to open download file
+     *
+     * @param fileName as String
+     */
 
     private void OpenPdfFile(String fileName){
         File file = new File(FileStore.getCacheFolder(context).getPath()+"/"+fileName);
-        Log.i("file Path",file.getAbsolutePath());
         if(file.exists()){
             try {
                 Intent intent = new Intent(Intent.ACTION_VIEW);

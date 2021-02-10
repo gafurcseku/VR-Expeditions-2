@@ -20,10 +20,6 @@ public class StudentListFragment extends BaseFragment {
 
     public static StudentListFragment newInstance() {
         StudentListFragment fragment = new StudentListFragment();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
         return fragment;
     }
 
@@ -32,10 +28,6 @@ public class StudentListFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
         binding = FragmentDeviceListBinding.inflate(getLayoutInflater());
         viewModel = new ViewModelProvider(this, viewModelFactory).get(StudentFragmentViewModel.class);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
     }
 
     @Override

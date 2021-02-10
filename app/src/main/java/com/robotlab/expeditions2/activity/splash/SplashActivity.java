@@ -23,15 +23,10 @@ public class SplashActivity extends BaseActivity {
         binding = ActivitySplashBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        /// For Dummy data , please remove it
+
         DummyData.saveDummyLesson(database);
 
-        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                setActivityLunch(MainActivity.class,null,true);
-            }
-        },3000);
+        new Handler(Looper.getMainLooper()).postDelayed(() -> setActivityLunch(MainActivity.class,null,true),3000);
 
     }
 }

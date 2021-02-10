@@ -66,12 +66,20 @@ public class MainFragment extends BaseFragment implements View.OnClickListener ,
         return binding.getRoot();
     }
 
+    /**
+     * This function use to show My Expedition List
+     */
+
     public void showMyExpedition(){
         getChildFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), MyExpeditionFragment.newInstance(),MyExpeditionFragment.class.getName()).commit();
         getChildFragmentManager().executePendingTransactions();
         binding.leftFragmentViw.setVisibility(View.VISIBLE);
         initCategoryPosition();
     }
+
+    /**
+     * This function use to Expedition List
+     */
 
     public void showExpedition(){
         getChildFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), ExpeditionFragment.newInstance(0),ExpeditionFragment.class.getName()).commit();
@@ -80,11 +88,19 @@ public class MainFragment extends BaseFragment implements View.OnClickListener ,
         initCategoryPosition();
     }
 
+    /**
+     * This function use to show Student list on Right side
+     */
+
     public void showStudent(){
         getChildFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), StudentListFragment.newInstance()).commit();
         getChildFragmentManager().executePendingTransactions();
         binding.leftFragmentViw.setVisibility(View.GONE);
     }
+
+    /**
+     * This function use to know setting fragment
+     */
 
     public void showSetting(){
         getChildFragmentManager().beginTransaction().replace(binding.rightFragmentViw.getId(), SettingFragment.newInstance()).commit();
@@ -98,6 +114,10 @@ public class MainFragment extends BaseFragment implements View.OnClickListener ,
             categoriesFragment.setCategoryPosition(0);
         }
     }
+
+    /**
+     * Init Live data View Model here
+     */
 
     private void setUpLiveData(){
         viewModel.getSearchLiveData().observe(requireActivity(), item -> {

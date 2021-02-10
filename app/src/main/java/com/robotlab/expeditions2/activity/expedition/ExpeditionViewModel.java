@@ -23,6 +23,10 @@ public class ExpeditionViewModel extends ViewModel {
         this.database = database;
     }
 
+    /**
+     * Get Dummy Expedition data according user select category
+     */
+
     public void getExpeditions(int categoryId){
         List expeditions = null;
         if(categoryId == 0){
@@ -32,6 +36,10 @@ public class ExpeditionViewModel extends ViewModel {
         }
         expeditionLiveData.setValue(expeditions);
     }
+
+    /**
+     * Get Category Name from Dummy category data according user select category
+     */
 
     public String getCategoryName(int categoryId){
       return  DummyData.getCategoryDummyData().get(categoryId).getName();

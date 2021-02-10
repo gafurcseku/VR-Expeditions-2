@@ -11,6 +11,11 @@ import com.robotlab.expeditions2.customDialog.CustomAlertDialog;
 import com.robotlab.expeditions2.database.AppDatabase;
 import com.robotlab.expeditions2.database.DatabaseClient;
 
+/*
+    This is Application base Fragment
+    Where you define all common action need in Fragment
+ */
+
 public class BaseFragment extends Fragment {
     protected Context context;
     protected ViewModelFactory viewModelFactory;

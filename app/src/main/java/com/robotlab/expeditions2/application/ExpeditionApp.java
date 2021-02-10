@@ -16,6 +16,6 @@ public class ExpeditionApp extends Application {
                 .build();
         PRDownloader.initialize(getApplicationContext(), config);
 
-        Mint.initAndStartSession(this, "b82ccb9f");
+       // Mint.initAndStartSession(this, "b82ccb9f");
     }
 }

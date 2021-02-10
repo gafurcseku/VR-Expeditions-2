@@ -27,6 +27,9 @@ public class StudentFragmentViewModel extends ViewModel {
         return studentLiveData;
     }
 
+    /**
+     * Get Dummy Data for Student Online
+     */
 
     private List<Devices> getDummy(){
         List<Devices> list = new ArrayList<>();

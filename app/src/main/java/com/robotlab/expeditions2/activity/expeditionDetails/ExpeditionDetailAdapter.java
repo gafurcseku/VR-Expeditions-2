@@ -20,12 +20,10 @@ import com.robotlab.expeditions2.database.AppDatabase;
 import com.robotlab.expeditions2.databinding.LessonListLayoutBinding;
 import com.robotlab.expeditions2.download.DownloadListener;
 import com.robotlab.expeditions2.model.Lesson;
-import com.robotlab.expeditions2.model.LessonImage;
 import com.robotlab.expeditions2.utility.FileStore;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -62,7 +60,6 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
     @Override
     public void onBindViewHolder(@NonNull ViewModel holder, int itemPosition) {
         Lesson lesson = lessonList.get(itemPosition);
-        Log.i("onBindViewHolder",itemPosition+"");
         holder.bind(lesson,itemPosition,isMyExpedition);
 
 
@@ -81,7 +78,6 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
         }
 
         public void bind(Lesson lesson, int itemPosition , Boolean isMyExpedition){
-
             if (itemPosition == downloadPosition && isDownloadStart) {
                 binding.downloadStatusTextView.setVisibility(View.VISIBLE);
                 binding.subtitleTextView.setText("Downloading...");
@@ -146,6 +142,14 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
         }
     }
 
+    /**
+     * This function use to lesson download init
+     * It call to start next after complete previous lesson
+     * Continue until complete all lesson
+     *
+     * @param position A int
+     */
+
     public void setDownload(int position){
         this.downloadPosition = position;
         if(downloadPosition < lessonList.size()){
@@ -153,10 +157,16 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
             lessonList.get(downloadPosition).setClock(false);
             notifyItemRangeChanged(downloadPosition-1,2);
         }else if(downloadPosition == lessonList.size()){
-           // notifyItemChanged(downloadPosition-1);
             notifyDataSetChanged();
         }
     }
+
+    /**
+     * This function use first time to init lesson download
+     * It call when use click My expedition button
+     *
+     * @param position A int
+     */
 
     public void setPreDownload(int position){
         for (int i = 0 ; i<lessonList.size() ; i++){
@@ -166,13 +176,19 @@ public class ExpeditionDetailAdapter extends RecyclerView.Adapter<ExpeditionDeta
         setDownload(position);
     }
 
+    /**
+     * This function use to download lesson images
+     * @param lesson A Lesson object
+     *@param percentageTextView A AppCompatTextView , use for show download percentage
+     * @param messageTextView A AppCompatTextView , Use to show message
+     */
+
     public void downloadLesson(Lesson lesson, WeakReference<AppCompatTextView> percentageTextView, WeakReference<AppCompatTextView> messageTextView) {
         int status = database.lessonDao().getStatus(lesson.getId());
         if (status == 0) {
             viewModel.FileDownload(lesson.getId(), 0, 0, lesson.getImage(), "" + lesson.getId() + ".png", percentageTextView.get(), new DownloadListener() {
                 @Override
                 public void onDownloadComplete(int status, int DownloadId) {
-                    Log.i("Status",status+"-"+DownloadId);
                     if(status == 1 && DownloadId > 0){
                         DownloadCompleteManager(percentageTextView, messageTextView);
                         database.lessonDao().downloadStatus(DownloadId, status, lesson.getId());

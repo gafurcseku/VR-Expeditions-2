@@ -68,13 +68,17 @@ public class LessonActivity extends BaseActivity implements View.OnClickListener
             handler.removeCallbacksAndMessages(null);
             index = lessonList.size();
         }
-       // handler.removeCallbacks(runnable);
     }
 
+    /**
+     * Use this function to show next and previous image
+     *
+     * @param lessonList List of lesson list
+     * @param index position of lesson list
+     */
+
     private void showImage(List<Lesson> lessonList, int index){
-
         ControlNextAndPrevious(index,lessonList.size());
-
         File file = new File(FileStore.getCacheFolder(context).getPath()+"/"+lessonList.get(index).getId() + ".png");
         if (!LessonActivity.this.isFinishing()) {
             Glide.with(context)
@@ -85,6 +89,13 @@ public class LessonActivity extends BaseActivity implements View.OnClickListener
         }
 
     }
+
+    /**
+     * Use this function to control Next and previous button INVISIBLE and VISIBLE
+     *
+     * @param index position of lesson list
+     * @param totalCount Count total of lesson list
+     */
 
     private void ControlNextAndPrevious(int index, int totalCount){
         if(totalCount == 1){
@@ -138,10 +149,17 @@ public class LessonActivity extends BaseActivity implements View.OnClickListener
         }
     }
 
+    /**
+     * This is runnable object
+     * Continue run when play button click
+     * Stop run when pause button click
+     * @param index position of lesson list
+     * @param totalCount Count total of lesson list
+     */
+
     public Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            Log.i("handler" , "Runnable");
             if(index < lessonList.size() - 1){
                 index++;
                 showImage(lessonList,index);

@@ -25,7 +25,6 @@ import java.util.List;
 
 public class CategoriesFragment extends BaseFragment {
 
-    private View rootView;
     private FragmentCategoriesBinding binding;
     private CategoriesViewModel viewModel;
     private CategoryAdapter categoryAdapter;
@@ -44,27 +43,20 @@ public class CategoriesFragment extends BaseFragment {
         viewModel = new ViewModelProvider(this,viewModelFactory).get(CategoriesViewModel.class);
         binding = FragmentCategoriesBinding.inflate(getLayoutInflater());
         onAttachToParentFragment(getParentFragment());
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setLiveData();
-        recyclerViewReadyCallback = new RecyclerViewReadyCallback() {
-            @Override
-            public void onLayoutReady() {
-                LinearLayoutManager layoutManager = ((LinearLayoutManager) binding.categoriesRecyclerView.getLayoutManager());
-                int visibleItemCount = layoutManager.findLastVisibleItemPosition();
+        recyclerViewReadyCallback = () -> {
+            LinearLayoutManager layoutManager = ((LinearLayoutManager) binding.categoriesRecyclerView.getLayoutManager());
+            int visibleItemCount = layoutManager.findLastVisibleItemPosition();
 
-                if(visibleItemCount < totalCategory){
-                    binding.loadMoreImageView.setVisibility(View.VISIBLE);
-                }else{
-                    binding.loadMoreImageView.setVisibility(View.INVISIBLE);
-                }
+            if(visibleItemCount < totalCategory){
+                binding.loadMoreImageView.setVisibility(View.VISIBLE);
+            }else{
+                binding.loadMoreImageView.setVisibility(View.INVISIBLE);
             }
         };
         return binding.getRoot();
@@ -85,6 +77,10 @@ public class CategoriesFragment extends BaseFragment {
         }
     }
 
+    /**
+     * Init Live data View Model here
+     */
+
     private void setLiveData(){
         viewModel.getCategory();
         viewModel.categoryLiveData.observe(getViewLifecycleOwner(), new Observer<List<Category>>() {
@@ -99,7 +95,6 @@ public class CategoriesFragment extends BaseFragment {
                     paint.setColor(Color.parseColor("#802D3236"));
                     paint.setAntiAlias(true);
                     paint.setPathEffect(new DashPathEffect(new float[]{8.0f, 8.0f}, 0));
-                 //   DividerItemDecoration itemDecoration = new DividerItemDecoration(binding.categoriesRecyclerView.getContext(),DividerItemDecoration.VERTICAL);
                     binding.categoriesRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(context).paint(paint).build());
                     binding.categoriesRecyclerView.setAdapter(categoryAdapter);
                     categoryAdapter.setOnItemListenerListener(position -> {

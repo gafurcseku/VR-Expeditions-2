@@ -13,7 +13,6 @@ import com.robotlab.expeditions2.activity.expeditionDetails.ExpeditionDetailsFra
 import com.robotlab.expeditions2.base.BaseActivity;
 import com.robotlab.expeditions2.databinding.ActivityMainBinding;
 import com.robotlab.expeditions2.model.Expedition;
-import com.robotlab.expeditions2.utility.DummyData;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener , ItemClick , BackClick {
     private ActivityMainBinding binding;
@@ -79,6 +78,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         }
     }
 
+    /**
+     * Use this function to remove fragment from FragmentManager Stack
+     */
+
     private void removeOtherBack(){
         if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
             getSupportFragmentManager().popBackStackImmediate();
@@ -100,6 +103,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
             }
         }
     }
+
+    /**
+     * Use this function to Show Version Code and Version Number
+     */
 
     private void setVersionAndBuild(){
         int versionCode = 1;

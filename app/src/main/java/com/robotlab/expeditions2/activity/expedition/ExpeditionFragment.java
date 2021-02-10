@@ -48,6 +48,10 @@ public class ExpeditionFragment extends BaseFragment implements ItemClick {
         setLiveData();
     }
 
+    /**
+     * Init Live data View Model here
+     */
+
     private void setLiveData() {
         viewModel.getExpeditions(CategoryId);
         viewModel.expeditionLiveData.observe(this, expeditions -> {
@@ -64,10 +68,18 @@ public class ExpeditionFragment extends BaseFragment implements ItemClick {
         });
     }
 
+    /**
+     * This function use category id to get Name of the category and display at top
+     */
+
     public void setCategory(int CategoryId){
         viewModel.getExpeditions(CategoryId);
         binding.categoriesNameTextView.setText(viewModel.getCategoryName(CategoryId));
     }
+
+    /**
+     * This function use to perform search base on use text write
+     */
 
     public void searchText(String text){
         if(expeditionAdapter!=null){

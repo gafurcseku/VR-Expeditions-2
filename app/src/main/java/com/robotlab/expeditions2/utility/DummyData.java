@@ -63,6 +63,11 @@ public class DummyData {
         return  random;
     }
 
+    /**
+     * Use this function to Store dummy Lesson data in local database
+     *
+     * @param database A AppDatabase
+     */
 
     public static void saveDummyLesson (AppDatabase database){
         if(database.dummyLessonDao().Count()==0){
